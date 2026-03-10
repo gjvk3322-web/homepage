@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>돌봄매트 Pro</title>
+    <style>
+        /* 애플 감성의 핵심: 딥 블랙 배경과 깔끔한 폰트 */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #f5f5f7;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 각 섹션 설정 (화면 꽉 차게) */
+        section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 그라데이션 텍스트 (아이폰 Pro 감성) */
+        .gradient-text {
+            background: linear-gradient(135deg, #a1a1a6 0%, #ffffff 50%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin-bottom: 20px;
+        }
+
+        h2 { font-size: 3rem; font-weight: 700; margin-bottom: 10px; }
+        p { font-size: 1.5rem; color: #86868b; font-weight: 500; margin-bottom: 40px; line-height: 1.5; }
+
+        /* 스크롤 애니메이션을 위한 기본 설정 (안 보이게 숨김) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* 화면에 나타날 때 적용될 클래스 */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 강력한 스펙을 보여주는 그리드 */
+        .specs {
+            display: flex;
+            gap: 50px;
+            margin-top: 30px;
+        }
+        .spec-item h3 { font-size: 4rem; margin: 0; color: #fff; }
+        .spec-item span { font-size: 1.2rem; color: #86868b; }
+
+        /* 예약 버튼 */
+        .buy-btn {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        .buy-btn:hover { transform: scale(1.05); }
+
+    </style>
+</head>
+<body>
+
+    <section>
+        <div class="reveal active">
+            <h1 class="gradient-text">돌봄매트 Pro</h1>
+            <p>층간소음, 완벽에 가깝게 지우다.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="reveal">
+            <h2>압도적인 62% 소음 저감.</h2>
+            <p>우주항공 소재에서 영감을 받은 5중 흡음 구조.<br>아이의 발망치도, 당신의 스트레스도 조용히 흡수합니다.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="reveal">
+            <h2>기록이 증명하는 성능.</h2>
+            <div class="specs">
+                <div class="spec-item">
+                    <h3>62<span>%</span></h3>
+                    <span>소음 저감률</span>
+                </div>
+                <div class="spec-item">
+                    <h3>5<span>년+</span></h3>
+                    <span>검증된 내구성</span>
+                </div>
+                <div class="spec-item">
+                    <h3>450<span>곳</span></h3>
+                    <span>프리미엄 호텔 시공</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="reveal">
+            <h1 class="gradient-text">당신의 공간을 업그레이드할 시간.</h1>
+            <br>
+            <a href="#" class="buy-btn">무료 맞춤 견적받기</a>
+        </div>
+    </section>
+
+    <script>
+        // 자바스크립트: 스크롤할 때 요소를 부드럽게 나타나게 하는 'Intersection Observer' 기술
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150; // 요소가 화면에 150px 보일 때 작동
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // 처음 로딩 시 한 번 실행
+    </script>
+
+</body>
+</html>
