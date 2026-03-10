@@ -629,20 +629,8 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
      크기 비교 섹션 (SIZE COMPARISON)
 ═══════════════════════════════════════ -->
 <style>
-/* Size Compare */
-.size-boxes{display:flex;align-items:flex-end;justify-content:center;gap:clamp(24px,5vw,52px);min-height:300px;padding:0 12px}
-.size-box-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0;transform:translateY(50px);transition:all 0.8s cubic-bezier(0.22,1,0.36,1)}
-.size-box-wrap.visible{opacity:1;transform:translateY(0)}
-.size-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:12px;background:#f3f4f6;border:1.5px solid rgba(0,0,0,0.06);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.size-box.highlight{border-radius:20px;background:linear-gradient(145deg,var(--accent),#b8935e);border:none;box-shadow:0 24px 48px -12px rgba(200,169,126,0.35)}
-.size-box .num{font-weight:800;letter-spacing:-0.5px}
-.size-box.highlight .num{color:#fff}
-.size-box:not(.highlight) .num{color:#9ca3af}
-.size-box .unit{font-weight:500}
-.size-box.highlight .unit{color:rgba(255,255,255,0.7)}
-.size-box:not(.highlight) .unit{color:#c4c4cc}
-.size-brand{font-weight:500;color:#9ca3af;font-size:13px}
-.size-brand.hl{font-weight:700;color:var(--accent);font-size:15px}
+/* Size Compare - Tab Style */
+.sz-tab-active{background:var(--text)!important;color:#fff!important;border-color:var(--text)!important}
 
 /* Stats Banner */
 .stats-banner{background:linear-gradient(135deg,#111827,#1f2937);padding:64px 24px;position:relative;overflow:hidden}
@@ -709,48 +697,54 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 }
 </style>
 
-<!-- SIZE COMPARISON -->
+<!-- SIZE COMPARISON (1:1 Tab Compare) -->
 <section class="section" style="padding-bottom:0">
   <div class="section-center" style="max-width:640px">
     <p class="section-label fade-up text-center" style="color:var(--accent)">Size Comparison</p>
     <h2 class="section-title text-center fade-up mb-8">더 크니까,<br><span class="text-muted">더 다릅니다.</span></h2>
-    <p class="fade-up text-center mb-48" style="font-size:15px;color:var(--soft)">1m × 1m 대형 사이즈로 바닥을 더 깔끔하게 완성합니다</p>
-  </div>
+    <p class="fade-up text-center mb-28" style="font-size:15px;color:var(--soft)">1m × 1m 대형 사이즈로 바닥을 더 깔끔하게 완성합니다</p>
 
-  <div class="size-boxes" id="sizeBoxes">
-    <div class="size-box-wrap" style="transition-delay:0s">
-      <div class="size-box" style="width:156px;height:156px">
-        <span class="num" style="font-size:18px">600</span>
-        <span class="unit" style="font-size:11px">mm</span>
-      </div>
-      <span class="size-brand">A사</span>
+    <!-- 탭 버튼 -->
+    <div class="fade-up" style="display:flex;justify-content:center;gap:8px;margin-bottom:36px">
+      <button class="sz-tab sz-tab-active" onclick="switchSize(600)" data-size="600" style="padding:10px 22px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;font-family:inherit;transition:all 0.25s">600mm</button>
+      <button class="sz-tab" onclick="switchSize(700)" data-size="700" style="padding:10px 22px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;font-family:inherit;transition:all 0.25s">700mm</button>
+      <button class="sz-tab" onclick="switchSize(800)" data-size="800" style="padding:10px 22px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;font-family:inherit;transition:all 0.25s">800mm</button>
     </div>
-    <div class="size-box-wrap" style="transition-delay:0.18s">
-      <div class="size-box" style="width:208px;height:208px">
-        <span class="num" style="font-size:22px">800</span>
-        <span class="unit" style="font-size:12px">mm</span>
+
+    <!-- 1:1 비교 비주얼 -->
+    <div class="fade-up" style="display:flex;align-items:flex-end;justify-content:center;gap:clamp(20px,6vw,48px);min-height:220px;margin-bottom:12px">
+      <!-- 타사 -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div id="otherBox" style="width:120px;height:120px;border-radius:12px;background:#f3f4f6;border:1.5px solid rgba(0,0,0,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.5s cubic-bezier(0.22,1,0.36,1)">
+          <span id="otherNum" style="font-size:20px;font-weight:800;color:#9ca3af;transition:all 0.3s">600</span>
+          <span style="font-size:11px;font-weight:500;color:#c4c4cc">mm</span>
+        </div>
+        <span style="font-size:13px;font-weight:500;color:#9ca3af">타사 매트</span>
       </div>
-      <span class="size-brand">B사</span>
-    </div>
-    <div class="size-box-wrap" style="transition-delay:0.36s">
-      <div class="size-box highlight" style="width:260px;height:260px">
-        <span class="num" style="font-size:36px;color:#fff">1,000</span>
-        <span class="unit" style="font-size:14px">mm</span>
+      <!-- 돌봄매트 -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="width:200px;height:200px;border-radius:20px;background:linear-gradient(145deg,var(--accent),#b8935e);box-shadow:0 20px 44px -10px rgba(200,169,126,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
+          <span style="font-size:34px;font-weight:800;color:#fff;letter-spacing:-1px">1,000</span>
+          <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.7)">mm</span>
+        </div>
+        <span style="font-size:15px;font-weight:700;color:var(--accent)">돌봄매트</span>
       </div>
-      <span class="size-brand hl">돌봄매트</span>
     </div>
+
+    <!-- 면적 비율 한줄 메시지 -->
+    <p class="fade-up text-center" style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:0" id="areaMsg">돌봄매트 1장 = 600mm 매트 약 2.8장</p>
   </div>
 </section>
 
-<!-- STATS BANNER -->
+<!-- STATS BANNER (동적) -->
 <div class="stats-banner">
   <div class="glow" style="top:-100px;right:-100px;width:300px;height:300px"></div>
   <div class="stats-grid" id="statsGrid">
     <div class="stat-item" style="transition-delay:0s"><p><span class="stat-num">1,000</span><span class="stat-unit">mm</span></p><p class="stat-label">대형 매트 사이즈</p></div>
-    <div class="stat-item" style="transition-delay:0.12s"><p><span class="stat-num">2.8</span><span class="stat-unit">배</span></p><p class="stat-label">600mm 대비 면적</p></div>
-    <div class="stat-item" style="transition-delay:0.24s"><p><span class="stat-num">66</span><span class="stat-unit">%</span></p><p class="stat-label">이음새 감소</p></div>
+    <div class="stat-item" style="transition-delay:0.12s"><p><span class="stat-num" id="statArea">2.8</span><span class="stat-unit">배</span></p><p class="stat-label" id="statAreaLabel">600mm 대비 면적</p></div>
+    <div class="stat-item" style="transition-delay:0.24s"><p><span class="stat-num" id="statSeam">66</span><span class="stat-unit">%</span></p><p class="stat-label">이음새 감소</p></div>
   </div>
-  <p style="font-size:11px;color:#6b7280;text-align:center;margin-top:24px;position:relative">* 1,000mm 40장 기준, 600mm 대비</p>
+  <p style="font-size:11px;color:#6b7280;text-align:center;margin-top:24px;position:relative" id="statNote">* 1,000mm 40장 기준, 600mm 대비</p>
 </div>
 
 <!-- SEAM COMPARISON (Interactive Slider) -->
@@ -869,39 +863,31 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
       </div>
 
       <!-- 타사 비교 (선택) -->
-      <div style="background:#fff8f0;padding:16px;border-radius:14px;border:1px dashed rgba(200,169,126,0.4);margin-bottom:20px">
-        <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">🤔 타 업체와 비교해볼까요? <span style="font-size:11px;color:var(--muted);font-weight:500">(선택)</span></p>
-        <p style="font-size:11px;color:var(--soft);margin-bottom:10px">고민 중인 타사 매트 사이즈(mm)와 가격을 적어주세요</p>
-        <div style="display:flex;gap:8px;margin-bottom:6px">
-          <input type="number" id="comp-w" placeholder="가로 (예: 500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-          <input type="number" id="comp-h" placeholder="세로 (예: 500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
+      <div style="background:#fff8f0;padding:14px;border-radius:14px;border:1px dashed rgba(200,169,126,0.4);margin-bottom:16px">
+        <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px">🤔 타 업체와 비교해볼까요? <span style="font-size:11px;color:var(--muted);font-weight:500">(선택)</span></p>
+        <p style="font-size:11px;color:var(--soft);margin-bottom:8px">타사 매트 사이즈(mm)와 가격</p>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input type="number" id="comp-w" placeholder="가로" style="flex:1;padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+          <input type="number" id="comp-h" placeholder="세로" style="flex:1;padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+          <input type="number" id="comp-price" placeholder="장당 가격" style="flex:1;padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
         </div>
-        <input type="number" id="comp-price" placeholder="타사 장당 가격 (예: 15000)" style="width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;box-sizing:border-box;outline:none">
       </div>
 
       <!-- 공간 입력 -->
-      <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">📐 시공할 공간 치수 (mm)</p>
+      <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">📐 시공할 공간 치수 (mm)</p>
 
-      <div style="margin-bottom:14px">
-        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">1. 거실</p>
-        <div style="display:flex;gap:8px">
-          <input type="number" id="w1" placeholder="가로 (예: 4500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-          <input type="number" id="h1" placeholder="세로 (예: 3200)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-        </div>
-      </div>
-      <div style="margin-bottom:14px">
-        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">2. 복도</p>
-        <div style="display:flex;gap:8px">
-          <input type="number" id="w2" placeholder="가로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-          <input type="number" id="h2" placeholder="세로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-        </div>
-      </div>
-      <div style="margin-bottom:20px">
-        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">3. 주방</p>
-        <div style="display:flex;gap:8px">
-          <input type="number" id="w3" placeholder="가로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-          <input type="number" id="h3" placeholder="세로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:16px;font-family:inherit;outline:none">
-        </div>
+      <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:6px 8px;align-items:center;margin-bottom:16px">
+        <span style="font-size:12px;color:var(--muted);font-weight:600">1. 거실</span>
+        <input type="number" id="w1" placeholder="가로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+        <input type="number" id="h1" placeholder="세로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+
+        <span style="font-size:12px;color:var(--muted);font-weight:600">2. 복도</span>
+        <input type="number" id="w2" placeholder="가로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+        <input type="number" id="h2" placeholder="세로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+
+        <span style="font-size:12px;color:var(--muted);font-weight:600">3. 주방</span>
+        <input type="number" id="w3" placeholder="가로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
+        <input type="number" id="h3" placeholder="세로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;font-size:14px;font-family:inherit;outline:none;min-width:0">
       </div>
 
       <!-- 할인 체크 -->
@@ -1535,8 +1521,38 @@ function copyToClipboard() {
   }).catch(function() { alert('복사 실패. 브라우저 설정을 확인해주세요.'); });
 }
 
-// ── Size boxes observer ──
-document.querySelectorAll('.size-box-wrap').forEach(el => observer.observe(el));
+// ── Size Tab Switcher ──
+var sizeData = {
+  600: { area: 2.8, seam: 66, boxSize: 120, fontSize: 20, note: '* 1,000mm 40장 기준, 600mm 대비' },
+  700: { area: 2.0, seam: 56, boxSize: 140, fontSize: 22, note: '* 1,000mm 40장 기준, 700mm 대비' },
+  800: { area: 1.6, seam: 44, boxSize: 160, fontSize: 24, note: '* 1,000mm 40장 기준, 800mm 대비' }
+};
+
+function switchSize(size) {
+  var d = sizeData[size];
+  if (!d) return;
+
+  // Update tabs
+  document.querySelectorAll('.sz-tab').forEach(function(t) {
+    t.classList.toggle('sz-tab-active', t.getAttribute('data-size') == size);
+  });
+
+  // Update box
+  var box = document.getElementById('otherBox');
+  box.style.width = d.boxSize + 'px';
+  box.style.height = d.boxSize + 'px';
+  document.getElementById('otherNum').textContent = size.toLocaleString();
+
+  // Update stats
+  document.getElementById('statArea').textContent = d.area;
+  document.getElementById('statAreaLabel').textContent = size + 'mm 대비 면적';
+  document.getElementById('statSeam').textContent = d.seam;
+  document.getElementById('statNote').textContent = d.note;
+
+  // Update area message
+  document.getElementById('areaMsg').textContent = '돌봄매트 1장 = ' + size + 'mm 매트 약 ' + d.area + '장';
+}
+
 document.querySelectorAll('.stat-item').forEach(el => observer.observe(el));
 
 // ── Seam Slider Grid Generation ──
