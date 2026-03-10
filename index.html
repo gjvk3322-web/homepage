@@ -9,7 +9,7 @@
 <style>
 /* ═══ RESET & BASE ═══ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overscroll-behavior:none;overscroll-behavior-y:none}
+html{scroll-behavior:smooth;touch-action:manipulation;-webkit-text-size-adjust:100%;overscroll-behavior:none;overscroll-behavior-y:none}
 body{font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#FDFBF7;color:#3C3832;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
 img{display:block;max-width:100%;height:auto}
 button{font-family:inherit;cursor:pointer}
@@ -24,11 +24,11 @@ a{text-decoration:none;color:inherit}
 }
 
 /* ═══ ANIMATIONS (GPU accelerated) ═══ */
-.fade-up{opacity:0;transform:translate3d(0,44px,0);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.fade-up{opacity:0;transform:translate3d(0,44px,0);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);will-change:auto}
 .fade-up.visible{opacity:1;transform:translate3d(0,0,0)}
-.scale-in{opacity:0;transform:scale3d(0.93,0.93,1);transition:opacity 0.85s cubic-bezier(0.22,1,0.36,1),transform 0.85s cubic-bezier(0.22,1,0.36,1);will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.scale-in{opacity:0;transform:scale3d(0.93,0.93,1);transition:opacity 0.85s cubic-bezier(0.22,1,0.36,1),transform 0.85s cubic-bezier(0.22,1,0.36,1);will-change:auto}
 .scale-in.visible{opacity:1;transform:scale3d(1,1,1)}
-.fade-in{opacity:0;transition:opacity 1s ease;will-change:opacity}
+.fade-in{opacity:0;transition:opacity 1s ease;will-change:auto}
 .fade-in.visible{opacity:1}
 .delay-1{transition-delay:0.1s}.delay-2{transition-delay:0.2s}.delay-3{transition-delay:0.3s}.delay-4{transition-delay:0.4s}.delay-5{transition-delay:0.5s}
 
@@ -48,7 +48,7 @@ a{text-decoration:none;color:inherit}
 .gnb .link{color:var(--blue);font-weight:600;cursor:pointer}
 
 /* ═══ STICKY NAV ═══ */
-.sticky-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:rgba(253,251,247,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translate3d(0,-60px,0);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
+.sticky-nav{position:fixed;contain:layout style;top:38px;left:0;right:0;z-index:105;background:rgba(253,251,247,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translate3d(0,-60px,0);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
 .sticky-nav.show{transform:translate3d(0,0,0);opacity:1;pointer-events:auto}
 .sticky-nav .brand{font-size:16px;font-weight:750;letter-spacing:-0.02em}
 .sticky-nav .btns{display:flex;gap:8px}
@@ -79,7 +79,7 @@ a{text-decoration:none;color:inherit}
 .text-muted{color:var(--muted)}
 
 /* ═══ CAROUSEL ═══ */
-.carousel-wrap{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-wrap{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain;scroll-behavior:smooth;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:24px;overflow:hidden;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);-webkit-transform:translateZ(0);transform:translateZ(0)}
 .carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.7);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;color:#fff}
@@ -140,7 +140,7 @@ img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibili
 .video-modal .close{position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 /* ═══ FLOATING CTA ═══ */
-.float-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:#fff;border-top:1px solid rgba(0,0,0,0.08);transform:translate3d(0,100%,0);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
+.float-cta{position:fixed;bottom:0;contain:layout style;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:#fff;border-top:1px solid rgba(0,0,0,0.08);transform:translate3d(0,100%,0);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
 .float-cta.show{transform:translate3d(0,0,0)}
 .float-cta .inner{max-width:380px;margin:0 auto;display:flex;gap:10px}
 .float-cta .btn-dark{flex:1;background:var(--accent);color:#fff;border:none;border-radius:14px;padding:14px 0;font-size:15px;font-weight:650}
@@ -165,6 +165,23 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 .air-col:nth-child(5){left:60%;animation-delay:1.4s}
 .air-col:nth-child(6){left:73%;animation-delay:1.75s}
 .air-col:nth-child(7){left:86%;animation-delay:2.1s}
+
+/* ═══ MOBILE STABILITY ═══ */
+@media(max-width:768px){
+  /* 3D 매트 회전 성능 개선 */
+  #mat3d{animation-duration:12s!important}
+  
+  /* 스크롤 성능 */
+  .section,.section-dark,.section-warm{contain:content}
+  
+  /* 이미지 렌더링 최적화 */
+  img{will-change:auto!important}
+  
+  /* 슬라이더 터치 개선 */
+  .seam-slider-container{touch-action:pan-y pinch-zoom}
+  .carousel-wrap{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+}
+
 </style>
 </head>
 <body>
@@ -313,7 +330,8 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   </div>
 
   <!-- 카테고리 탭 (좌우 스크롤) -->
-  <div style="margin-top:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 20px 20px;display:flex;gap:8px;justify-content:flex-start" id="explorerTabs">
+  <div style="max-width:640px;margin:0 auto">
+    <div style="margin-top:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 20px 20px;display:flex;gap:8px;justify-content:center" id="explorerTabs">
     <button onclick="switchExplorer(0)" class="exp-tab exp-tab-active" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:rgba(255,255,255,0.15);color:#fff">
       <span style="width:20px;height:20px;border-radius:50%;background:#d4d0ca;display:inline-block;border:1.5px solid rgba(255,255,255,0.3)"></span> 컬러
     </button>
@@ -332,6 +350,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
     <button onclick="switchExplorer(5)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
       ⊕ 반려동물
     </button>
+    </div>
   </div>
 </section>
 
@@ -379,7 +398,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 
     <!-- 3D Stage -->
     <div class="fade-up" style="perspective:1000px;width:100%;max-width:320px;margin:0 auto;-webkit-transform:translateZ(0);transform:translateZ(0)">
-      <div id="mat3d" style="width:100%;aspect-ratio:1;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;animation:matSpin3D 8s linear infinite;cursor:grab" ontouchstart="start3DDrag(event)" ontouchmove="drag3D(event)" ontouchend="end3DDrag()" onmousedown="start3DDragMouse(event)">
+      <div id="mat3d" style="width:100%;aspect-ratio:1;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;animation:matSpin3D 8s linear infinite;cursor:grab" ontouchstart="start3DDrag(event)" style="touch-action:pan-y" ontouchmove="drag3D(event)" ontouchend="end3DDrag()" onmousedown="start3DDragMouse(event)">
 
         <!-- FRONT face -->
         <div style="position:absolute;inset:0;transform:translateZ(12px);-webkit-transform:translateZ(12px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(174,203,212,0.15)">
@@ -639,7 +658,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 .stat-num{font-size:clamp(34px,4.5vw,52px);font-weight:700;color:#fff;line-height:1;text-shadow:0 2px 12px rgba(0,0,0,0.08)}
 .stat-unit{font-size:clamp(16px,2vw,22px);color:rgba(255,255,255,0.8);font-weight:500;margin-left:2px}
 .stat-label{font-size:13px;color:rgba(255,255,255,0.7);margin-top:12px;font-weight:400}
-.seam-slider-container{position:relative;width:100%;max-width:480px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.06);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;aspect-ratio:480/340}
+.seam-slider-container{position:relative;width:100%;max-width:480px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.06);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y pinch-zoom;aspect-ratio:480/340}
 .seam-slider-container.dragging{cursor:grabbing}
 .seam-grid{position:absolute;inset:0;display:grid;justify-content:center;align-content:center}
 .seam-grid.small{gap:4px;background:#E8E2DA}
