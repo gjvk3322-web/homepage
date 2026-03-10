@@ -312,25 +312,44 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 </section>
 
 <!-- ═══════════════════════════════════════
-     신뢰 섹션
+     신뢰 섹션 — 전국 6,700곳 + 지도
 ═══════════════════════════════════════ -->
 <section class="section section-warm">
   <div class="section-center">
     <p class="section-label fade-up" style="color:var(--accent)">Trusted By</p>
-    <h2 class="section-title text-center fade-up mb-8">이미 선택한 곳들.</h2>
-    <p class="fade-up text-center" style="font-size:52px;font-weight:800;letter-spacing:-0.05em;line-height:1" id="trustCount">0+</p>
-    <p class="fade-up text-center mb-40" style="font-size:13px;color:var(--muted)">시공 완료 현장</p>
+    <h2 class="section-title text-center fade-up mb-8">전국이 선택한 매트.</h2>
+    <p class="fade-up text-center" style="font-size:clamp(52px,14vw,80px);font-weight:800;letter-spacing:-0.05em;line-height:1" id="trustCount">0</p>
+    <p class="fade-up text-center" style="font-size:15px;color:var(--soft);margin-bottom:8px">시공 완료 현장</p>
+    <p class="fade-up text-center mb-36" style="font-size:13px;color:var(--muted)">👶 우리 아이, 🐶 댕댕이 친구들이 매일 안전하게 뛰어놀고 있어요!</p>
 
+    <!-- 전국 시공 지도 -->
+    <div class="scale-in mb-16">
+      <a href="https://www.google.com/maps/d/edit?mid=1yVEL5-1haaKF0XdJzlRDbMrmF8rNYE4&usp=sharing" target="_blank" rel="noopener" style="display:block;position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 24px rgba(0,0,0,0.06)">
+        <img src="img/map-korea.png" alt="전국 돌봄매트 시공 지도" style="width:100%;border-radius:24px">
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:20px 20px 24px;border-radius:0 0 24px 24px">
+          <p style="color:#fff;font-size:14px;font-weight:600;text-align:center">👆 지도를 클릭하면 우리 동네 시공 내역을 확인할 수 있어요</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 자동 슬라이드 -->
     <div class="trust-slide fade-up" id="trustSlide">
       <p class="trust-tag" id="trustTag">5성급 호텔</p>
       <p class="trust-name" id="trustName">부산 파라다이스호텔</p>
       <div class="dots mt-20" id="trustDots"></div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px" class="fade-up">
-      <div style="background:#fff;border-radius:16px;padding:20px 8px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">5성급</p><p style="font-size:11px;color:var(--muted)">호텔</p></div>
-      <div style="background:#fff;border-radius:16px;padding:20px 8px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">40+</p><p style="font-size:11px;color:var(--muted)">어린이집</p></div>
-      <div style="background:#fff;border-radius:16px;padding:20px 8px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">공공기관</p><p style="font-size:11px;color:var(--muted)">경찰서 외</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px" class="fade-up">
+      <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">5성급</p><p style="font-size:11px;color:var(--muted)">호텔 시공</p></div>
+      <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">80곳</p><p style="font-size:11px;color:var(--muted)">국공립 어린이집</p></div>
+      <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">경찰서</p><p style="font-size:11px;color:var(--muted)">어린이집 포함</p></div>
+      <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">전국</p><p style="font-size:11px;color:var(--muted)">시공 가능</p></div>
+    </div>
+
+    <!-- 경쟁 차별화 메시지 -->
+    <div class="fade-up" style="margin-top:24px;background:#fff;border-radius:20px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05)">
+      <p style="font-size:15px;font-weight:700;color:var(--red);margin-bottom:10px">🚨 잠깐! 신생 업체와 비교 중이신가요?</p>
+      <p style="font-size:14px;color:var(--soft);line-height:1.7">매트는 <strong style="color:var(--text)">'시공 후 A/S와 내구성'</strong>이 생명입니다.<br>검증되지 않은 곳에서 후회하지 마시고,<br>전국 <strong style="color:var(--text)">6,700곳이 증명하는 1위 브랜드</strong><br>돌봄매트와 함께하세요! 🐶👶</p>
     </div>
   </div>
 </section>
@@ -368,7 +387,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
       <h2 style="font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.12;letter-spacing:-0.035em;margin-bottom:16px;color:#fff">우리 아이를 위한<br>첫 번째 선택.</h2>
       <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:300px;margin:0 auto 36px">무료 샘플을 직접 만져보세요.<br>5년 이상 함께할 매트.</p>
       <button class="btn-white" style="padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기</button>
-      <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,0.5)">📞 1588-0000 · 카카오톡 상담</p>
+      <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,0.5)">📞 0507-1345-4146 · <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="color:rgba(255,255,255,0.6)">카카오톡 상담</a></p>
     </div>
   </div>
 </section>
@@ -376,7 +395,13 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 <!-- ═══ Footer ═══ -->
 <footer>
   <p style="font-weight:650;color:rgba(255,255,255,0.4);margin-bottom:6px;font-size:13px">돌봄매트</p>
-  <p>상호명: 돌봄매트 | 대표: 홍길동<br>사업자등록번호: 000-00-00000<br>부산광역시 해운대구 ○○로 ○○</p>
+  <p>상호: 돌봄매트 | 대표: 허민석<br>사업자등록번호: 680-37-00893<br>통신판매업: 2021-부산강서구-0154<br>부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호</p>
+  <p style="margin-top:8px">고객센터: 0507-1345-4146<br>카카오톡채널: 돌봄매트 (24시간 운영)<br>이메일: dolbommat@naver.com</p>
+  <div style="display:flex;justify-content:center;gap:16px;margin-top:16px">
+    <a href="https://instagram.com/dolbomstore" target="_blank" style="color:var(--muted);font-size:13px">Instagram</a>
+    <a href="https://blog.naver.com/dolbommatt1004" target="_blank" style="color:var(--muted);font-size:13px">Blog</a>
+    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="color:var(--muted);font-size:13px">카카오톡</a>
+  </div>
   <p style="margin-top:12px;font-size:11px;opacity:0.4">© 2026 돌봄매트. All rights reserved.</p>
 </footer>
 
@@ -461,9 +486,12 @@ setupCarouselDots('carousel1', 'dots1', 5);
 const trustData = [
   { name: "부산 파라다이스호텔", tag: "5성급 호텔" },
   { name: "서울 신라호텔 키즈룸", tag: "5성급 호텔" },
-  { name: "해운대 경찰서", tag: "공공기관" },
+  { name: "해운대 경찰서 어린이집", tag: "공공기관" },
+  { name: "국공립 어린이집 80곳", tag: "국공립 시설" },
   { name: "하바 키즈 라운지", tag: "키즈 시설" },
-  { name: "부산 키즈카페 40+곳", tag: "어린이 시설" },
+  { name: "전국 키즈카페 다수", tag: "어린이 시설" },
+  { name: "디에이치아너힐즈 25평", tag: "최근 시공" },
+  { name: "매교역푸르지오SK뷰 24평", tag: "최근 시공" },
 ];
 let trustIdx = 0;
 const trustDotsEl = document.getElementById('trustDots');
@@ -491,7 +519,7 @@ const countObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       let n = 0;
-      const id = setInterval(() => { n += 5; if (n >= 500) { trustCountEl.textContent = '500+'; clearInterval(id); } else { trustCountEl.textContent = n + '+'; }}, 1000/60);
+      const id = setInterval(() => { n += 67; if (n >= 6700) { trustCountEl.textContent = '6,700+'; clearInterval(id); } else { trustCountEl.textContent = n.toLocaleString() + '+'; }}, 1000/60);
       countObs.unobserve(e.target);
     }
   });
