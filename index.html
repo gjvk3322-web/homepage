@@ -9,8 +9,8 @@
 <style>
 /* ═══ RESET & BASE ═══ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#faf9f6;color:#1d1d1f;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overscroll-behavior:none;overscroll-behavior-y:none}
+body{font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#faf9f6;color:#1d1d1f;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
 img{display:block;max-width:100%;height:auto}
 button{font-family:inherit;cursor:pointer}
 a{text-decoration:none;color:inherit}
@@ -23,12 +23,12 @@ a{text-decoration:none;color:inherit}
   --accent:#c8a97e;--gold:#d4a843;--blue:#2997ff;--green:#30d158;--red:#ff453a;
 }
 
-/* ═══ ANIMATIONS ═══ */
-.fade-up{opacity:0;transform:translateY(44px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
-.fade-up.visible{opacity:1;transform:translateY(0)}
-.scale-in{opacity:0;transform:scale(0.93);transition:opacity 0.85s cubic-bezier(0.22,1,0.36,1),transform 0.85s cubic-bezier(0.22,1,0.36,1)}
-.scale-in.visible{opacity:1;transform:scale(1)}
-.fade-in{opacity:0;transition:opacity 1s ease}
+/* ═══ ANIMATIONS (GPU accelerated) ═══ */
+.fade-up{opacity:0;transform:translate3d(0,44px,0);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.fade-up.visible{opacity:1;transform:translate3d(0,0,0)}
+.scale-in{opacity:0;transform:scale3d(0.93,0.93,1);transition:opacity 0.85s cubic-bezier(0.22,1,0.36,1),transform 0.85s cubic-bezier(0.22,1,0.36,1);will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.scale-in.visible{opacity:1;transform:scale3d(1,1,1)}
+.fade-in{opacity:0;transition:opacity 1s ease;will-change:opacity}
 .fade-in.visible{opacity:1}
 .delay-1{transition-delay:0.1s}.delay-2{transition-delay:0.2s}.delay-3{transition-delay:0.3s}.delay-4{transition-delay:0.4s}.delay-5{transition-delay:0.5s}
 
@@ -43,13 +43,13 @@ a{text-decoration:none;color:inherit}
 .scroll-hint{animation:scrollBounce 2s ease-in-out infinite;opacity:0.35}
 
 /* ═══ GNB ═══ */
-.gnb{position:fixed;top:0;left:0;right:0;z-index:110;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 20px;text-align:center;font-size:13px;color:var(--light)}
+.gnb{position:fixed;top:0;left:0;right:0;z-index:110;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 20px;text-align:center;font-size:13px;color:var(--light);contain:layout style;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .gnb .gold{color:var(--gold);font-weight:700}
 .gnb .link{color:var(--blue);font-weight:600;cursor:pointer}
 
 /* ═══ STICKY NAV ═══ */
-.sticky-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:rgba(250,249,246,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translateY(-60px);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none}
-.sticky-nav.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.sticky-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:rgba(250,249,246,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translate3d(0,-60px,0);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none;will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.sticky-nav.show{transform:translate3d(0,0,0);opacity:1;pointer-events:auto}
 .sticky-nav .brand{font-size:16px;font-weight:750;letter-spacing:-0.02em}
 .sticky-nav .btns{display:flex;gap:8px}
 .sticky-nav .btn-outline{background:rgba(0,0,0,0.06);border:none;border-radius:980px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--text)}
@@ -93,11 +93,14 @@ a{text-decoration:none;color:inherit}
 .dot-dark{background:rgba(0,0,0,0.12)}.dot-dark.active{background:var(--text)}
 
 /* ═══ FULL-BLEED IMAGE ═══ */
-.fullbleed{position:relative;overflow:hidden}
-.fullbleed img{width:100%;height:100%;object-fit:cover;display:block}
+.fullbleed{position:relative;overflow:hidden;contain:layout style paint}
+.fullbleed img{width:100%;height:100%;object-fit:cover;display:block;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .fullbleed .overlay{position:absolute;inset:0}
 .fullbleed .content{position:absolute;bottom:0;left:0;right:0;padding:40px 24px 48px;z-index:1}
 .fullbleed h3{font-size:clamp(28px,7vw,40px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15}
+
+/* Image performance */
+img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 
 /* ═══ SPEC GRID ═══ */
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -131,8 +134,8 @@ a{text-decoration:none;color:inherit}
 .video-modal .close{position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 /* ═══ FLOATING CTA ═══ */
-.float-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:rgba(255,255,255,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(0,0,0,0.06);transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
-.float-cta.show{transform:translateY(0)}
+.float-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:rgba(255,255,255,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(0,0,0,0.06);transform:translate3d(0,100%,0);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.float-cta.show{transform:translate3d(0,0,0)}
 .float-cta .inner{max-width:380px;margin:0 auto;display:flex;gap:10px}
 .float-cta .btn-dark{flex:1;background:var(--text);color:#fff;border:none;border-radius:14px;padding:14px 0;font-size:15px;font-weight:700}
 .float-cta .btn-call{background:rgba(0,0,0,0.05);color:var(--text);border:none;border-radius:14px;padding:14px 20px;font-size:15px;font-weight:600}
@@ -166,13 +169,16 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 </div>
 
 <!-- ═══ STICKY NAV ═══ -->
-<div class="sticky-nav" id="stickyNav">
-  <span class="brand">돌봄매트</span>
-  <div class="btns">
-    <button class="btn-outline">살펴보기</button>
-    <button class="btn-blue">구입하기</button>
+<nav class="sticky-nav" id="stickyNav">
+  <a href="index.html" class="brand" style="text-decoration:none">돌봄매트</a>
+  <div style="display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:4px 0">
+    <a href="baby-mat.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">유아매트</a>
+    <a href="dog-mat.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">애견매트</a>
+    <a href="cases.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">시공사례</a>
+    <a href="event.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">이벤트</a>
   </div>
-</div>
+  <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="text-decoration:none"><button style="background:var(--blue);border:none;border-radius:980px;padding:7px 14px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;flex-shrink:0;cursor:pointer">카톡상담</button></a>
+</nav>
 
 <!-- ═══════════════════════════════════════
      HERO
@@ -207,19 +213,19 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 
   <div class="carousel-wrap" id="carousel1">
     <!-- Card 1 -->
-    <div class="carousel-card"><div style="position:relative"><img src="img/kids-laughing.jpg" alt="웃는 아이들"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#818cf8">층간소음 저감</p><p class="card-title">아이가 뛰어놀아도
+    <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/kids-laughing.jpg" alt="웃는 아이들"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#818cf8">층간소음 저감</p><p class="card-title">아이가 뛰어놀아도
 아래층 걱정 끝.</p><p class="card-desc">KCL 국가 공인 기관 인증. 이웃과의 평화를 지킵니다.</p></div></div>
     <!-- Card 2 -->
-    <div class="carousel-card"><div style="position:relative"><img src="img/baby-walk.jpg" alt="걸음마 아기"><div class="badge">마찰계수 0.75+</div></div><div class="card-body"><p class="tag" style="color:#4ade80">미끄럼 방지</p><p class="card-title">첫 걸음마부터
+    <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/baby-walk.jpg" alt="걸음마 아기"><div class="badge">마찰계수 0.75+</div></div><div class="card-body"><p class="tag" style="color:#4ade80">미끄럼 방지</p><p class="card-title">첫 걸음마부터
 안전하게.</p><p class="card-desc">미끄럼 방지 최고 등급. 물에 젖어도 안전합니다.</p></div></div>
     <!-- Card 3 -->
-    <div class="carousel-card"><div style="position:relative"><img src="img/mat-structure.jpg" alt="매트 구조"><div class="badge">특허 등록</div></div><div class="card-body"><p class="tag" style="color:#60a5fa">공기순환 케어</p><p class="card-title">360° 에어홀 구조.
+    <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/mat-structure.jpg" alt="매트 구조"><div class="badge">특허 등록</div></div><div class="card-body"><p class="tag" style="color:#60a5fa">공기순환 케어</p><p class="card-title">360° 에어홀 구조.
 곰팡이 걱정 제로.</p><p class="card-desc">바닥 습기를 차단하여 마루 변색을 예방합니다.</p></div></div>
     <!-- Card 4 -->
-    <div class="carousel-card"><div style="position:relative"><img src="img/boy-toy.jpg" alt="장난감 노는 아이"><div class="badge">67% 흡수</div></div><div class="card-body"><p class="tag" style="color:#fbbf24">충격 흡수</p><p class="card-title">TPU 젖병 소재.
+    <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/boy-toy.jpg" alt="장난감 노는 아이"><div class="badge">67% 흡수</div></div><div class="card-body"><p class="tag" style="color:#fbbf24">충격 흡수</p><p class="card-title">TPU 젖병 소재.
 넘어져도 안심.</p><p class="card-desc">젖병과 동일한 안전 소재로 부상 위험을 줄입니다.</p></div></div>
     <!-- Card 5 -->
-    <div class="carousel-card"><div style="position:relative"><img src="img/dog-sofa.jpg" alt="강아지"><div class="badge">스크래치 방지</div></div><div class="card-body"><p class="tag" style="color:#f472b6">반려동물도 안전</p><p class="card-title">반려동물 발톱에도
+    <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/dog-sofa.jpg" alt="강아지"><div class="badge">스크래치 방지</div></div><div class="card-body"><p class="tag" style="color:#f472b6">반려동물도 안전</p><p class="card-title">반려동물 발톱에도
 끄떡없는.</p><p class="card-desc">내구성 높은 표면으로 반려동물과 함께 안심하세요.</p></div></div>
   </div>
   <div class="dots" id="dots1"></div>
@@ -229,7 +235,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
      라이프스타일 풀블리드 #1
 ═══════════════════════════════════════ -->
 <section class="fullbleed" style="height:70vh">
-  <img src="img/kids-drawing-wide.jpg" alt="그림 그리는 아이들" style="height:70vh">
+  <img loading="lazy" src="img/kids-drawing-wide.jpg" alt="그림 그리는 아이들" style="height:70vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%)"></div>
   <div class="content fade-up">
     <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Creative Space</p>
@@ -247,7 +253,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 
 <!-- 풀블리드 #2 -->
 <section class="fullbleed" style="height:80vh">
-  <img src="img/girl-easel.jpg" alt="이젤 앞 아이" style="height:80vh">
+  <img loading="lazy" src="img/girl-easel.jpg" alt="이젤 앞 아이" style="height:80vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.35) 100%)"></div>
   <div class="content fade-up">
     <h3>서 있어도, 앉아 있어도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></h3>
@@ -262,10 +268,10 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
     <p class="section-label fade-up" style="color:var(--blue)">Product Detail</p>
     <h2 class="section-title text-center fade-up mb-48">프로에겐 <span class="text-muted">프로의 소재를.</span></h2>
 
-    <div class="scale-in mb-16"><img src="img/mat-structure.jpg" alt="매트 구조" style="border-radius:24px;width:100%"></div>
+    <div class="scale-in mb-16"><img loading="lazy" src="img/mat-structure.jpg" alt="매트 구조" style="border-radius:24px;width:100%"></div>
     <p class="fade-up text-center mb-40" style="font-size:15px;color:var(--soft);line-height:1.6">간편하게 들어올려 세척 가능한 구조.<br>공기순환 에어홀이 뒷면에 설계되어 있습니다.</p>
 
-    <div class="scale-in mb-16"><img src="img/mat-sizes.jpg" alt="매트 사이즈" style="border-radius:24px;width:100%"></div>
+    <div class="scale-in mb-16"><img loading="lazy" src="img/mat-sizes.jpg" alt="매트 사이즈" style="border-radius:24px;width:100%"></div>
     <p class="fade-up text-center mb-40" style="font-size:15px;color:var(--soft);line-height:1.6">500mm · 600mm · <strong>1000mm</strong><br>세 가지 사이즈로 공간에 맞게 선택.</p>
 
     <div class="spec-grid">
@@ -302,7 +308,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
      반려동물 풀블리드
 ═══════════════════════════════════════ -->
 <section class="fullbleed" style="height:75vh">
-  <img src="img/dog-stand.jpg" alt="서 있는 강아지" style="height:75vh">
+  <img loading="lazy" src="img/dog-stand.jpg" alt="서 있는 강아지" style="height:75vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%)"></div>
   <div class="content fade-up">
     <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Pet Friendly</p>
@@ -325,7 +331,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
     <!-- 전국 시공 지도 -->
     <div class="scale-in mb-16">
       <a href="https://www.google.com/maps/d/edit?mid=1yVEL5-1haaKF0XdJzlRDbMrmF8rNYE4&usp=sharing" target="_blank" rel="noopener" style="display:block;position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 24px rgba(0,0,0,0.06)">
-        <img src="img/map-korea.png" alt="전국 돌봄매트 시공 지도" style="width:100%;border-radius:24px">
+        <img loading="lazy" src="img/map-korea.png" alt="전국 돌봄매트 시공 지도" style="width:100%;border-radius:24px">
         <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:20px 20px 24px;border-radius:0 0 24px 24px">
           <p style="color:#fff;font-size:14px;font-weight:600;text-align:center">👆 지도를 클릭하면 우리 동네 시공 내역을 확인할 수 있어요</p>
         </div>
@@ -380,7 +386,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 
 <!-- ═══ Final CTA ═══ -->
 <section class="fullbleed" style="min-height:auto">
-  <img src="img/kids-sofa.jpg" alt="소파 앞 아이들" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <img loading="lazy" src="img/kids-sofa.jpg" alt="소파 앞 아이들" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 100%)"></div>
   <div style="position:relative;z-index:1;padding:100px 24px 120px;text-align:center">
     <div class="fade-up">
@@ -396,7 +402,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 <footer>
   <p style="font-weight:650;color:rgba(255,255,255,0.4);margin-bottom:6px;font-size:13px">돌봄매트</p>
   <p>상호: 돌봄매트 | 대표: 허민석<br>사업자등록번호: 680-37-00893<br>통신판매업: 2021-부산강서구-0154<br>부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호</p>
-  <p style="margin-top:8px">고객센터: 0507-1345-4146<br>카카오톡채널: 돌봄매트 (24시간 운영)<br>이메일: dolbommat@naver.com</p>
+  <p style="margin-top:8px">고객센터: 0507-1345-4146<br>카카오톡채널: 돌봄매트 (24시간 운영)<br>이메일: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2743484b45484a4a46536749465142550944484a">[email&#160;protected]</a></p>
   <div style="display:flex;justify-content:center;gap:16px;margin-top:16px">
     <a href="https://instagram.com/dolbomstore" target="_blank" style="color:var(--muted);font-size:13px">Instagram</a>
     <a href="https://blog.naver.com/dolbommatt1004" target="_blank" style="color:var(--muted);font-size:13px">Blog</a>
@@ -424,7 +430,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 <!-- ═══════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── Intersection Observer for animations ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
@@ -432,16 +438,26 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up,.scale-in,.fade-in').forEach(el => observer.observe(el));
 
-// ── Scroll events ──
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(() => {
-    const y = window.scrollY;
-    document.getElementById('stickyNav').classList.toggle('show', y > 500);
-    document.getElementById('floatCta').classList.toggle('show', y > 700);
-    ticking = false;
-  }); ticking = true; }
-}, { passive: true });
+// ── Scroll-based UI (optimized with Intersection Observer instead of scroll events) ──
+// Use sentinel elements instead of scroll position for smoother performance
+const navSentinel = document.createElement('div');
+navSentinel.style.cssText = 'position:absolute;top:500px;width:1px;height:1px;pointer-events:none';
+document.body.prepend(navSentinel);
+
+const ctaSentinel = document.createElement('div');
+ctaSentinel.style.cssText = 'position:absolute;top:700px;width:1px;height:1px;pointer-events:none';
+document.body.prepend(ctaSentinel);
+
+const stickyNav = document.getElementById('stickyNav');
+const floatCta = document.getElementById('floatCta');
+
+new IntersectionObserver(([e]) => {
+  stickyNav.classList.toggle('show', !e.isIntersecting);
+}, { threshold: 0 }).observe(navSentinel);
+
+new IntersectionObserver(([e]) => {
+  floatCta.classList.toggle('show', !e.isIntersecting);
+}, { threshold: 0 }).observe(ctaSentinel);
 
 // ── Scroll-trigger video ──
 const scrollVid = document.getElementById('scrollVideo');
@@ -519,13 +535,4 @@ const countObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       let n = 0;
-      const id = setInterval(() => { n += 67; if (n >= 6700) { trustCountEl.textContent = '6,700+'; clearInterval(id); } else { trustCountEl.textContent = n.toLocaleString() + '+'; }}, 1000/60);
-      countObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.5 });
-countObs.observe(trustCountEl);
-</script>
-
-</body>
-</html>
+      const id = setInterval(() => { n += 67; if (n >= 6700) { trustCountEl.textContent = '6,700
