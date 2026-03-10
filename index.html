@@ -292,6 +292,72 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 </section>
 
 <!-- ═══════════════════════════════════════
+     Apple 스타일 제품 탐색기
+═══════════════════════════════════════ -->
+<section class="section-dark" style="padding:80px 0 60px">
+  <div style="max-width:640px;margin:0 auto;padding:0 24px">
+    <p class="section-label fade-up text-center" style="color:var(--gold)">Product Explorer</p>
+    <h2 style="font-size:clamp(28px,7vw,42px);font-weight:800;text-align:center;letter-spacing:-0.035em;line-height:1.12;margin-bottom:8px;color:#fff" class="fade-up">돌봄매트를<br><span style="color:var(--muted)">자세히 살펴보세요.</span></h2>
+    <p class="fade-up text-center" style="font-size:14px;color:var(--muted);margin-bottom:32px">이미지를 탭하면 크게 볼 수 있습니다</p>
+  </div>
+
+  <!-- 메인 이미지 -->
+  <div style="max-width:640px;margin:0 auto;padding:0 20px">
+    <div id="explorerMain" class="fade-up" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#111;cursor:pointer" onclick="openLightbox(currentExplorerIdx)">
+      <img id="explorerImg" src="img/kids-playing.jpg" alt="" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.4s ease;-webkit-transform:translateZ(0);transform:translateZ(0)">
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:20px 20px 24px">
+        <p id="explorerTag" style="font-size:11px;font-weight:650;color:var(--gold);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px">컬러 · 모던화이트</p>
+        <p id="explorerDesc" style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:500">깔끔한 화이트 톤으로 어떤 인테리어에도 자연스럽게 어울립니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 카테고리 탭 (좌우 스크롤) -->
+  <div style="margin-top:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 20px 20px;display:flex;gap:8px;justify-content:flex-start" id="explorerTabs">
+    <button onclick="switchExplorer(0)" class="exp-tab exp-tab-active" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:rgba(255,255,255,0.15);color:#fff">
+      <span style="width:20px;height:20px;border-radius:50%;background:#d4d0ca;display:inline-block;border:1.5px solid rgba(255,255,255,0.3)"></span> 컬러
+    </button>
+    <button onclick="switchExplorer(1)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 매트 구조
+    </button>
+    <button onclick="switchExplorer(2)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 사이즈
+    </button>
+    <button onclick="switchExplorer(3)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 시공 모습
+    </button>
+    <button onclick="switchExplorer(4)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 세척
+    </button>
+    <button onclick="switchExplorer(5)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 반려동물
+    </button>
+  </div>
+</section>
+
+<!-- 라이트박스 (풀스크린) -->
+<div id="lightbox" style="position:fixed;inset:0;z-index:210;background:rgba(0,0,0,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;-webkit-transform:translateZ(0);transform:translateZ(0)">
+  <!-- 닫기 -->
+  <button onclick="closeLightbox()" style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">✕</button>
+
+  <!-- 이미지 -->
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:60px 16px 0;position:relative">
+    <!-- 좌 화살표 -->
+    <button onclick="lightboxPrev()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">‹</button>
+    <!-- 우 화살표 -->
+    <button onclick="lightboxNext()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">›</button>
+
+    <img id="lightboxImg" src="" alt="" style="max-width:100%;max-height:70vh;object-fit:contain;border-radius:12px;transition:opacity 0.3s">
+  </div>
+
+  <!-- 하단 설명 -->
+  <div style="width:100%;padding:20px 24px 40px;padding-bottom:max(40px,env(safe-area-inset-bottom))">
+    <p id="lightboxTag" style="font-size:11px;font-weight:650;color:var(--gold);letter-spacing:0.04em;margin-bottom:6px"></p>
+    <p id="lightboxDesc" style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
      영상 섹션
 ═══════════════════════════════════════ -->
 <section class="section">
@@ -824,6 +890,71 @@ const countObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 countObs.observe(trustCountEl);
+
+// ── Product Explorer (Apple Style) ──
+var currentExplorerIdx = 0;
+var explorerData = [
+  { img: 'img/kids-playing.jpg', tag: '컬러 · 모던화이트', desc: '깔끔한 화이트 톤으로 어떤 인테리어에도 자연스럽게 어울립니다.' },
+  { img: 'img/mat-structure.jpg', tag: '매트 구조 · 에어홀 시스템', desc: '뒷면의 360° 에어홀 구조로 공기가 순환하여 곰팡이와 변색을 예방합니다.' },
+  { img: 'img/mat-sizes.jpg', tag: '사이즈 · 500 / 600 / 1000mm', desc: '업계 최대 1m 사이즈. 이음새가 줄어 더 깔끔하고 위생적입니다.' },
+  { img: 'img/kids-drawing.jpg', tag: '시공 모습 · 거실', desc: '시공 후 아이들이 바닥에서 안전하게 놀 수 있는 공간이 됩니다.' },
+  { img: 'img/mat-pieces.jpg', tag: '세척 · 간편 분리', desc: '매트를 하나씩 분리해서 물걸레로 간편하게 세척할 수 있습니다.' },
+  { img: 'img/dog-sofa.jpg', tag: '반려동물 · 미끄럼 방지', desc: '마찰계수 0.75+ 최고 등급. 반려동물 슬개골을 보호합니다.' },
+];
+
+function switchExplorer(idx) {
+  currentExplorerIdx = idx;
+  var data = explorerData[idx];
+  var imgEl = document.getElementById('explorerImg');
+  imgEl.style.opacity = '0';
+  setTimeout(function() {
+    imgEl.src = data.img;
+    imgEl.onload = function() { imgEl.style.opacity = '1'; };
+    document.getElementById('explorerTag').textContent = data.tag;
+    document.getElementById('explorerDesc').textContent = data.desc;
+  }, 200);
+  document.querySelectorAll('.exp-tab').forEach(function(t, i) {
+    t.style.background = i === idx ? 'rgba(255,255,255,0.15)' : 'transparent';
+    t.style.color = i === idx ? '#fff' : 'rgba(255,255,255,0.45)';
+  });
+}
+
+var lightboxIdx = 0;
+function openLightbox(idx) {
+  lightboxIdx = idx;
+  document.getElementById('lightbox').style.display = 'flex';
+  updateLightbox();
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function updateLightbox() {
+  var d = explorerData[lightboxIdx];
+  var img = document.getElementById('lightboxImg');
+  img.style.opacity = '0';
+  setTimeout(function() {
+    img.src = d.img;
+    img.onload = function() { img.style.opacity = '1'; };
+    document.getElementById('lightboxTag').textContent = d.tag;
+    document.getElementById('lightboxDesc').textContent = d.desc;
+  }, 150);
+}
+function lightboxNext() { lightboxIdx = (lightboxIdx + 1) % explorerData.length; updateLightbox(); }
+function lightboxPrev() { lightboxIdx = (lightboxIdx - 1 + explorerData.length) % explorerData.length; updateLightbox(); }
+
+// Swipe support for lightbox
+(function() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  var startX = 0;
+  lb.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    var diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) { diff > 0 ? lightboxPrev() : lightboxNext(); }
+  }, { passive: true });
+})();
 
 // ── Smart Calculator ──
 var PRICE_PER_MAT = 62000;
