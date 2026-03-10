@@ -626,6 +626,222 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 </section>
 
 <!-- ═══════════════════════════════════════
+     크기 비교 섹션 (SIZE COMPARISON)
+═══════════════════════════════════════ -->
+<style>
+/* Size Compare */
+.size-boxes{display:flex;align-items:flex-end;justify-content:center;gap:clamp(24px,5vw,52px);min-height:300px;padding:0 12px}
+.size-box-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0;transform:translateY(50px);transition:all 0.8s cubic-bezier(0.22,1,0.36,1)}
+.size-box-wrap.visible{opacity:1;transform:translateY(0)}
+.size-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:12px;background:#f3f4f6;border:1.5px solid rgba(0,0,0,0.06);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.size-box.highlight{border-radius:20px;background:linear-gradient(145deg,var(--accent),#b8935e);border:none;box-shadow:0 24px 48px -12px rgba(200,169,126,0.35)}
+.size-box .num{font-weight:800;letter-spacing:-0.5px}
+.size-box.highlight .num{color:#fff}
+.size-box:not(.highlight) .num{color:#9ca3af}
+.size-box .unit{font-weight:500}
+.size-box.highlight .unit{color:rgba(255,255,255,0.7)}
+.size-box:not(.highlight) .unit{color:#c4c4cc}
+.size-brand{font-weight:500;color:#9ca3af;font-size:13px}
+.size-brand.hl{font-weight:700;color:var(--accent);font-size:15px}
+
+/* Stats Banner */
+.stats-banner{background:linear-gradient(135deg,#111827,#1f2937);padding:64px 24px;position:relative;overflow:hidden}
+.stats-banner .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(200,169,126,0.12),transparent 70%)}
+.stats-grid{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+.stat-item{text-align:center;opacity:0;transform:translateY(24px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1)}
+.stat-item.visible{opacity:1;transform:translateY(0)}
+.stat-num{font-size:clamp(34px,4.5vw,52px);font-weight:800;color:#fff;line-height:1}
+.stat-unit{font-size:clamp(16px,2vw,22px);color:var(--gold);font-weight:600;margin-left:2px}
+.stat-label{font-size:13px;color:#9ca3af;margin-top:12px;font-weight:500}
+
+/* Seam Slider */
+.seam-slider-container{position:relative;width:100%;max-width:480px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.08);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;aspect-ratio:480/340}
+.seam-slider-container.dragging{cursor:grabbing}
+.seam-grid{position:absolute;inset:0;display:grid;justify-content:center;align-content:center}
+.seam-grid.small{gap:4px;background:#e8e8e8}
+.seam-grid.large{gap:1px;background:#d6e8fa}
+.seam-grid .cell-s{background:#f5f5f5;border-radius:2px}
+.seam-grid .cell-l{background:linear-gradient(135deg,#ebf3fe,#dceafb);border-radius:4px}
+.seam-clip{position:absolute;inset:0;overflow:hidden}
+.seam-label{position:absolute;top:16px;z-index:3;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;color:#fff;pointer-events:none}
+.seam-label.left{left:16px;background:rgba(0,0,0,0.6)}
+.seam-label.right{right:16px;background:rgba(200,169,126,0.85)}
+.seam-line{position:absolute;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,0.3);z-index:10;pointer-events:none}
+.seam-handle{position:absolute;top:50%;width:48px;height:48px;border-radius:50%;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none}
+.seam-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);color:#fff;font-size:13px;font-weight:600;padding:8px 20px;border-radius:100px;pointer-events:none;z-index:12;white-space:nowrap;animation:seamPulse 2s infinite}
+@keyframes seamPulse{0%,100%{opacity:1;transform:translateX(-50%) scale(1)}50%{opacity:0.7;transform:translateX(-50%) scale(1.05)}}
+
+/* Seam compare cards */
+.seam-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.seam-card{border-radius:18px;padding:22px 16px;text-align:center}
+.seam-card.other{background:#fff;border:1px solid rgba(0,0,0,0.06)}
+.seam-card.dolbom{background:linear-gradient(135deg,rgba(200,169,126,0.1),rgba(200,169,126,0.18));border:2px solid rgba(200,169,126,0.3)}
+.seam-card .card-label{font-size:12px;font-weight:600;margin-bottom:12px}
+.seam-card.other .card-label{color:#9ca3af}
+.seam-card.dolbom .card-label{color:var(--accent)}
+.seam-nums{display:flex;justify-content:center;gap:18px}
+.seam-nums .big{font-size:28px;font-weight:800;line-height:1}
+.seam-nums .big span{font-size:13px;font-weight:600}
+.seam-card.other .big{color:var(--red)}
+.seam-card.dolbom .big{color:var(--accent)}
+.seam-nums .sm{font-size:11px;margin-top:6px;font-weight:500}
+.seam-card.other .sm{color:#f87171}
+.seam-card.dolbom .sm{color:#b8935e}
+.seam-reduction{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap;max-width:480px;margin-left:auto;margin-right:auto}
+.seam-tag{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:10px 18px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 4px rgba(0,0,0,0.03)}
+.seam-tag .label{font-size:12px;color:#9ca3af;font-weight:500}
+.seam-tag .from{font-size:12px;color:#d1d5db;text-decoration:line-through}
+.seam-tag .arrow{font-size:12px;color:#9ca3af}
+.seam-tag .to{font-size:13px;color:var(--accent);font-weight:700}
+.seam-tag .badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+
+.benefit-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:44px}
+.benefit-card{background:#fff;border-radius:20px;padding:28px 16px;text-align:center;border:1px solid rgba(0,0,0,0.05)}
+.benefit-card .icon{width:48px;height:48px;border-radius:14px;background:rgba(200,169,126,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px}
+.benefit-card h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.benefit-card p{font-size:13px;color:var(--soft);line-height:1.65}
+
+@media(max-width:480px){
+  .benefit-cards{grid-template-columns:1fr}
+  .seam-cards{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+  .seam-reduction{flex-direction:column;align-items:center}
+}
+</style>
+
+<!-- SIZE COMPARISON -->
+<section class="section" style="padding-bottom:0">
+  <div class="section-center" style="max-width:640px">
+    <p class="section-label fade-up text-center" style="color:var(--accent)">Size Comparison</p>
+    <h2 class="section-title text-center fade-up mb-8">더 크니까,<br><span class="text-muted">더 다릅니다.</span></h2>
+    <p class="fade-up text-center mb-48" style="font-size:15px;color:var(--soft)">1m × 1m 대형 사이즈로 바닥을 더 깔끔하게 완성합니다</p>
+  </div>
+
+  <div class="size-boxes" id="sizeBoxes">
+    <div class="size-box-wrap" style="transition-delay:0s">
+      <div class="size-box" style="width:156px;height:156px">
+        <span class="num" style="font-size:18px">600</span>
+        <span class="unit" style="font-size:11px">mm</span>
+      </div>
+      <span class="size-brand">A사</span>
+    </div>
+    <div class="size-box-wrap" style="transition-delay:0.18s">
+      <div class="size-box" style="width:208px;height:208px">
+        <span class="num" style="font-size:22px">800</span>
+        <span class="unit" style="font-size:12px">mm</span>
+      </div>
+      <span class="size-brand">B사</span>
+    </div>
+    <div class="size-box-wrap" style="transition-delay:0.36s">
+      <div class="size-box highlight" style="width:260px;height:260px">
+        <span class="num" style="font-size:36px;color:#fff">1,000</span>
+        <span class="unit" style="font-size:14px">mm</span>
+      </div>
+      <span class="size-brand hl">돌봄매트</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BANNER -->
+<div class="stats-banner">
+  <div class="glow" style="top:-100px;right:-100px;width:300px;height:300px"></div>
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-item" style="transition-delay:0s"><p><span class="stat-num">1,000</span><span class="stat-unit">mm</span></p><p class="stat-label">대형 매트 사이즈</p></div>
+    <div class="stat-item" style="transition-delay:0.12s"><p><span class="stat-num">2.8</span><span class="stat-unit">배</span></p><p class="stat-label">600mm 대비 면적</p></div>
+    <div class="stat-item" style="transition-delay:0.24s"><p><span class="stat-num">66</span><span class="stat-unit">%</span></p><p class="stat-label">이음새 감소</p></div>
+  </div>
+  <p style="font-size:11px;color:#6b7280;text-align:center;margin-top:24px;position:relative">* 1,000mm 40장 기준, 600mm 대비</p>
+</div>
+
+<!-- SEAM COMPARISON (Interactive Slider) -->
+<section class="section section-warm">
+  <div class="section-center" style="max-width:640px">
+    <p class="section-label fade-up text-center" style="color:var(--accent)">Seamless Floor</p>
+    <h2 class="section-title text-center fade-up mb-8">이음새가 줄면,<br><span class="text-muted">바닥이 달라집니다.</span></h2>
+    <p class="fade-up text-center mb-36" style="font-size:15px;color:var(--soft)">슬라이더를 움직여서 직접 비교해 보세요</p>
+
+    <!-- Slider -->
+    <div class="seam-slider-container scale-in" id="seamSlider">
+      <!-- Large grid (돌봄매트, behind) -->
+      <div class="seam-grid large" id="gridLarge"></div>
+      <!-- Small grid (타사, front, clipped) -->
+      <div class="seam-clip" id="seamClip">
+        <div class="seam-grid small" id="gridSmall"></div>
+      </div>
+      <!-- Labels -->
+      <div class="seam-label left" id="labelLeft">타사 매트 600mm</div>
+      <div class="seam-label right" id="labelRight">돌봄매트 1,000mm</div>
+      <!-- Line -->
+      <div class="seam-line" id="seamLine"></div>
+      <!-- Handle -->
+      <div class="seam-handle" id="seamHandle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 5L3 12L8 19" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5L21 12L16 19" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <!-- Hint -->
+      <div class="seam-hint" id="seamHint">← 좌우로 드래그해 보세요 →</div>
+    </div>
+
+    <!-- Comparison Cards -->
+    <div class="seam-cards fade-up">
+      <div class="seam-card other">
+        <p class="card-label">타사 매트 600mm</p>
+        <div class="seam-nums">
+          <div><p class="big">44<span>장</span></p><p class="sm">매트 수</p></div>
+          <div style="width:1px;background:#f0f0f0"></div>
+          <div><p class="big">71<span>개</span></p><p class="sm">이음새</p></div>
+        </div>
+      </div>
+      <div class="seam-card dolbom">
+        <p class="card-label">돌봄매트 1,000mm</p>
+        <div class="seam-nums">
+          <div><p class="big">16<span>장</span></p><p class="sm">매트 수</p></div>
+          <div style="width:1px;background:rgba(200,169,126,0.3)"></div>
+          <div><p class="big">24<span>개</span></p><p class="sm">이음새</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reduction Tags -->
+    <div class="seam-reduction fade-up" style="margin-top:20px">
+      <div class="seam-tag">
+        <span class="label">매트 수</span>
+        <span class="from">44장</span>
+        <span class="arrow">→</span>
+        <span class="to">16장</span>
+        <span class="badge">64% 절감</span>
+      </div>
+      <div class="seam-tag">
+        <span class="label">이음새</span>
+        <span class="from">71개</span>
+        <span class="arrow">→</span>
+        <span class="to">24개</span>
+        <span class="badge">66% 감소</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:14px">* 34평 거실 기준 산출</p>
+
+    <!-- Benefits -->
+    <div class="benefit-cards fade-up" style="margin-top:44px">
+      <div class="benefit-card">
+        <div class="icon">🧹</div>
+        <h4>위생적인 바닥</h4>
+        <p>이음새 틈에 이물질이 끼지 않아 언제나 깨끗하게 유지돼요</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">✨</div>
+        <h4>깔끔한 마감</h4>
+        <p>넓은 매트로 이음새가 최소화되어 바닥이 한결 매끈해요</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">👶</div>
+        <h4>안전한 바닥</h4>
+        <p>틈이 줄어 아이 손가락이 끼일 걱정이 없어요</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
      스마트 견적 비교기 (Interactive Calculator)
 ═══════════════════════════════════════ -->
 <section class="section" id="calcSection">
@@ -1318,6 +1534,120 @@ function copyToClipboard() {
     alert('✅ 견적이 복사되었습니다!\n카톡 상담하기 버튼을 눌러 붙여넣기 해주세요!');
   }).catch(function() { alert('복사 실패. 브라우저 설정을 확인해주세요.'); });
 }
+
+// ── Size boxes observer ──
+document.querySelectorAll('.size-box-wrap').forEach(el => observer.observe(el));
+document.querySelectorAll('.stat-item').forEach(el => observer.observe(el));
+
+// ── Seam Slider Grid Generation ──
+(function() {
+  var slider = document.getElementById('seamSlider');
+  if (!slider) return;
+
+  var gridSmall = document.getElementById('gridSmall');
+  var gridLarge = document.getElementById('gridLarge');
+  var seamClip = document.getElementById('seamClip');
+  var seamLine = document.getElementById('seamLine');
+  var seamHandle = document.getElementById('seamHandle');
+  var seamHint = document.getElementById('seamHint');
+  var labelLeft = document.getElementById('labelLeft');
+  var labelRight = document.getElementById('labelRight');
+
+  // Generate grids
+  var w, h;
+  function setupGrids() {
+    w = slider.offsetWidth;
+    h = slider.offsetHeight;
+    if (w === 0 || h === 0) return;
+
+    // Small grid (타사 600mm)
+    var sCols = 9, sRows = 7, sGap = 4;
+    var sCW = Math.floor((w - (sCols - 1) * sGap) / sCols);
+    var sCH = Math.floor((h - (sRows - 1) * sGap) / sRows);
+    gridSmall.style.gridTemplateColumns = 'repeat(' + sCols + ',' + sCW + 'px)';
+    gridSmall.style.gridTemplateRows = 'repeat(' + sRows + ',' + sCH + 'px)';
+    gridSmall.innerHTML = '';
+    for (var i = 0; i < sCols * sRows; i++) {
+      var c = document.createElement('div');
+      c.className = 'cell-s';
+      gridSmall.appendChild(c);
+    }
+
+    // Large grid (돌봄매트 1000mm)
+    var lCols = 5, lRows = 4, lGap = 1;
+    var lCW = Math.floor((w - (lCols - 1) * lGap) / lCols);
+    var lCH = Math.floor((h - (lRows - 1) * lGap) / lRows);
+    gridLarge.style.gridTemplateColumns = 'repeat(' + lCols + ',' + lCW + 'px)';
+    gridLarge.style.gridTemplateRows = 'repeat(' + lRows + ',' + lCH + 'px)';
+    gridLarge.innerHTML = '';
+    for (var j = 0; j < lCols * lRows; j++) {
+      var d = document.createElement('div');
+      d.className = 'cell-l';
+      gridLarge.appendChild(d);
+    }
+  }
+
+  // Wait for render
+  setTimeout(setupGrids, 100);
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setupGrids, 200);
+  });
+
+  // Slider position
+  var pos = 50;
+  var isDragging = false;
+  var hasInteracted = false;
+
+  function updateSlider(pct) {
+    pos = Math.max(2, Math.min(98, pct));
+    seamClip.style.clipPath = 'inset(0 ' + (100 - pos) + '% 0 0)';
+    seamLine.style.left = pos + '%';
+    seamLine.style.transform = 'translateX(-50%)';
+    seamHandle.style.left = pos + '%';
+    seamHandle.style.transform = 'translate(-50%, -50%)';
+    labelLeft.style.opacity = pos > 10 ? '1' : '0';
+    labelRight.style.opacity = pos < 90 ? '1' : '0';
+  }
+  updateSlider(50);
+
+  function getPercent(clientX) {
+    var rect = slider.getBoundingClientRect();
+    return ((clientX - rect.left) / rect.width) * 100;
+  }
+
+  slider.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    isDragging = true;
+    slider.classList.add('dragging');
+    updateSlider(getPercent(e.clientX));
+    if (!hasInteracted) { hasInteracted = true; seamHint.style.display = 'none'; }
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    updateSlider(getPercent(e.clientX));
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    slider.classList.remove('dragging');
+  });
+
+  slider.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    slider.classList.add('dragging');
+    updateSlider(getPercent(e.touches[0].clientX));
+    if (!hasInteracted) { hasInteracted = true; seamHint.style.display = 'none'; }
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    updateSlider(getPercent(e.touches[0].clientX));
+  }, { passive: true });
+  document.addEventListener('touchend', function() {
+    isDragging = false;
+    slider.classList.remove('dragging');
+  });
+})();
 
 // ── FAQ Toggle ──
 function toggleFaq(item) {
