@@ -43,12 +43,12 @@ a{text-decoration:none;color:inherit}
 .scroll-hint{animation:scrollBounce 2s ease-in-out infinite;opacity:0.35}
 
 /* ═══ GNB ═══ */
-.gnb{position:fixed;top:0;left:0;right:0;z-index:110;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 20px;text-align:center;font-size:13px;color:var(--light);contain:layout style;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.gnb{position:fixed;top:0;left:0;right:0;z-index:110;background:#0a0a0a;padding:12px 20px;text-align:center;font-size:13px;color:var(--light);contain:layout style;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .gnb .gold{color:var(--gold);font-weight:700}
 .gnb .link{color:var(--blue);font-weight:600;cursor:pointer}
 
 /* ═══ STICKY NAV ═══ */
-.sticky-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:rgba(250,249,246,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translate3d(0,-60px,0);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none;will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.sticky-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:#faf9f6;border-bottom:1px solid rgba(0,0,0,0.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;transform:translate3d(0,-60px,0);opacity:0;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
 .sticky-nav.show{transform:translate3d(0,0,0);opacity:1;pointer-events:auto}
 .sticky-nav .brand{font-size:16px;font-weight:750;letter-spacing:-0.02em}
 .sticky-nav .btns{display:flex;gap:8px}
@@ -56,16 +56,16 @@ a{text-decoration:none;color:inherit}
 .sticky-nav .btn-blue{background:var(--blue);border:none;border-radius:980px;padding:8px 16px;font-size:13px;font-weight:600;color:#fff}
 
 /* ═══ HERO ═══ */
-.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:flex-end}
-.hero img.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.45) 100%)}
-.hero .content{position:relative;z-index:1;padding:140px 24px 80px}
+.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:flex-end;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.hero img.hero-bg,.hero video.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%);-webkit-transform:translateZ(0);transform:translateZ(0)}
+.hero .content{position:relative;z-index:1;padding:140px 24px 80px;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .hero .sub{font-size:13px;font-weight:500;letter-spacing:0.12em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:14px}
 .hero h1{font-size:clamp(40px,10vw,68px);font-weight:800;line-height:1.06;letter-spacing:-0.04em;color:#fff;margin-bottom:16px;max-width:440px}
 .hero .desc{font-size:clamp(15px,3.5vw,18px);color:rgba(255,255,255,0.75);line-height:1.6;max-width:300px;margin-bottom:32px}
 .hero .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn-white{background:rgba(255,255,255,0.95);color:#1d1d1f;border:none;border-radius:980px;padding:14px 32px;font-size:15px;font-weight:650}
-.btn-glass{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:980px;padding:14px 24px;font-size:15px;font-weight:600;backdrop-filter:blur(8px)}
+.btn-glass{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:980px;padding:14px 24px;font-size:15px;font-weight:600}
 .scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2}
 
 /* ═══ SECTIONS ═══ */
@@ -79,10 +79,10 @@ a{text-decoration:none;color:inherit}
 .text-muted{color:var(--muted)}
 
 /* ═══ CAROUSEL ═══ */
-.carousel-wrap{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch}
-.carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:24px;overflow:hidden;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08)}
-.carousel-card img{width:100%;height:240px;object-fit:cover}
-.carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.55);backdrop-filter:blur(10px);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;color:#fff}
+.carousel-wrap{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:24px;overflow:hidden;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.7);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;color:#fff}
 .carousel-card .card-body{padding:22px 20px 26px}
 .carousel-card .tag{font-size:11px;font-weight:650;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px}
 .carousel-card .card-title{font-size:19px;font-weight:750;letter-spacing:-0.02em;line-height:1.3;margin-bottom:10px;color:var(--light);white-space:pre-line}
@@ -93,14 +93,20 @@ a{text-decoration:none;color:inherit}
 .dot-dark{background:rgba(0,0,0,0.12)}.dot-dark.active{background:var(--text)}
 
 /* ═══ FULL-BLEED IMAGE ═══ */
-.fullbleed{position:relative;overflow:hidden;contain:layout style paint}
-.fullbleed img{width:100%;height:100%;object-fit:cover;display:block;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.fullbleed .overlay{position:absolute;inset:0}
-.fullbleed .content{position:absolute;bottom:0;left:0;right:0;padding:40px 24px 48px;z-index:1}
+.fullbleed{position:relative;overflow:hidden;contain:layout style paint;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.fullbleed img{width:100%;height:100%;object-fit:cover;display:block;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.fullbleed .overlay{position:absolute;inset:0;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.fullbleed .content{position:absolute;bottom:0;left:0;right:0;padding:40px 24px 48px;z-index:1;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .fullbleed h3{font-size:clamp(28px,7vw,40px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15}
 
+/* ═══ VIDEO BACKGROUND (Apple Style) ═══ */
+.video-bg-section{position:relative;overflow:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section .overlay{position:absolute;inset:0;z-index:1;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section .content{position:relative;z-index:2}
+
 /* Image performance */
-img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
 
 /* ═══ SPEC GRID ═══ */
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -127,14 +133,14 @@ img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibili
 .video-wrap video{width:100%;display:block}
 
 /* ═══ VIDEO MODAL ═══ */
-.video-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.95);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.35s}
+.video-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.35s}
 .video-modal.open{opacity:1;pointer-events:auto}
 .video-modal .inner{width:100%;max-width:640px;position:relative}
 .video-modal video{width:100%;border-radius:16px;background:#000}
 .video-modal .close{position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 /* ═══ FLOATING CTA ═══ */
-.float-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:rgba(255,255,255,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(0,0,0,0.06);transform:translate3d(0,100%,0);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.float-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:#fff;border-top:1px solid rgba(0,0,0,0.08);transform:translate3d(0,100%,0);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0)}
 .float-cta.show{transform:translate3d(0,0,0)}
 .float-cta .inner{max-width:380px;margin:0 auto;display:flex;gap:10px}
 .float-cta .btn-dark{flex:1;background:var(--text);color:#fff;border:none;border-radius:14px;padding:14px 0;font-size:15px;font-weight:700}
@@ -184,7 +190,7 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
      HERO
 ═══════════════════════════════════════ -->
 <section class="hero">
-  <img class="hero-bg" src="img/kids-playing.jpg" alt="돌봄매트 위에서 노는 아이들">
+  <video class="hero-bg" src="dolbom-video.mp4" poster="img/kids-playing.jpg" muted loop playsinline autoplay preload="auto"></video>
   <div class="overlay"></div>
   <div class="content">
     <p class="sub hero-anim hero-d2">우리 아이 처음이자 마지막 매트</p>
@@ -469,53 +475,99 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 </section>
 
 <!-- ═══════════════════════════════════════
-     견적 계산기 (Interactive)
+     스마트 견적 비교기 (Interactive Calculator)
 ═══════════════════════════════════════ -->
 <section class="section" id="calcSection">
-  <div style="max-width:440px;margin:0 auto;text-align:center">
-    <p class="section-label fade-up" style="color:var(--red)">Price Calculator</p>
-    <h2 class="section-title text-center fade-up mb-12">우리 집 견적,<br><span class="text-muted">바로 확인하세요.</span></h2>
-    <p class="fade-up mb-36" style="font-size:15px;color:var(--soft)">평수를 선택하면 예상 견적이 자동 계산됩니다.</p>
+  <div style="max-width:460px;margin:0 auto">
+    <p class="section-label fade-up text-center" style="color:var(--red)">Smart Calculator</p>
+    <h2 class="section-title text-center fade-up mb-12">스마트 견적 비교기.</h2>
+    <p class="fade-up text-center mb-36" style="font-size:15px;color:var(--soft)">우리 집 치수를 입력하면<br>타사 대비 절약 금액까지 확인됩니다.</p>
 
-    <!-- Calculator Card -->
-    <div class="scale-in" style="background:#fff;border-radius:26px;padding:36px 22px 32px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 28px rgba(0,0,0,0.05);position:relative;overflow:hidden">
+    <div class="scale-in" style="background:#fff;border-radius:26px;padding:32px 20px 28px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 28px rgba(0,0,0,0.05);position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold))"></div>
 
-      <!-- 평수 선택 버튼 -->
-      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;font-weight:600">평수를 선택하세요</p>
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px" id="sizeButtons">
-        <button onclick="calcPrice(15)" class="calc-btn" data-size="15" style="padding:10px 20px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;transition:all 0.25s">15평</button>
-        <button onclick="calcPrice(20)" class="calc-btn" data-size="20" style="padding:10px 20px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;transition:all 0.25s">20평</button>
-        <button onclick="calcPrice(25)" class="calc-btn active-calc" data-size="25" style="padding:10px 20px;border-radius:980px;border:1.5px solid var(--text);background:var(--text);font-size:14px;font-weight:600;color:#fff;cursor:pointer;transition:all 0.25s">25평</button>
-        <button onclick="calcPrice(30)" class="calc-btn" data-size="30" style="padding:10px 20px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;transition:all 0.25s">30평</button>
-        <button onclick="calcPrice(35)" class="calc-btn" data-size="35" style="padding:10px 20px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;transition:all 0.25s">35평</button>
-        <button onclick="calcPrice(40)" class="calc-btn" data-size="40" style="padding:10px 20px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.1);background:#fff;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer;transition:all 0.25s">40평</button>
+      <!-- 프리미엄 매트 소개 -->
+      <div style="background:var(--warm);padding:20px;border-radius:16px;text-align:center;margin-bottom:24px">
+        <p style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px">프리미엄 1m 퍼즐매트</p>
+        <p style="font-size:17px;font-weight:800;margin-bottom:4px">1,000 × 1,000mm <span style="font-size:13px;color:var(--muted)">(두께 1.7cm)</span></p>
+        <p style="font-size:14px;color:var(--soft)">장당 <strong style="color:var(--text)">62,000</strong>원</p>
+        <div id="dynamic-point" style="display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:6px 14px;border-radius:50px;margin-top:10px;font-weight:700">👶 층간소음 해방! 넘어져도 안전한 1.7cm 황금 두께</div>
       </div>
 
-      <!-- 결과 -->
-      <div id="calcResult">
-        <p style="font-size:12px;color:var(--muted);margin-bottom:4px"><span id="calcSize">25</span>평 예상 견적</p>
-        <p style="font-size:16px;color:var(--muted);text-decoration:line-through;margin-bottom:2px" id="calcOriginal">1,200,000원</p>
-        <p style="font-size:clamp(38px,10vw,52px);font-weight:800;letter-spacing:-0.04em;line-height:1.1;margin-bottom:10px">
-          <span id="calcFinal">1,116,000</span><span style="font-size:0.35em;font-weight:600;color:var(--soft)">원</span>
-        </p>
-        <div style="display:inline-block;background:var(--red);color:#fff;border-radius:980px;padding:5px 16px;font-size:11px;font-weight:700;margin-bottom:8px">
-          온누리 7% 할인 적용가
+      <!-- 시공 목적 선택 -->
+      <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">🎈 주로 누구를 위해 시공하시나요?</p>
+      <div style="display:flex;gap:8px;margin-bottom:20px">
+        <button id="label-child" onclick="selectPurpose('child')" style="flex:1;padding:12px;border-radius:12px;border:2px solid var(--accent);background:rgba(200,169,126,0.08);font-size:14px;font-weight:700;color:var(--accent);cursor:pointer;transition:all 0.25s">👶 우리 아이</button>
+        <button id="label-pet" onclick="selectPurpose('pet')" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.08);background:#fff;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.25s">🐶 반려동물</button>
+      </div>
+
+      <!-- 타사 비교 (선택) -->
+      <div style="background:#fff8f0;padding:16px;border-radius:14px;border:1px dashed rgba(200,169,126,0.4);margin-bottom:20px">
+        <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">🤔 타 업체와 비교해볼까요? <span style="font-size:11px;color:var(--muted);font-weight:500">(선택)</span></p>
+        <p style="font-size:11px;color:var(--soft);margin-bottom:10px">고민 중인 타사 매트 사이즈(mm)와 가격을 적어주세요</p>
+        <div style="display:flex;gap:8px;margin-bottom:6px">
+          <input type="number" id="comp-w" placeholder="가로 (예: 500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+          <input type="number" id="comp-h" placeholder="세로 (예: 500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
         </div>
-        <p style="font-size:12px;color:var(--green);font-weight:600" id="calcSaving">약 84,000원 절약!</p>
+        <input type="number" id="comp-price" placeholder="타사 장당 가격 (예: 15000)" style="width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;box-sizing:border-box;outline:none">
       </div>
 
-      <div style="border-top:1px solid rgba(0,0,0,0.06);margin-top:24px;padding-top:20px;display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px"><span style="color:var(--green);font-size:13px;font-weight:700">✓</span><span style="font-size:14px;font-weight:500">무료 실측 방문</span></div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px"><span style="color:var(--green);font-size:13px;font-weight:700">✓</span><span style="font-size:14px;font-weight:500">당일 시공 가능</span></div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px"><span style="color:var(--green);font-size:13px;font-weight:700">✓</span><span style="font-size:14px;font-weight:500">A/S 2년 보증</span></div>
+      <!-- 공간 입력 -->
+      <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">📐 시공할 공간 치수 (mm)</p>
+
+      <div style="margin-bottom:14px">
+        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">1. 거실</p>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="w1" placeholder="가로 (예: 4500)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+          <input type="number" id="h1" placeholder="세로 (예: 3200)" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">2. 복도</p>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="w2" placeholder="가로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+          <input type="number" id="h2" placeholder="세로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <p style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">3. 주방</p>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="w3" placeholder="가로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+          <input type="number" id="h3" placeholder="세로" style="flex:1;padding:10px 12px;border:1px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px;font-family:inherit;outline:none">
+        </div>
+      </div>
+
+      <!-- 할인 체크 -->
+      <label style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:#fef9e7;border-radius:12px;border:1px solid rgba(212,168,67,0.2);cursor:pointer;margin-bottom:20px">
+        <input type="checkbox" id="discount-check" style="width:18px;height:18px;cursor:pointer">
+        <span style="font-size:14px;font-weight:700;color:var(--red)">🎁 공동구매/박람회 5% 추가할인 적용</span>
+      </label>
+
+      <!-- 계산 버튼 -->
+      <button onclick="calculate()" style="width:100%;padding:16px;background:var(--text);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">견적 및 이음새 비교 확인</button>
+
+      <!-- 결과 영역 -->
+      <div id="result-box" style="display:none;margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.06)">
+        <h3 id="result-title" style="text-align:center;font-size:17px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,0.06)">📊 예상 견적</h3>
+        <p id="total-info" style="text-align:center;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px"></p>
+
+        <div id="compare-box" style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px"></div>
+
+        <div id="visual-compare-container"></div>
+
+        <!-- 액션 버튼 -->
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button id="copy-btn" onclick="copyToClipboard()" style="flex:1;padding:14px;background:var(--warm);color:var(--text);border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">📋 견적 복사</button>
+          <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="flex:1.2;text-decoration:none">
+            <button style="width:100%;padding:14px;background:#FEE500;color:#3c1e1e;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">🚀 카톡 상담하기</button>
+          </a>
+        </div>
+
+        <p style="font-size:11px;color:var(--muted);margin-top:14px;line-height:1.5;text-align:center">
+          ※ 위 견적은 자투리(로스율) 10%를 포함한 예상치이며,<br>공간 구조에 따라 차이가 있을 수 있습니다.
+        </p>
       </div>
     </div>
-
-    <p class="fade-up" style="margin-top:16px;font-size:11px;color:var(--muted);line-height:1.7">
-      * 실제 견적은 자재·시공 환경에 따라 달라질 수 있습니다<br>
-      * 무료 실측 후 정확한 견적을 안내해드립니다
-    </p>
   </div>
 </section>
 
@@ -649,7 +701,19 @@ footer{background:var(--dark);padding:32px 20px 40px;text-align:center;color:var
 <!-- ═══════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+// ── Hero video autoplay (mobile fix) ──
+document.addEventListener('DOMContentLoaded', function() {
+  var heroVid = document.querySelector('video.hero-bg');
+  if (heroVid) {
+    heroVid.play().catch(function() {});
+    // iOS Safari needs user interaction sometimes - play on first touch
+    document.addEventListener('touchstart', function() {
+      heroVid.play().catch(function() {});
+    }, { once: true });
+  }
+});
+
 // ── Intersection Observer for animations ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
@@ -761,32 +825,175 @@ const countObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 countObs.observe(trustCountEl);
 
-// ── Price Calculator ──
-function calcPrice(pyeong) {
-  const pricePerPyeong = 48000;
-  const original = pyeong * pricePerPyeong;
-  const discounted = Math.round(original * 0.93);
-  const saving = original - discounted;
+// ── Smart Calculator ──
+var PRICE_PER_MAT = 62000;
+var currentPurpose = 'child';
 
-  document.getElementById('calcSize').textContent = pyeong;
-  document.getElementById('calcOriginal').textContent = original.toLocaleString() + '원';
-  document.getElementById('calcFinal').textContent = discounted.toLocaleString();
-  document.getElementById('calcSaving').textContent = '약 ' + saving.toLocaleString() + '원 절약!';
+function selectPurpose(type) {
+  currentPurpose = type;
+  var labelChild = document.getElementById('label-child');
+  var labelPet = document.getElementById('label-pet');
+  var dp = document.getElementById('dynamic-point');
 
-  // Update active button
-  document.querySelectorAll('.calc-btn').forEach(btn => {
-    if (parseInt(btn.dataset.size) === pyeong) {
-      btn.style.background = 'var(--text)'; btn.style.color = '#fff'; btn.style.borderColor = 'var(--text)';
-    } else {
-      btn.style.background = '#fff'; btn.style.color = 'var(--soft)'; btn.style.borderColor = 'rgba(0,0,0,0.1)';
-    }
-  });
+  if (type === 'child') {
+    labelChild.style.background = 'rgba(200,169,126,0.08)';
+    labelChild.style.borderColor = 'var(--accent)';
+    labelChild.style.color = 'var(--accent)';
+    labelPet.style.background = '#fff';
+    labelPet.style.borderColor = 'rgba(0,0,0,0.08)';
+    labelPet.style.color = 'var(--muted)';
+    dp.innerHTML = '👶 층간소음 해방! 넘어져도 안전한 1.7cm 황금 두께';
+    dp.style.background = 'var(--accent)';
+  } else {
+    labelPet.style.background = 'rgba(255,69,58,0.06)';
+    labelPet.style.borderColor = 'var(--red)';
+    labelPet.style.color = 'var(--red)';
+    labelChild.style.background = '#fff';
+    labelChild.style.borderColor = 'rgba(0,0,0,0.08)';
+    labelChild.style.color = 'var(--muted)';
+    dp.innerHTML = '🐶 미끄럼 방지 최적화! 소중한 반려견 슬개골 보호';
+    dp.style.background = 'var(--red)';
+  }
+  if (document.getElementById('result-box').style.display === 'block') calculate();
+}
 
-  // Animate the number
-  const finalEl = document.getElementById('calcFinal');
-  finalEl.style.transform = 'scale(1.05)';
-  finalEl.style.transition = 'transform 0.3s ease';
-  setTimeout(() => { finalEl.style.transform = 'scale(1)'; }, 300);
+function calculate() {
+  var w1 = parseFloat(document.getElementById('w1').value) || 0;
+  var h1 = parseFloat(document.getElementById('h1').value) || 0;
+  var w2 = parseFloat(document.getElementById('w2').value) || 0;
+  var h2 = parseFloat(document.getElementById('h2').value) || 0;
+  var w3 = parseFloat(document.getElementById('w3').value) || 0;
+  var h3 = parseFloat(document.getElementById('h3').value) || 0;
+
+  var totalArea = (w1/1000)*(h1/1000) + (w2/1000)*(h2/1000) + (w3/1000)*(h3/1000);
+  if (totalArea === 0) { alert('가로, 세로 길이를 한 곳 이상 입력해주세요.'); return; }
+
+  var ourCount = Math.ceil(totalArea * 1.1);
+  var basePrice = ourCount * PRICE_PER_MAT;
+  var isDiscount = document.getElementById('discount-check').checked;
+  var ourPrice = isDiscount ? Math.floor(basePrice * 0.95) : basePrice;
+
+  var compW = parseFloat(document.getElementById('comp-w').value) || 0;
+  var compH = parseFloat(document.getElementById('comp-h').value) || 0;
+  var compPrice = parseFloat(document.getElementById('comp-price').value) || 0;
+
+  // Title
+  var titleEl = document.getElementById('result-title');
+  if (currentPurpose === 'child') {
+    titleEl.innerHTML = '<span style="color:var(--accent)">👶 우리 아이를 위한 맞춤 견적</span>';
+  } else {
+    titleEl.innerHTML = '<span style="color:var(--red)">🐶 반려동물을 위한 맞춤 견적</span>';
+  }
+
+  document.getElementById('total-info').textContent = '시공 총 면적: ' + totalArea.toFixed(2) + ' ㎡';
+
+  // Compare box
+  var compareHTML = '';
+  var compTotalCount = 0;
+  var copyText = '[돌봄매트 스마트 견적]\n\n■ 시공 면적: ' + totalArea.toFixed(2) + '㎡\n■ 1m 매트 수량: 약 ' + ourCount + '장\n\n';
+
+  if (compW > 0 && compH > 0 && compPrice > 0) {
+    var compAreaPerMat = (compW/1000) * (compH/1000);
+    compTotalCount = Math.ceil((totalArea * 1.1) / compAreaPerMat);
+    var compTotal = compTotalCount * compPrice;
+    var diff = compTotal - ourPrice;
+
+    compareHTML += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--muted)">' +
+      '<span>🔍 타사 (' + compW + '×' + compH + 'mm)</span>' +
+      '<span>약 ' + compTotalCount + '장 / <b>' + compTotal.toLocaleString() + '원</b></span></div>';
+
+    copyText += '❌ 타사: ' + compTotal.toLocaleString() + '원\n';
+    copyText += '✅ 돌봄매트: ' + ourPrice.toLocaleString() + '원\n';
+    copyText += '👉 ' + Math.abs(diff).toLocaleString() + '원 ' + (diff > 0 ? '절약' : '차이') + '!\n\n';
+  }
+
+  var priceHTML = '';
+  if (isDiscount) {
+    priceHTML = '<div style="text-align:right"><del style="color:var(--muted);font-size:13px">' + basePrice.toLocaleString() + '원</del><br><span style="color:var(--red);font-size:20px;font-weight:800">' + ourPrice.toLocaleString() + '원</span></div>';
+  } else {
+    priceHTML = '<span style="font-size:20px;font-weight:800;color:var(--text)">' + ourPrice.toLocaleString() + '원</span>';
+  }
+
+  compareHTML += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:2px dashed rgba(0,0,0,0.06);font-size:14px;font-weight:700">' +
+    '<span style="color:var(--accent)">✅ 돌봄매트 1m</span>' + priceHTML + '</div>';
+
+  if (isDiscount) { copyText += '🎁 공동구매 5% 할인 적용!\n'; }
+  copyText += '\n🚀 카톡 상담: http://pf.kakao.com/_UMyBK/chat';
+
+  document.getElementById('compare-box').innerHTML = compareHTML;
+  document.getElementById('copy-btn').setAttribute('data-copy', copyText);
+
+  // Visual seam comparison
+  var vc = document.getElementById('visual-compare-container');
+  vc.innerHTML = '';
+  if (compW > 0 && compH > 0) {
+    drawGridComparison(totalArea, ourCount, compTotalCount, compW, compH, vc);
+  }
+
+  document.getElementById('result-box').style.display = 'block';
+  document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function drawGridComparison(totalArea, ourCount, compCount, compW, compH, container) {
+  var wrapper = document.createElement('div');
+  wrapper.style.cssText = 'margin-top:20px;padding:20px 10px;background:var(--warm);border-radius:16px;text-align:center';
+
+  wrapper.innerHTML = '<p style="font-size:15px;font-weight:700;color:var(--accent);margin-bottom:6px">👀 이음새(선) 비교</p>' +
+    '<p style="font-size:12px;color:var(--soft);margin-bottom:16px;line-height:1.5">동일 면적 시공 시 바닥에 생기는 <b>선(이음새)</b> 차이<br><span style="color:var(--red)">선이 많을수록 틈새 먼지↑ 청소 어려움↑</span></p>';
+
+  var flexBox = document.createElement('div');
+  flexBox.style.cssText = 'display:flex;justify-content:center;gap:14px';
+
+  var roomW_m = Math.sqrt(totalArea * (4/3));
+  var roomH_m = Math.sqrt(totalArea * (3/4));
+  var maxW = 140;
+  var scale = maxW / roomW_m;
+  var cW = roomW_m * scale;
+  var cH = roomH_m * scale;
+
+  // Competitor
+  var b1 = document.createElement('div');
+  b1.style.cssText = 'text-align:center';
+  b1.innerHTML = '<p style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px">❌ 타사 매트<br><span style="font-size:11px;font-weight:400;color:var(--muted)">약 ' + compCount + '장</span></p>';
+  var c1 = document.createElement('canvas');
+  c1.width = cW; c1.height = cH;
+  c1.style.cssText = 'border:2px solid var(--red);background:#fff5f5;border-radius:8px';
+  drawGrid(c1, compW/1000, compH/1000, scale, '#ff453a', 0.5);
+  b1.appendChild(c1);
+
+  // Ours
+  var b2 = document.createElement('div');
+  b2.style.cssText = 'text-align:center';
+  b2.innerHTML = '<p style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px">✅ 돌봄매트 1m<br><span style="font-size:11px;font-weight:400;color:var(--muted)">약 ' + ourCount + '장</span></p>';
+  var c2 = document.createElement('canvas');
+  c2.width = cW; c2.height = cH;
+  c2.style.cssText = 'border:2px solid var(--accent);background:#faf8f4;border-radius:8px';
+  drawGrid(c2, 1, 1, scale, '#c8a97e', 1.5);
+  b2.appendChild(c2);
+
+  flexBox.appendChild(b1);
+  flexBox.appendChild(b2);
+  wrapper.appendChild(flexBox);
+  container.appendChild(wrapper);
+}
+
+function drawGrid(canvas, stepW, stepH, scale, color, lineWidth) {
+  var ctx = canvas.getContext('2d');
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  var sw = stepW * scale;
+  var sh = stepH * scale;
+  ctx.beginPath();
+  for (var x = sw; x < canvas.width; x += sw) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); }
+  for (var y = sh; y < canvas.height; y += sh) { ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); }
+  ctx.stroke();
+}
+
+function copyToClipboard() {
+  var text = document.getElementById('copy-btn').getAttribute('data-copy');
+  navigator.clipboard.writeText(text).then(function() {
+    alert('✅ 견적이 복사되었습니다!\n카톡 상담하기 버튼을 눌러 붙여넣기 해주세요!');
+  }).catch(function() { alert('복사 실패. 브라우저 설정을 확인해주세요.'); });
 }
 
 // ── FAQ Toggle ──
