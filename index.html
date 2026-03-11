@@ -186,9 +186,67 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   .carousel-wrap{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 }
 
+
+/* ═══ PERSONA SYSTEM ═══ */
+.intro-overlay{position:fixed;inset:0;z-index:999;background:#FDFBF7;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;transition:opacity 0.5s,visibility 0.5s;opacity:1;visibility:visible}
+.intro-overlay.hide{opacity:0;visibility:hidden;pointer-events:none}
+.intro-logo{font-size:24px;font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:8px}
+.intro-sub{font-size:14px;color:var(--muted);margin-bottom:48px}
+.intro-cards{display:flex;gap:16px;width:100%;max-width:400px}
+.intro-card{flex:1;background:#fff;border-radius:24px;padding:36px 16px 32px;text-align:center;border:2px solid rgba(0,0,0,0.06);cursor:pointer;transition:all 0.3s cubic-bezier(0.22,1,0.36,1);box-shadow:0 4px 24px rgba(0,0,0,0.04)}
+.intro-card:active{transform:scale(0.97)}
+.intro-card:hover{border-color:var(--accent);box-shadow:0 8px 32px rgba(174,203,212,0.2)}
+.intro-card .emoji{font-size:48px;margin-bottom:16px;display:block}
+.intro-card .card-name{font-size:18px;font-weight:750;letter-spacing:-0.02em;margin-bottom:6px;color:var(--text)}
+.intro-card .card-desc{font-size:13px;color:var(--muted);line-height:1.5}
+.intro-skip{margin-top:32px;font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;opacity:0.6}
+
+/* Mode toggle in hero */
+.persona-toggle{display:flex;gap:6px;margin-bottom:20px}
+.persona-btn{padding:8px 18px;border-radius:980px;font-size:13px;font-weight:600;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.3s;font-family:inherit;backdrop-filter:blur(8px)}
+.persona-btn.active{background:rgba(255,255,255,0.95);color:#1d1d1f;border-color:transparent}
+
+/* Persona content switching */
+body.mode-baby .for-pet{display:none!important}
+body.mode-pet .for-baby{display:none!important}
+body .for-baby,body .for-pet{display:block}
+span.for-baby,span.for-pet{display:inline}
+body.mode-baby span.for-pet{display:none!important}
+body.mode-pet span.for-baby{display:none!important}
+
+/* Cross-sell section */
+.cross-sell{background:linear-gradient(135deg,rgba(174,203,212,0.08),rgba(232,180,160,0.08));border-radius:24px;padding:36px 24px;border:1px solid rgba(0,0,0,0.05);text-align:center;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;margin:0 auto;max-width:540px}
+.cross-sell:active{transform:scale(0.98)}
+.cross-sell:hover{box-shadow:0 8px 32px rgba(0,0,0,0.06)}
+
+/* Sticky persona tabs */
+.sticky-persona{display:flex;gap:4px;background:rgba(0,0,0,0.04);border-radius:980px;padding:3px}
+.sticky-persona .sp-btn{padding:6px 14px;border-radius:980px;font-size:12px;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.25s;font-family:inherit;white-space:nowrap}
+.sticky-persona .sp-btn.active{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+
 </style>
 </head>
 <body>
+
+<!-- ═══ INTRO SELECTOR ═══ -->
+<div class="intro-overlay" id="introOverlay">
+  <p class="intro-logo">돌봄매트</p>
+  <p class="intro-sub">어떤 바닥을 찾고 계신가요?</p>
+  <div class="intro-cards">
+    <div class="intro-card" onclick="selectPersona('baby')">
+      <span class="emoji">👶</span>
+      <p class="card-name">유아매트</p>
+      <p class="card-desc">층간소음 걱정 없이<br>마음껏 뛰어놀 수 있도록</p>
+    </div>
+    <div class="intro-card" onclick="selectPersona('pet')">
+      <span class="emoji">🐶</span>
+      <p class="card-name">애견매트</p>
+      <p class="card-desc">미끄러운 바닥에서<br>슬개골을 안전하게</p>
+    </div>
+  </div>
+  <button class="intro-skip" onclick="selectPersona('baby')">건너뛰기</button>
+</div>
+
 
 <!-- ═══ GNB ═══ -->
 <div class="gnb">
@@ -198,11 +256,12 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 <!-- ═══ STICKY NAV ═══ -->
 <nav class="sticky-nav" id="stickyNav">
   <a href="index.html" class="brand" style="text-decoration:none">돌봄매트</a>
-  <div style="display:flex;gap:4px;overflow:hidden;scrollbar-width:none;padding:4px 0">
-    <a href="baby-mat.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">유아매트</a>
-    <a href="dog-mat.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">애견매트</a>
+  <div style="display:flex;gap:8px;align-items:center;overflow:hidden;scrollbar-width:none;padding:4px 0">
+    <div class="sticky-persona">
+      <button class="sp-btn active" id="spBaby" onclick="switchMode('baby')">👶 유아매트</button>
+      <button class="sp-btn" id="spPet" onclick="switchMode('pet')">🐶 애견매트</button>
+    </div>
     <a href="cases.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">시공사례</a>
-    <a href="event.html" style="font-size:13px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:980px;white-space:nowrap;text-decoration:none">이벤트</a>
   </div>
   <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="text-decoration:none"><button style="background:var(--blue);border:none;border-radius:980px;padding:7px 14px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;flex-shrink:0;cursor:pointer">카톡상담</button></a>
 </nav>
@@ -215,9 +274,22 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   <video class="hero-bg" src="dolbom-video.mp4" poster="img/kids-playing.jpg" muted loop playsinline autoplay preload="auto"></video>
   <div class="overlay"></div>
   <div class="content">
-    <p class="sub hero-anim hero-d2">우리 아이 처음이자 마지막 매트</p>
-    <h1 class="hero-anim hero-d3">아이가 뛰어놀 때,<br>더 이상 눈치 보지 마세요.</h1>
-    <p class="desc hero-anim hero-d4">층간소음 62% 저감. 미끄럼 방지.<br>전국 6,700곳이 선택한 프리미엄 매트.</p>
+    <div class="persona-toggle hero-anim hero-d1">
+      <button class="persona-btn active" id="heroBaby" onclick="switchMode('baby')">👶 유아매트</button>
+      <button class="persona-btn" id="heroPet" onclick="switchMode('pet')">🐶 애견매트</button>
+    </div>
+    <p class="sub hero-anim hero-d2">
+      <span class="for-baby">우리 아이 처음이자 마지막 매트</span>
+      <span class="for-pet">반려견의 관절을 지키는 매트</span>
+    </p>
+    <h1 class="hero-anim hero-d3">
+      <span class="for-baby">아이가 뛰어놀 때,<br>더 이상 눈치 보지 마세요.</span>
+      <span class="for-pet">미끄러운 바닥,<br>이제 걱정 놓으세요.</span>
+    </h1>
+    <p class="desc hero-anim hero-d4">
+      <span class="for-baby">층간소음 62% 저감. 미끄럼 방지.<br>전국 6,700곳이 선택한 프리미엄 매트.</span>
+      <span class="for-pet">마찰계수 0.75 최고 등급. 스크래치 방지.<br>전국 6,700곳이 선택한 프리미엄 매트.</span>
+    </p>
     <div class="btns hero-anim hero-d5">
       <button class="btn-white">무료 샘플 신청</button>
       <button class="btn-glass" onclick="openVideo()">▶ 영상 보기</button>
@@ -233,7 +305,10 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 ═══════════════════════════════════════ -->
 <section class="section section-dark" style="padding-bottom:72px">
   <div style="padding:0 24px" class="fade-up">
-    <h2 class="section-title" style="margin-bottom:8px">일단 핵심부터.</h2>
+    <h2 class="section-title" style="margin-bottom:8px">
+      <span class="for-baby">우리 아이를 위한 핵심.</span>
+      <span class="for-pet">반려견을 위한 핵심.</span>
+    </h2>
     <button onclick="openVideo()" style="background:none;border:none;padding:0;font-size:14px;color:var(--blue);font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:6px">
       동영상 보기 <span style="display:inline-flex;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--blue);align-items:center;justify-content:center;font-size:9px">▶</span>
     </button>
@@ -265,10 +340,13 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 <section class="section">
   <div class="section-center">
     <p class="section-label fade-up text-center" style="color:var(--green)">Real Reviews</p>
-    <h2 class="section-title text-center fade-up mb-36">직접 사용해본 분들의<br><span class="text-muted">솔직한 후기.</span></h2>
+    <h2 class="section-title text-center fade-up mb-36">
+      <span class="for-baby">아이 키우는 집에서<br><span class="text-muted">직접 써본 후기.</span></span>
+      <span class="for-pet">반려견 가정에서<br><span class="text-muted">직접 써본 후기.</span></span>
+    </h2>
 
     <!-- Review 1 -->
-    <div class="fade-up" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+    <div class="fade-up review-item" data-persona="baby" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
       <div style="display:flex;gap:4px;margin-bottom:12px">
         <span style="color:#fbbf24;font-size:16px">★★★★★</span>
       </div>
@@ -276,7 +354,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
       <p style="font-size:13px;color:var(--muted)">서울 디에이치아너힐즈 · 25평 · 김○○ 님</p>
     </div>
     <!-- Review 2 -->
-    <div class="fade-up delay-1" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+    <div class="fade-up delay-1 review-item" data-persona="pet" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
       <div style="display:flex;gap:4px;margin-bottom:12px">
         <span style="color:#fbbf24;font-size:16px">★★★★★</span>
       </div>
@@ -284,7 +362,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
       <p style="font-size:13px;color:var(--muted)">부산 해운대 · 32평 · 박○○ 님</p>
     </div>
     <!-- Review 3 -->
-    <div class="fade-up delay-2" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+    <div class="fade-up delay-2 review-item" data-persona="baby" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
       <div style="display:flex;gap:4px;margin-bottom:12px">
         <span style="color:#fbbf24;font-size:16px">★★★★★</span>
       </div>
@@ -292,7 +370,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
       <p style="font-size:13px;color:var(--muted)">수원 매교역푸르지오 · 24평 · 이○○ 님</p>
     </div>
     <!-- Review 4 -->
-    <div class="fade-up delay-3" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+    <div class="fade-up delay-3 review-item" data-persona="baby" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
       <div style="display:flex;gap:4px;margin-bottom:12px">
         <span style="color:#fbbf24;font-size:16px">★★★★★</span>
       </div>
@@ -311,15 +389,22 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   <img loading="lazy" src="img/kids-drawing-wide.jpg" alt="그림 그리는 아이들" style="height:70vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%)"></div>
   <div class="content fade-up">
-    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Creative Space</p>
-    <h3>아이의 창의력이<br>자라는 바닥.</h3>
+    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">
+      <span class="for-baby">Creative Space</span>
+      <span class="for-pet">Safe Ground</span>
+    </p>
+    <h3>
+      <span class="for-baby">아이의 창의력이<br>자라는 바닥.</span>
+      <span class="for-pet">마음 놓고 뛰어놀 수 있는<br>안전한 바닥.</span>
+    </h3>
   </div>
 </section>
 
 <!-- Text block -->
 <div style="padding:80px 24px;max-width:480px;margin:0 auto;text-align:center">
   <p class="fade-up" style="font-size:clamp(22px,5.5vw,30px);font-weight:700;line-height:1.5;letter-spacing:-0.02em">
-    아이가 바닥에 앉아 그림을 그리고, 뛰어놀고, 뒹굴어도 안전한 공간.
+    <span class="for-baby">아이가 바닥에 앉아 그림을 그리고, 뛰어놀고, 뒹굴어도 안전한 공간.</span>
+    <span class="for-pet">반려견이 달리고, 점프하고, 쉬어도 관절이 안전한 공간.</span>
     <span style="color:var(--muted)"> 돌봄매트가 만들어드립니다.</span>
   </p>
 </div>
@@ -329,7 +414,10 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   <img loading="lazy" src="img/girl-easel.jpg" alt="이젤 앞 아이" style="height:80vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.35) 100%)"></div>
   <div class="content fade-up">
-    <h3>서 있어도, 앉아 있어도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></h3>
+    <h3>
+      <span class="for-baby">서 있어도, 앉아 있어도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></span>
+      <span class="for-pet">달려도, 멈춰도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></span>
+    </h3>
   </div>
 </section>
 
@@ -600,9 +688,18 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   <img loading="lazy" src="img/dog-stand.jpg" alt="서 있는 강아지" style="height:75vh">
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%)"></div>
   <div class="content fade-up">
-    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Pet Friendly</p>
-    <h3 style="margin-bottom:10px">반려동물에게도<br>안전한 바닥.</h3>
-    <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:300">미끄럼 방지로 관절 보호.<br>발톱 스크래치에도 끄떡없는 내구성.</p>
+    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">
+      <span class="for-baby">Pet Friendly</span>
+      <span class="for-pet">Baby Safe</span>
+    </p>
+    <h3 style="margin-bottom:10px">
+      <span class="for-baby">반려동물에게도<br>안전한 바닥.</span>
+      <span class="for-pet">우리 아이에게<br>가장 안전한 바닥.</span>
+    </h3>
+    <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:300">
+      <span class="for-baby">미끄럼 방지로 관절 보호.<br>발톱 스크래치에도 끄떡없는 내구성.</span>
+      <span class="for-pet">마찰계수 0.75 최고 등급.<br>넘어져도 충격 67% 흡수.</span>
+    </p>
   </div>
 </section>
 
@@ -953,6 +1050,31 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════
+     크로스셀 섹션
+═══════════════════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="for-baby">
+    <div class="cross-sell fade-up" onclick="switchMode('pet');window.scrollTo({top:0,behavior:'smooth'})">
+      <p style="font-size:32px;margin-bottom:12px">🐶</p>
+      <p style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px">Also for Pets</p>
+      <p style="font-size:clamp(22px,5.5vw,28px);font-weight:750;letter-spacing:-0.03em;line-height:1.25;margin-bottom:10px">반려동물에게도<br>안전한 바닥이 됩니다.</p>
+      <p style="font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:20px">미끄럼 방지 최고 등급으로 슬개골 보호.<br>발톱 스크래치에도 끄떡없는 내구성.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:14px;font-weight:650">애견매트 알아보기 <span style="font-size:18px">→</span></span>
+    </div>
+  </div>
+  <div class="for-pet">
+    <div class="cross-sell fade-up" onclick="switchMode('baby');window.scrollTo({top:0,behavior:'smooth'})">
+      <p style="font-size:32px;margin-bottom:12px">👶</p>
+      <p style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px">Also for Kids</p>
+      <p style="font-size:clamp(22px,5.5vw,28px);font-weight:750;letter-spacing:-0.03em;line-height:1.25;margin-bottom:10px">우리 아이에게도<br>안전한 바닥이 됩니다.</p>
+      <p style="font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:20px">층간소음 62% 저감. 넘어져도 충격 흡수.<br>유해물질 ZERO, CE 인증 완료.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:14px;font-weight:650">유아매트 알아보기 <span style="font-size:18px">→</span></span>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════
      Final CTA
 ═══════════════════════════════════════ -->
@@ -961,8 +1083,14 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 100%)"></div>
   <div style="position:relative;z-index:1;padding:100px 24px 120px;text-align:center">
     <div class="fade-up">
-      <h2 style="font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.12;letter-spacing:-0.035em;margin-bottom:16px;color:#fff">우리 아이를 위한<br>첫 번째 선택.</h2>
-      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:300px;margin:0 auto 36px">무료 샘플을 직접 만져보세요.<br>5년 이상 함께할 매트.</p>
+      <h2 style="font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.12;letter-spacing:-0.035em;margin-bottom:16px;color:#fff">
+        <span class="for-baby">우리 아이를 위한<br>첫 번째 선택.</span>
+        <span class="for-pet">우리 강아지를 위한<br>첫 번째 선택.</span>
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:300px;margin:0 auto 36px">
+        <span class="for-baby">무료 샘플을 직접 만져보세요.<br>5년 이상 함께할 매트.</span>
+        <span class="for-pet">무료 샘플을 직접 만져보세요.<br>발톱도, 관절도 안전하게.</span>
+      </p>
       <button class="btn-white" style="padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기</button>
       <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,0.5)">📞 0507-1345-4146 · <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="color:rgba(255,255,255,0.6)">카카오톡 상담</a></p>
     </div>
@@ -1511,6 +1639,89 @@ function toggleFaq(item) {
     arrow.textContent = '－';
   }
 }
+
+// ── Persona Mode System ──
+function selectPersona(mode) {
+  document.getElementById('introOverlay').classList.add('hide');
+  document.body.style.overflow = '';
+  switchMode(mode);
+  try { sessionStorage.setItem('dolbom-mode', mode); } catch(e) {}
+}
+
+function switchMode(mode) {
+  // Body class
+  document.body.classList.remove('mode-baby', 'mode-pet');
+  document.body.classList.add('mode-' + mode);
+
+  // Hero toggle
+  var hb = document.getElementById('heroBaby');
+  var hp = document.getElementById('heroPet');
+  if (hb) { hb.classList.toggle('active', mode === 'baby'); }
+  if (hp) { hp.classList.toggle('active', mode === 'pet'); }
+
+  // Sticky nav toggle
+  var sb = document.getElementById('spBaby');
+  var sp = document.getElementById('spPet');
+  if (sb) { sb.classList.toggle('active', mode === 'baby'); }
+  if (sp) { sp.classList.toggle('active', mode === 'pet'); }
+
+  // Reorder reviews
+  reorderReviews(mode);
+
+  // Update calculator purpose
+  if (mode === 'pet') { selectPurpose('pet'); }
+  else { selectPurpose('child'); }
+
+  try { sessionStorage.setItem('dolbom-mode', mode); } catch(e) {}
+}
+
+function reorderReviews(mode) {
+  var container = document.querySelector('#faqList')?.closest('.section-center');
+  // Find review items parent
+  var reviews = document.querySelectorAll('.review-item');
+  if (reviews.length === 0) return;
+  var parent = reviews[0].parentNode;
+  var items = Array.from(reviews);
+
+  if (mode === 'pet') {
+    // Move pet review (index 1) to top
+    items.sort(function(a, b) {
+      var aP = a.getAttribute('data-persona');
+      var bP = b.getAttribute('data-persona');
+      if (aP === 'pet' && bP !== 'pet') return -1;
+      if (aP !== 'pet' && bP === 'pet') return 1;
+      return 0;
+    });
+  } else {
+    // Move baby reviews to top (original order)
+    items.sort(function(a, b) {
+      var aP = a.getAttribute('data-persona');
+      var bP = b.getAttribute('data-persona');
+      if (aP === 'baby' && bP !== 'baby') return -1;
+      if (aP !== 'baby' && bP === 'baby') return 1;
+      return 0;
+    });
+  }
+
+  // Get the text node after last review (the "더 많은 후기" paragraph)
+  var lastEl = parent.querySelector('p.fade-up.text-center');
+  items.forEach(function(item) {
+    parent.insertBefore(item, lastEl);
+  });
+}
+
+// Check for saved persona on load
+(function() {
+  var saved = null;
+  try { saved = sessionStorage.getItem('dolbom-mode'); } catch(e) {}
+  if (saved) {
+    selectPersona(saved);
+  } else {
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('mode-baby'); // default
+  }
+})();
+
 </script>
 
 </body>
