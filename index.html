@@ -68,14 +68,6 @@ a{text-decoration:none;color:inherit}
 .btn-glass{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:980px;padding:14px 24px;font-size:15px;font-weight:600}
 .scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2}
 
-/* ═══ TRUST STRIP (NEW) ═══ */
-.trust-strip{background:linear-gradient(135deg,#AECBD4 0%,#96B8C2 50%,#E8B4A0 100%);padding:28px 20px;position:relative;overflow:hidden}
-.trust-strip .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.2),transparent 70%);max-width:100%}
-.trust-strip-inner{display:flex;justify-content:center;gap:clamp(20px,5vw,48px);flex-wrap:wrap;position:relative;z-index:1}
-.trust-strip-item{text-align:center}
-.trust-strip-item .num{font-size:clamp(24px,5vw,36px);font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em}
-.trust-strip-item .label{font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px;font-weight:500}
-
 /* ═══ SECTIONS ═══ */
 .section{padding:120px 20px;overflow:hidden}
 .section-dark{background:var(--dark);color:var(--light)}
@@ -106,6 +98,12 @@ a{text-decoration:none;color:inherit}
 .fullbleed .overlay{position:absolute;inset:0;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .fullbleed .content{position:absolute;bottom:0;left:0;right:0;padding:40px 24px 48px;z-index:1;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .fullbleed h3{font-size:clamp(28px,7vw,40px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15}
+
+/* ═══ VIDEO BACKGROUND (Apple Style) ═══ */
+.video-bg-section{position:relative;overflow:hidden;max-width:100vw;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section .overlay{position:absolute;inset:0;z-index:1;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.video-bg-section .content{position:relative;z-index:2}
 
 /* Image performance */
 img{content-visibility:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
@@ -169,20 +167,22 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 .air-col:nth-child(7){left:86%;animation-delay:2.1s}
 
 /* ═══ OVERFLOW KILL ═══ */
+/* ═══ OVERFLOW KILL — 가로 넘침 완전 차단 ═══ */
 .fullbleed img{max-width:100%;width:100%}
-
-/* ═══ URGENCY PULSE ═══ */
-@keyframes urgencyPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,144,142,0.4)}50%{box-shadow:0 0 0 8px rgba(212,144,142,0)}}
-.urgency-badge{animation:urgencyPulse 2s infinite}
-
-/* ═══ REVIEW SCROLL ═══ */
-.review-scroll{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch}
-.review-card{flex:0 0 88%;max-width:360px;scroll-snap-align:center;background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05)}
 
 /* ═══ MOBILE STABILITY ═══ */
 @media(max-width:768px){
+  /* 3D 매트 회전 성능 개선 */
+  #mat3d{animation-duration:12s!important}
+  
+  /* 스크롤 성능 */
   .section,.section-dark,.section-warm{contain:content}
+  
+  /* 이미지 렌더링 최적화 */
   img{will-change:auto!important}
+  
+  /* 슬라이더 터치 개선 */
+  .seam-slider-container{touch-action:pan-y pinch-zoom}
   .carousel-wrap{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 }
 
@@ -192,7 +192,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 
 <!-- ═══ GNB ═══ -->
 <div class="gnb">
-  <span style="opacity:0.7">이번 달 한정 </span><span class="gold">온누리상품권 7% 할인</span><span style="opacity:0.7"> + 무료 시공 </span><span class="link">확인하기 &gt;</span>
+  <span style="opacity:0.7">누구나 </span><span class="gold">온누리상품권 7% 할인</span><span style="opacity:0.7"> 가능 </span><span class="link">더 알아보기 &gt;</span>
 </div>
 
 <!-- ═══ STICKY NAV ═══ -->
@@ -209,17 +209,17 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 <div id="page-wrap" style="overflow-x:clip;max-width:100vw">
 
 <!-- ═══════════════════════════════════════
-     1. HERO — 첫인상 + 핵심 CTA
+     HERO
 ═══════════════════════════════════════ -->
 <section class="hero">
   <video class="hero-bg" src="dolbom-video.mp4" poster="img/kids-playing.jpg" muted loop playsinline autoplay preload="auto"></video>
   <div class="overlay"></div>
   <div class="content">
-    <p class="sub hero-anim hero-d2">전국 6,700곳이 선택한 매트</p>
+    <p class="sub hero-anim hero-d2">우리 아이 처음이자 마지막 매트</p>
     <h1 class="hero-anim hero-d3">아이가 뛰어놀 때,<br>더 이상 눈치 보지 마세요.</h1>
-    <p class="desc hero-anim hero-d4">층간소음 62% 저감. 미끄럼 방지.<br>KCL 국가 공인 인증 프리미엄 매트.</p>
+    <p class="desc hero-anim hero-d4">층간소음 62% 저감. 미끄럼 방지.<br>전국 6,700곳이 선택한 프리미엄 매트.</p>
     <div class="btns hero-anim hero-d5">
-      <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank"><button class="btn-white">무료 샘플 신청 →</button></a>
+      <button class="btn-white">무료 샘플 신청</button>
       <button class="btn-glass" onclick="openVideo()">▶ 영상 보기</button>
     </div>
   </div>
@@ -229,33 +229,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     2. 신뢰 스트립 — 히어로 직후 즉시 신뢰 구축 (NEW)
-═══════════════════════════════════════ -->
-<div class="trust-strip">
-  <div class="glow" style="top:-60px;right:-40px;width:200px;height:200px"></div>
-  <div class="glow" style="bottom:-40px;left:-30px;width:150px;height:150px"></div>
-  <div class="trust-strip-inner">
-    <div class="trust-strip-item">
-      <p class="num" id="stripCount">6,700+</p>
-      <p class="label">전국 시공 완료</p>
-    </div>
-    <div class="trust-strip-item">
-      <p class="num">5성급</p>
-      <p class="label">호텔 납품</p>
-    </div>
-    <div class="trust-strip-item">
-      <p class="num">80곳</p>
-      <p class="label">국공립 어린이집</p>
-    </div>
-    <div class="trust-strip-item">
-      <p class="num">2년</p>
-      <p class="label">A/S 보증</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     3. "일단 핵심부터." 캐러셀 — 핵심 USP
+     "일단 핵심부터." 캐러셀
 ═══════════════════════════════════════ -->
 <section class="section section-dark" style="padding-bottom:72px">
   <div style="padding:0 24px" class="fade-up">
@@ -266,14 +240,19 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
   </div>
 
   <div class="carousel-wrap" id="carousel1">
+    <!-- Card 1 -->
     <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/kids-laughing.jpg" alt="웃는 아이들"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#AECBD4">층간소음 저감</p><p class="card-title">아이가 뛰어놀아도
 아래층 걱정 끝.</p><p class="card-desc">KCL 국가 공인 기관 인증. 이웃과의 평화를 지킵니다.</p></div></div>
+    <!-- Card 2 -->
     <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/baby-walk.jpg" alt="걸음마 아기"><div class="badge">마찰계수 0.75+</div></div><div class="card-body"><p class="tag" style="color:#E8B4A0">미끄럼 방지</p><p class="card-title">첫 걸음마부터
 안전하게.</p><p class="card-desc">미끄럼 방지 최고 등급. 물에 젖어도 안전합니다.</p></div></div>
+    <!-- Card 3 -->
     <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/mat-structure.jpg" alt="매트 구조"><div class="badge">특허 등록</div></div><div class="card-body"><p class="tag" style="color:#60a5fa">공기순환 케어</p><p class="card-title">360° 에어홀 구조.
 곰팡이 걱정 제로.</p><p class="card-desc">바닥 습기를 차단하여 마루 변색을 예방합니다.</p></div></div>
+    <!-- Card 4 -->
     <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/boy-toy.jpg" alt="장난감 노는 아이"><div class="badge">67% 흡수</div></div><div class="card-body"><p class="tag" style="color:#fbbf24">충격 흡수</p><p class="card-title">TPU 젖병 소재.
 넘어져도 안심.</p><p class="card-desc">젖병과 동일한 안전 소재로 부상 위험을 줄입니다.</p></div></div>
+    <!-- Card 5 -->
     <div class="carousel-card"><div style="position:relative"><img loading="lazy" src="img/dog-sofa.jpg" alt="강아지"><div class="badge">스크래치 방지</div></div><div class="card-body"><p class="tag" style="color:#f472b6">반려동물도 안전</p><p class="card-title">반려동물 발톱에도
 끄떡없는.</p><p class="card-desc">내구성 높은 표면으로 반려동물과 함께 안심하세요.</p></div></div>
   </div>
@@ -281,56 +260,81 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     4. 고객 후기 (MOVED UP) — 소셜 프루프 조기 배치
+     고객 후기 (Social Proof)
 ═══════════════════════════════════════ -->
-<section class="section" style="padding-bottom:80px">
-  <div style="max-width:540px;margin:0 auto;text-align:center">
+<section class="section">
+  <div class="section-center">
     <p class="section-label fade-up text-center" style="color:var(--green)">Real Reviews</p>
-    <h2 class="section-title text-center fade-up mb-8">시공한 분들이<br><span class="text-muted">직접 말합니다.</span></h2>
-    <p class="fade-up text-center mb-36" style="font-size:14px;color:var(--muted)">네이버·카카오 실제 후기 기반</p>
-  </div>
+    <h2 class="section-title text-center fade-up mb-36">직접 사용해본 분들의<br><span class="text-muted">솔직한 후기.</span></h2>
 
-  <!-- 횡스크롤 리뷰 (새 UX) -->
-  <div class="review-scroll" id="reviewScroll">
-    <div class="review-card fade-up">
-      <div style="display:flex;gap:4px;margin-bottom:12px"><span style="color:#fbbf24;font-size:16px">★★★★★</span></div>
+    <!-- Review 1 -->
+    <div class="fade-up" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+      <div style="display:flex;gap:4px;margin-bottom:12px">
+        <span style="color:#fbbf24;font-size:16px">★★★★★</span>
+      </div>
       <p style="font-size:15px;font-weight:600;line-height:1.6;margin-bottom:12px">"시공한 지 2년 됐는데 아직도 새것 같아요.<br>아래층에서 한 번도 연락 안 왔습니다."</p>
       <p style="font-size:13px;color:var(--muted)">서울 디에이치아너힐즈 · 25평 · 김○○ 님</p>
     </div>
-    <div class="review-card fade-up delay-1">
-      <div style="display:flex;gap:4px;margin-bottom:12px"><span style="color:#fbbf24;font-size:16px">★★★★★</span></div>
+    <!-- Review 2 -->
+    <div class="fade-up delay-1" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+      <div style="display:flex;gap:4px;margin-bottom:12px">
+        <span style="color:#fbbf24;font-size:16px">★★★★★</span>
+      </div>
       <p style="font-size:15px;font-weight:600;line-height:1.6;margin-bottom:12px">"강아지가 뛰어다녀도 안 미끄러져요.<br>슬개골 걱정이 줄었습니다."</p>
       <p style="font-size:13px;color:var(--muted)">부산 해운대 · 32평 · 박○○ 님</p>
     </div>
-    <div class="review-card fade-up delay-2">
-      <div style="display:flex;gap:4px;margin-bottom:12px"><span style="color:#fbbf24;font-size:16px">★★★★★</span></div>
+    <!-- Review 3 -->
+    <div class="fade-up delay-2" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+      <div style="display:flex;gap:4px;margin-bottom:12px">
+        <span style="color:#fbbf24;font-size:16px">★★★★★</span>
+      </div>
       <p style="font-size:15px;font-weight:600;line-height:1.6;margin-bottom:12px">"아이가 음식을 쏟아도 물걸레로 한 번이면 끝.<br>진작 할걸 그랬어요."</p>
       <p style="font-size:13px;color:var(--muted)">수원 매교역푸르지오 · 24평 · 이○○ 님</p>
     </div>
-    <div class="review-card fade-up delay-3">
-      <div style="display:flex;gap:4px;margin-bottom:12px"><span style="color:#fbbf24;font-size:16px">★★★★★</span></div>
+    <!-- Review 4 -->
+    <div class="fade-up delay-3" style="background:#fff;border-radius:22px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05);margin-bottom:14px">
+      <div style="display:flex;gap:4px;margin-bottom:12px">
+        <span style="color:#fbbf24;font-size:16px">★★★★★</span>
+      </div>
       <p style="font-size:15px;font-weight:600;line-height:1.6;margin-bottom:12px">"국공립 어린이집인데 아이들 안전사고가<br>확실히 줄었습니다. 학부모 만족도 최고예요."</p>
       <p style="font-size:13px;color:var(--muted)">부산 ○○국공립어린이집 · 원장 최○○ 님</p>
     </div>
+
+    <p class="fade-up text-center" style="font-size:13px;color:var(--muted);margin-top:16px">돌봄매트 공식 홈페이지에서 더 많은 후기를 확인하세요</p>
   </div>
-  <div class="dots" id="reviewDots"></div>
 </section>
 
 <!-- ═══════════════════════════════════════
-     5. 라이프스타일 풀블리드 (1장만)
+     라이프스타일 풀블리드 #1
 ═══════════════════════════════════════ -->
 <section class="fullbleed" style="height:70vh">
   <img loading="lazy" src="img/kids-drawing-wide.jpg" alt="그림 그리는 아이들" style="height:70vh">
-  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 100%)"></div>
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%)"></div>
   <div class="content fade-up">
-    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Creative & Safe Space</p>
-    <h3>바닥 위에서 자라는<br>아이의 모든 순간.</h3>
-    <p style="font-size:14px;color:rgba(255,255,255,0.55);margin-top:12px;line-height:1.6">그림 그리고, 뛰어놀고, 뒹굴어도 안전합니다.</p>
+    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Creative Space</p>
+    <h3>아이의 창의력이<br>자라는 바닥.</h3>
+  </div>
+</section>
+
+<!-- Text block -->
+<div style="padding:80px 24px;max-width:480px;margin:0 auto;text-align:center">
+  <p class="fade-up" style="font-size:clamp(22px,5.5vw,30px);font-weight:700;line-height:1.5;letter-spacing:-0.02em">
+    아이가 바닥에 앉아 그림을 그리고, 뛰어놀고, 뒹굴어도 안전한 공간.
+    <span style="color:var(--muted)"> 돌봄매트가 만들어드립니다.</span>
+  </p>
+</div>
+
+<!-- 풀블리드 #2 -->
+<section class="fullbleed" style="height:80vh">
+  <img loading="lazy" src="img/girl-easel.jpg" alt="이젤 앞 아이" style="height:80vh">
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.35) 100%)"></div>
+  <div class="content fade-up">
+    <h3>서 있어도, 앉아 있어도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></h3>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════
-     6. 비교 테이블 (돌봄매트 vs 일반매트) — 의사결정 도구
+     비교 테이블 (돌봄매트 vs 일반매트)
 ═══════════════════════════════════════ -->
 <section class="section section-dark">
   <div class="section-center">
@@ -338,60 +342,62 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
     <h2 class="section-title text-center fade-up mb-12" style="color:#fff">같은 매트가<br><span style="color:var(--muted)">아닙니다.</span></h2>
     <p class="fade-up text-center mb-36" style="font-size:14px;color:var(--muted)">일반 시공매트와 돌봄매트,<br>무엇이 다른지 확인하세요.</p>
 
+    <!-- Comparison Table -->
     <div class="fade-up" style="border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)">
+      <!-- Header -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,0.06);padding:16px 12px">
         <div></div>
         <div style="text-align:center"><p style="font-size:12px;color:var(--muted);font-weight:600">일반 매트</p></div>
         <div style="text-align:center"><p style="font-size:12px;color:var(--accent);font-weight:700">돌봄매트</p></div>
       </div>
+      <!-- Row 1 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">소재</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">PVC</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">TPU (젖병 소재)</p>
       </div>
+      <!-- Row 2 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">층간소음</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">미인증</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">62% 저감 (KCL)</p>
       </div>
+      <!-- Row 3 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">충격흡수</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">미표기</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">67% 흡수</p>
       </div>
+      <!-- Row 4 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">유해물질</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">불확실</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">ZERO (CE인증)</p>
       </div>
+      <!-- Row 5 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">공기순환</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">없음</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">360° 특허 시스템</p>
       </div>
+      <!-- Row 6 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">시공 실적</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">소수</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">6,700곳+</p>
       </div>
+      <!-- Row 7 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06)">
         <p style="font-size:13px;color:var(--light);font-weight:600">A/S 보증</p>
         <p style="font-size:13px;color:var(--muted);text-align:center">제한적</p>
         <p style="font-size:13px;color:var(--accent);text-align:center;font-weight:700">2년 보증</p>
       </div>
     </div>
-
-    <!-- 중간 CTA (NEW) -->
-    <div class="fade-up" style="margin-top:32px">
-      <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="display:block;background:var(--accent);color:#fff;border-radius:16px;padding:18px;text-align:center;font-size:15px;font-weight:700">
-        비교 후 무료 샘플로 직접 확인하기 →
-      </a>
-    </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════
-     7. 제품 상세 + 스펙
+     제품 상세
 ═══════════════════════════════════════ -->
 <section class="section section-warm">
   <div class="section-center">
@@ -416,9 +422,194 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     8. 신뢰 섹션 — 전국 시공 지도 + 자동 슬라이더
+     Apple 스타일 제품 탐색기
+═══════════════════════════════════════ -->
+<section class="section-dark" style="padding:80px 0 60px">
+  <div style="max-width:640px;margin:0 auto;padding:0 24px">
+    <p class="section-label fade-up text-center" style="color:var(--accent)">Product Explorer</p>
+    <h2 style="font-size:clamp(28px,7vw,42px);font-weight:800;text-align:center;letter-spacing:-0.035em;line-height:1.12;margin-bottom:8px;color:#fff" class="fade-up">돌봄매트를<br><span style="color:var(--muted)">자세히 살펴보세요.</span></h2>
+    <p class="fade-up text-center" style="font-size:14px;color:var(--muted);margin-bottom:32px">이미지를 탭하면 크게 볼 수 있습니다</p>
+  </div>
+
+  <!-- 메인 이미지 -->
+  <div style="max-width:640px;margin:0 auto;padding:0 20px">
+    <div id="explorerMain" class="fade-up" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#111;cursor:pointer" onclick="openLightbox(currentExplorerIdx)">
+      <img id="explorerImg" src="img/kids-playing.jpg" alt="" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.4s ease;-webkit-transform:translateZ(0);transform:translateZ(0)">
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:20px 20px 24px">
+        <p id="explorerTag" style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px">컬러 · 모던화이트</p>
+        <p id="explorerDesc" style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:500">깔끔한 화이트 톤으로 어떤 인테리어에도 자연스럽게 어울립니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 카테고리 탭 (좌우 스크롤) -->
+  <div style="max-width:640px;margin:0 auto">
+    <div style="margin-top:20px;overflow:hidden;padding:0 20px 20px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap" id="explorerTabs">
+    <button onclick="switchExplorer(0)" class="exp-tab exp-tab-active" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:rgba(255,255,255,0.15);color:#fff">
+      <span style="width:20px;height:20px;border-radius:50%;background:#d4d0ca;display:inline-block;border:1.5px solid rgba(255,255,255,0.3)"></span> 컬러
+    </button>
+    <button onclick="switchExplorer(1)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 매트 구조
+    </button>
+    <button onclick="switchExplorer(2)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 사이즈
+    </button>
+    <button onclick="switchExplorer(3)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 시공 모습
+    </button>
+    <button onclick="switchExplorer(4)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 세척
+    </button>
+    <button onclick="switchExplorer(5)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
+      ⊕ 반려동물
+    </button>
+    </div>
+  </div>
+</section>
+
+<!-- 라이트박스 (풀스크린) -->
+<div id="lightbox" style="position:fixed;inset:0;z-index:210;background:rgba(0,0,0,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;-webkit-transform:translateZ(0);transform:translateZ(0)">
+  <!-- 닫기 -->
+  <button onclick="closeLightbox()" style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">✕</button>
+
+  <!-- 이미지 -->
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:60px 16px 0;position:relative">
+    <!-- 좌 화살표 -->
+    <button onclick="lightboxPrev()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">‹</button>
+    <!-- 우 화살표 -->
+    <button onclick="lightboxNext()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">›</button>
+
+    <img id="lightboxImg" src="" alt="" style="max-width:100%;max-height:70vh;object-fit:contain;border-radius:12px;transition:opacity 0.3s">
+  </div>
+
+  <!-- 하단 설명 -->
+  <div style="width:100%;padding:20px 24px 40px;padding-bottom:max(40px,env(safe-area-inset-bottom))">
+    <p id="lightboxTag" style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px"></p>
+    <p id="lightboxDesc" style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     3D 매트 회전 (입체감 + 벡터 배경)
+═══════════════════════════════════════ -->
+<section style="padding:80px 20px;overflow:hidden;max-width:100vw;background:radial-gradient(ellipse at 50% 40%, #1a1a22 0%, #12121a 60%, #0a0a10 100%);position:relative">
+  <!-- Vector BG elements -->
+  <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;max-width:100%">
+    <div style="position:absolute;top:15%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(174,203,212,0.06) 0%,transparent 70%)"></div>
+    <div style="position:absolute;bottom:10%;right:5%;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(232,180,160,0.04) 0%,transparent 70%)"></div>
+    <!-- Grid lines -->
+    <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.03">
+      <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-width="0.5"/></pattern></defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+
+  <div style="max-width:500px;margin:0 auto;text-align:center;position:relative;z-index:1">
+    <p class="section-label fade-up" style="color:var(--accent)">360° View</p>
+    <h2 style="font-size:clamp(28px,7vw,42px);font-weight:800;letter-spacing:-0.035em;line-height:1.12;margin-bottom:8px;color:#fff" class="fade-up">앞면과 뒷면,<br><span style="color:rgba(255,255,255,0.35)">모두 보여드립니다.</span></h2>
+    <p class="fade-up" style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:48px">드래그하여 직접 회전 · 탭하면 일시정지</p>
+
+    <!-- 3D Stage -->
+    <div class="fade-up" style="perspective:1000px;width:100%;max-width:320px;margin:0 auto;-webkit-transform:translateZ(0);transform:translateZ(0)">
+      <div id="mat3d" style="width:100%;aspect-ratio:1;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;animation:matSpin3D 8s linear infinite;cursor:grab" ontouchstart="start3DDrag(event)" style="touch-action:pan-y" ontouchmove="drag3D(event)" ontouchend="end3DDrag()" onmousedown="start3DDragMouse(event)">
+
+        <!-- FRONT face -->
+        <div style="position:absolute;inset:0;transform:translateZ(12px);-webkit-transform:translateZ(12px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(174,203,212,0.15)">
+          <img src="img/mat-front.png" alt="앞면" style="width:100%;height:100%;object-fit:cover">
+        </div>
+
+        <!-- BACK face -->
+        <div style="position:absolute;inset:0;transform:rotateY(180deg) translateZ(12px);-webkit-transform:rotateY(180deg) translateZ(12px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(174,203,212,0.15)">
+          <img src="img/mat-back.png" alt="뒷면" style="width:100%;height:100%;object-fit:cover">
+        </div>
+
+        <!-- TOP edge (thickness) -->
+        <div style="position:absolute;top:0;left:0;width:100%;height:24px;transform:rotateX(90deg) translateZ(0px);-webkit-transform:rotateX(90deg) translateZ(0px);transform-origin:top center;background:linear-gradient(180deg,#d8d3cc,#c4beb6);border-radius:2px"></div>
+
+        <!-- BOTTOM edge -->
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:24px;transform:rotateX(-90deg) translateZ(0px);-webkit-transform:rotateX(-90deg) translateZ(0px);transform-origin:bottom center;background:linear-gradient(0deg,#b8b2aa,#a8a29a);border-radius:2px"></div>
+
+        <!-- LEFT edge -->
+        <div style="position:absolute;top:0;left:0;width:24px;height:100%;transform:rotateY(-90deg) translateZ(0px);-webkit-transform:rotateY(-90deg) translateZ(0px);transform-origin:left center;background:linear-gradient(90deg,#ccc7c0,#bab4ac);border-radius:2px"></div>
+
+        <!-- RIGHT edge -->
+        <div style="position:absolute;top:0;right:0;width:24px;height:100%;transform:rotateY(90deg) translateZ(0px);-webkit-transform:rotateY(90deg) translateZ(0px);transform-origin:right center;background:linear-gradient(-90deg,#ccc7c0,#bab4ac);border-radius:2px"></div>
+      </div>
+    </div>
+
+    <!-- Face indicator -->
+    <div style="margin-top:32px;display:flex;justify-content:center;gap:8px">
+      <div id="face-front" style="padding:8px 20px;border-radius:50px;background:rgba(200,169,126,0.2);border:1px solid rgba(200,169,126,0.3);transition:all 0.4s">
+        <p style="font-size:12px;font-weight:700;color:var(--accent)">FRONT · 앞면</p>
+      </div>
+      <div id="face-back" style="padding:8px 20px;border-radius:50px;background:transparent;border:1px solid rgba(255,255,255,0.08);transition:all 0.4s">
+        <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.3)">BACK · 뒷면</p>
+      </div>
+    </div>
+
+    <!-- Description cards -->
+    <div class="fade-up" style="margin-top:32px;display:flex;gap:14px;justify-content:center">
+      <div style="background:rgba(255,255,255,0.04);border-radius:18px;padding:22px 16px;flex:1;border:1px solid rgba(255,255,255,0.06)">
+        <p style="font-size:28px;margin-bottom:10px">🏠</p>
+        <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px">앞면</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.55">프리미엄 마블 패턴<br>인테리어와 자연스러운 조화</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border-radius:18px;padding:22px 16px;flex:1;border:1px solid rgba(255,255,255,0.06)">
+        <p style="font-size:28px;margin-bottom:10px">💨</p>
+        <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:6px">뒷면</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.55">360° 에어홀 구조<br>곰팡이·변색 완벽 예방</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes matSpin3D {
+  0%   { transform: rotateY(0deg) rotateX(10deg); }
+  25%  { transform: rotateY(90deg) rotateX(5deg); }
+  50%  { transform: rotateY(180deg) rotateX(10deg); }
+  75%  { transform: rotateY(270deg) rotateX(5deg); }
+  100% { transform: rotateY(360deg) rotateX(10deg); }
+}
+#mat3d.paused { animation-play-state: paused; }
+</style>
+
+<!-- ═══════════════════════════════════════
+     영상 섹션
 ═══════════════════════════════════════ -->
 <section class="section">
+  <div class="section-center">
+    <p class="section-label fade-up" style="color:var(--accent)">See it in Action</p>
+    <h2 class="section-title text-center fade-up mb-36">직접 확인하세요.</h2>
+    <div class="video-wrap scale-in">
+      <video id="scrollVideo" src="dolbom-video.mp4" muted loop playsinline preload="metadata"></video>
+    </div>
+    <div class="text-center mt-20 fade-up">
+      <button onclick="openVideo()" style="background:none;border:1.5px solid var(--text);border-radius:980px;padding:11px 24px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px">
+        <span style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--text);color:#fff;align-items:center;justify-content:center;font-size:9px">▶</span>
+        전체 화면으로 보기
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     반려동물 풀블리드
+═══════════════════════════════════════ -->
+<section class="fullbleed" style="height:75vh">
+  <img loading="lazy" src="img/dog-stand.jpg" alt="서 있는 강아지" style="height:75vh">
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%)"></div>
+  <div class="content fade-up">
+    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Pet Friendly</p>
+    <h3 style="margin-bottom:10px">반려동물에게도<br>안전한 바닥.</h3>
+    <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:300">미끄럼 방지로 관절 보호.<br>발톱 스크래치에도 끄떡없는 내구성.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     신뢰 섹션 — 전국 6,700곳 + 지도
+═══════════════════════════════════════ -->
+<section class="section section-warm">
   <div class="section-center">
     <p class="section-label fade-up" style="color:var(--accent)">Trusted By</p>
     <h2 class="section-title text-center fade-up mb-8">전국이 선택한 매트.</h2>
@@ -449,11 +640,17 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
       <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">경찰서</p><p style="font-size:11px;color:var(--muted)">어린이집 포함</p></div>
       <div style="background:#fff;border-radius:16px;padding:20px 12px;text-align:center;border:1px solid rgba(0,0,0,0.05)"><p style="font-size:22px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px">전국</p><p style="font-size:11px;color:var(--muted)">시공 가능</p></div>
     </div>
+
+    <!-- 경쟁 차별화 메시지 -->
+    <div class="fade-up" style="margin-top:24px;background:#fff;border-radius:20px;padding:28px 22px;border:1px solid rgba(0,0,0,0.05)">
+      <p style="font-size:15px;font-weight:700;color:var(--red);margin-bottom:10px">🚨 잠깐! 신생 업체와 비교 중이신가요?</p>
+      <p style="font-size:14px;color:var(--soft);line-height:1.7">매트는 <strong style="color:var(--text)">'시공 후 A/S와 내구성'</strong>이 생명입니다.<br>검증되지 않은 곳에서 후회하지 마시고,<br>전국 <strong style="color:var(--text)">6,700곳이 증명하는 1위 브랜드</strong><br>돌봄매트와 함께하세요! 🐶👶</p>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════
-     9. 크기 비교 + 이음새 비교
+     크기 비교 + 이음새 비교
 ═══════════════════════════════════════ -->
 <style>
 .sz-tab,.seam-tab{padding:10px 22px;border-radius:980px;border:1.5px solid rgba(0,0,0,0.08);background:#fff;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:all 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.02)}
@@ -589,7 +786,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     10. 스마트 견적 비교기
+     스마트 견적 비교기 (Interactive Calculator)
 ═══════════════════════════════════════ -->
 <section class="section" id="calcSection">
   <div style="max-width:460px;margin:0 auto">
@@ -600,6 +797,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
     <div class="scale-in" style="background:#fff;border-radius:26px;padding:32px 20px 28px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 28px rgba(0,0,0,0.05);position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#AECBD4,#E8B4A0)"></div>
 
+      <!-- 프리미엄 매트 소개 -->
       <div style="background:var(--warm);padding:20px;border-radius:16px;text-align:center;margin-bottom:24px">
         <p style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px">프리미엄 1m 퍼즐매트</p>
         <p style="font-size:17px;font-weight:800;margin-bottom:4px">1,000 × 1,000mm <span style="font-size:13px;color:var(--muted)">(두께 1.7cm)</span></p>
@@ -607,12 +805,14 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
         <div id="dynamic-point" style="display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:6px 14px;border-radius:50px;margin-top:10px;font-weight:700">👶 층간소음 해방! 넘어져도 안전한 1.7cm 황금 두께</div>
       </div>
 
+      <!-- 시공 목적 선택 -->
       <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">🎈 주로 누구를 위해 시공하시나요?</p>
       <div style="display:flex;gap:8px;margin-bottom:20px">
         <button id="label-child" onclick="selectPurpose('child')" style="flex:1;padding:12px;border-radius:12px;border:2px solid var(--accent);background:rgba(174,203,212,0.1);font-size:14px;font-weight:700;color:var(--accent);cursor:pointer;transition:all 0.25s">👶 우리 아이</button>
         <button id="label-pet" onclick="selectPurpose('pet')" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.08);background:#fff;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.25s">🐶 반려동물</button>
       </div>
 
+      <!-- 타사 비교 (선택) -->
       <div style="background:#FFF5EE;padding:14px;border-radius:14px;border:1px dashed rgba(174,203,212,0.35);margin-bottom:16px">
         <p style="font-size:13px;font-weight:650;color:var(--text);margin-bottom:3px">🤔 타 업체와 비교해볼까요? <span style="font-size:11px;color:var(--muted);font-weight:400">(선택)</span></p>
         <p style="font-size:11px;color:var(--soft);margin-bottom:8px">타사 매트 사이즈(mm)와 가격</p>
@@ -623,6 +823,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
         </div>
       </div>
 
+      <!-- 공간 입력 -->
       <p style="font-size:13px;font-weight:650;color:var(--text);margin-bottom:10px">📐 시공할 공간 치수 (mm)</p>
       <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:6px 8px;align-items:center;margin-bottom:16px">
         <span style="font-size:12px;color:var(--muted);font-weight:600">1. 거실</span>
@@ -636,24 +837,32 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
         <input type="number" id="h3" placeholder="세로" style="padding:8px 10px;border:1px solid rgba(0,0,0,0.06);border-radius:10px;font-size:14px;font-family:inherit;outline:none;min-width:0">
       </div>
 
+      <!-- 할인 체크 -->
       <label style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:#FFF5EE;border-radius:12px;border:1px solid rgba(232,180,160,0.25);cursor:pointer;margin-bottom:20px">
         <input type="checkbox" id="discount-check" style="width:18px;height:18px;cursor:pointer">
         <span style="font-size:14px;font-weight:700;color:var(--red)">🎁 공동구매/박람회 5% 추가할인 적용</span>
       </label>
 
+      <!-- 계산 버튼 -->
       <button onclick="calculate()" style="width:100%;padding:16px;background:var(--accent);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:650;cursor:pointer;font-family:inherit">견적 및 이음새 비교 확인</button>
 
+      <!-- 결과 영역 -->
       <div id="result-box" style="display:none;margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.06)">
         <h3 id="result-title" style="text-align:center;font-size:17px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,0.06)">📊 예상 견적</h3>
         <p id="total-info" style="text-align:center;font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px"></p>
+
         <div id="compare-box" style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px"></div>
+
         <div id="visual-compare-container"></div>
+
+        <!-- 액션 버튼 -->
         <div style="display:flex;gap:10px;margin-top:20px">
           <button id="copy-btn" onclick="copyToClipboard()" style="flex:1;padding:14px;background:var(--warm);color:var(--text);border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">📋 견적 복사</button>
           <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="flex:1.2;text-decoration:none">
             <button style="width:100%;padding:14px;background:#FEE500;color:#3c1e1e;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">🚀 카톡 상담하기</button>
           </a>
         </div>
+
         <p style="font-size:11px;color:var(--muted);margin-top:14px;line-height:1.5;text-align:center">
           ※ 위 견적은 자투리(로스율) 10%를 포함한 예상치이며,<br>공간 구조에 따라 차이가 있을 수 있습니다.
         </p>
@@ -663,7 +872,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     11. FAQ (자주 묻는 질문)
+     FAQ (자주 묻는 질문)
 ═══════════════════════════════════════ -->
 <section class="section section-warm">
   <div class="section-center">
@@ -745,20 +954,16 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 </section>
 
 <!-- ═══════════════════════════════════════
-     12. Final CTA — 긴박감 + 강한 전환
+     Final CTA
 ═══════════════════════════════════════ -->
 <section class="fullbleed" style="min-height:auto">
   <img loading="lazy" src="img/kids-sofa.jpg" alt="소파 앞 아이들" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.65) 100%)"></div>
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 100%)"></div>
   <div style="position:relative;z-index:1;padding:100px 24px 120px;text-align:center">
     <div class="fade-up">
-      <!-- 긴박감 배지 (NEW) -->
-      <div class="urgency-badge" style="display:inline-block;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:8px 20px;border-radius:980px;margin-bottom:20px">
-        🔥 이번 달 시공 예약 마감 임박
-      </div>
       <h2 style="font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.12;letter-spacing:-0.035em;margin-bottom:16px;color:#fff">우리 아이를 위한<br>첫 번째 선택.</h2>
       <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:300px;margin:0 auto 36px">무료 샘플을 직접 만져보세요.<br>5년 이상 함께할 매트.</p>
-      <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank"><button class="btn-white" style="padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기 →</button></a>
+      <button class="btn-white" style="padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기</button>
       <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,0.5)">📞 0507-1345-4146 · <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="color:rgba(255,255,255,0.6)">카카오톡 상담</a></p>
     </div>
   </div>
@@ -768,7 +973,7 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 <footer>
   <p style="font-weight:650;color:rgba(255,255,255,0.4);margin-bottom:6px;font-size:13px">돌봄매트</p>
   <p>상호: 돌봄매트 | 대표: 허민석<br>사업자등록번호: 680-37-00893<br>통신판매업: 2021-부산강서구-0154<br>부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호</p>
-  <p style="margin-top:8px">고객센터: 0507-1345-4146<br>카카오톡채널: 돌봄매트 (24시간 운영)<br>이메일: dolbommat@gmail.com</p>
+  <p style="margin-top:8px">고객센터: 0507-1345-4146<br>카카오톡채널: 돌봄매트 (24시간 운영)<br>이메일: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2743484b45484a4a46536749465142550944484a">[email&#160;protected]</a></p>
   <div style="display:flex;justify-content:center;gap:16px;margin-top:16px">
     <a href="https://instagram.com/dolbomstore" target="_blank" style="color:var(--muted);font-size:13px">Instagram</a>
     <a href="https://blog.naver.com/dolbommatt1004" target="_blank" style="color:var(--muted);font-size:13px">Blog</a>
@@ -781,8 +986,8 @@ footer{background:#2C2824;padding:48px 20px 56px;text-align:center;color:var(--m
 <!-- ═══ Floating CTA ═══ -->
 <div class="float-cta" id="floatCta">
   <div class="inner">
-    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="flex:1;text-decoration:none"><button class="btn-dark" style="width:100%">무료 샘플 신청</button></a>
-    <a href="tel:0507-1345-4146"><button class="btn-call">📞</button></a>
+    <button class="btn-dark">무료 샘플 신청</button>
+    <button class="btn-call">📞</button>
   </div>
 </div>
 
@@ -803,6 +1008,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var heroVid = document.querySelector('video.hero-bg');
   if (heroVid) {
     heroVid.play().catch(function() {});
+    // iOS Safari needs user interaction sometimes - play on first touch
     document.addEventListener('touchstart', function() {
       heroVid.play().catch(function() {});
     }, { once: true });
@@ -816,7 +1022,8 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up,.scale-in,.fade-in').forEach(el => observer.observe(el));
 
-// ── Scroll-based UI ──
+// ── Scroll-based UI (optimized with Intersection Observer instead of scroll events) ──
+// Use sentinel elements instead of scroll position for smoother performance
 const navSentinel = document.createElement('div');
 navSentinel.style.cssText = 'position:absolute;top:500px;width:1px;height:1px;pointer-events:none';
 document.body.prepend(navSentinel);
@@ -835,6 +1042,15 @@ new IntersectionObserver(([e]) => {
 new IntersectionObserver(([e]) => {
   floatCta.classList.toggle('show', !e.isIntersecting);
 }, { threshold: 0 }).observe(ctaSentinel);
+
+// ── Scroll-trigger video ──
+const scrollVid = document.getElementById('scrollVideo');
+if (scrollVid) {
+  const vidObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { e.isIntersecting ? scrollVid.play().catch(()=>{}) : scrollVid.pause(); });
+  }, { threshold: 0.4 });
+  vidObs.observe(scrollVid);
+}
 
 // ── Video modal ──
 function openVideo() {
@@ -866,23 +1082,6 @@ function setupCarouselDots(carouselId, dotsId, count) {
 }
 setupCarouselDots('carousel1', 'dots1', 5);
 
-// ── Review scroll dots ──
-(function() {
-  var rs = document.getElementById('reviewScroll');
-  var rd = document.getElementById('reviewDots');
-  if (!rs || !rd) return;
-  for (var i = 0; i < 4; i++) {
-    var d = document.createElement('div');
-    d.className = 'dot dot-dark' + (i === 0 ? ' active' : '');
-    rd.appendChild(d);
-  }
-  rs.addEventListener('scroll', function() {
-    var w = rs.firstElementChild ? rs.firstElementChild.offsetWidth : 280;
-    var idx = Math.min(Math.round(rs.scrollLeft / (w + 14)), 3);
-    rd.querySelectorAll('.dot').forEach(function(d, i) { d.classList.toggle('active', i === idx); });
-  }, { passive: true });
-})();
-
 // ── Trust auto-slider ──
 const trustData = [
   { name: "부산 파라다이스호텔", tag: "5성급 호텔" },
@@ -903,150 +1102,329 @@ trustData.forEach((_, i) => {
 });
 setInterval(() => {
   trustIdx = (trustIdx + 1) % trustData.length;
-  document.getElementById('trustName').textContent = trustData[trustIdx].name;
-  document.getElementById('trustTag').textContent = trustData[trustIdx].tag;
-  trustDotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === trustIdx));
-}, 2500);
+  const nameEl = document.getElementById('trustName');
+  const tagEl = document.getElementById('trustTag');
+  nameEl.style.opacity = 0; tagEl.style.opacity = 0;
+  setTimeout(() => {
+    nameEl.textContent = trustData[trustIdx].name;
+    tagEl.textContent = trustData[trustIdx].tag;
+    nameEl.style.opacity = 1; tagEl.style.opacity = 1;
+    trustDotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === trustIdx));
+  }, 300);
+}, 2600);
 
-// ── Trust count animation ──
+// ── CountUp for trust number ──
 const trustCountEl = document.getElementById('trustCount');
-const countObs = new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) {
-    let c = 0, target = 6700, dur = 1500, start = performance.now();
-    function step(now) {
-      let p = Math.min((now - start) / dur, 1);
-      p = 1 - Math.pow(1 - p, 3);
-      trustCountEl.textContent = Math.floor(p * target).toLocaleString() + '+';
-      if (p < 1) requestAnimationFrame(step);
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      let n = 0;
+      const id = setInterval(() => { n += 67; if (n >= 6700) { trustCountEl.textContent = '6,700+'; clearInterval(id); } else { trustCountEl.textContent = n.toLocaleString() + '+'; }}, 1000/60);
+      countObs.unobserve(e.target);
     }
-    requestAnimationFrame(step);
-    countObs.unobserve(e.target);
-  }
+  });
 }, { threshold: 0.5 });
 countObs.observe(trustCountEl);
 
-// ── Calculator ──
-var currentPurpose = 'child';
-function selectPurpose(p) {
-  currentPurpose = p;
-  var cBtn = document.getElementById('label-child');
-  var pBtn = document.getElementById('label-pet');
-  var dp = document.getElementById('dynamic-point');
-  if (p === 'child') {
-    cBtn.style.borderColor = 'var(--accent)'; cBtn.style.background = 'rgba(174,203,212,0.1)'; cBtn.style.color = 'var(--accent)';
-    pBtn.style.borderColor = 'rgba(0,0,0,0.08)'; pBtn.style.background = '#fff'; pBtn.style.color = 'var(--muted)';
-    dp.textContent = '👶 층간소음 해방! 넘어져도 안전한 1.7cm 황금 두께';
-  } else {
-    pBtn.style.borderColor = 'var(--accent)'; pBtn.style.background = 'rgba(174,203,212,0.1)'; pBtn.style.color = 'var(--accent)';
-    cBtn.style.borderColor = 'rgba(0,0,0,0.08)'; cBtn.style.background = '#fff'; cBtn.style.color = 'var(--muted)';
-    dp.textContent = '🐶 미끄럼 방지로 슬개골 보호! 발톱 스크래치에도 끄떡없는';
+// ── 3D Mat Rotation (Interactive Drag + Auto) ──
+var mat3dEl = document.getElementById('mat3d');
+var isDragging3D = false;
+var drag3DStartX = 0;
+var currentRotation = 0;
+var autoRotateInterval = null;
+
+function toggle3D() {
+  if (!isDragging3D) mat3dEl.classList.toggle('paused');
+}
+
+// Auto face indicator update
+setInterval(function() {
+  if (!mat3dEl) return;
+  var transform = getComputedStyle(mat3dEl).transform;
+  if (transform && transform !== 'none') {
+    var matrix = new DOMMatrix(transform);
+    // Approximate Y rotation from matrix
+    var angle = Math.atan2(matrix.m13, matrix.m11) * (180 / Math.PI);
+    var normalized = ((angle % 360) + 360) % 360;
+    var frontEl = document.getElementById('face-front');
+    var backEl = document.getElementById('face-back');
+    if (frontEl && backEl) {
+      if (normalized > 90 && normalized < 270) {
+        frontEl.style.background = 'transparent';
+        frontEl.style.borderColor = 'rgba(255,255,255,0.08)';
+        frontEl.querySelector('p').style.color = 'rgba(255,255,255,0.3)';
+        backEl.style.background = 'rgba(200,169,126,0.2)';
+        backEl.style.borderColor = 'rgba(200,169,126,0.3)';
+        backEl.querySelector('p').style.color = '#c8a97e';
+      } else {
+        frontEl.style.background = 'rgba(200,169,126,0.2)';
+        frontEl.style.borderColor = 'rgba(200,169,126,0.3)';
+        frontEl.querySelector('p').style.color = '#c8a97e';
+        backEl.style.background = 'transparent';
+        backEl.style.borderColor = 'rgba(255,255,255,0.08)';
+        backEl.querySelector('p').style.color = 'rgba(255,255,255,0.3)';
+      }
+    }
   }
+}, 200);
+
+// Touch drag
+function start3DDrag(e) {
+  isDragging3D = true;
+  drag3DStartX = e.touches[0].clientX;
+  mat3dEl.classList.add('paused');
+  currentRotation = getCurrentRotation();
+  mat3dEl.style.cursor = 'grabbing';
+}
+function drag3D(e) {
+  if (!isDragging3D) return;
+  var diff = (e.touches[0].clientX - drag3DStartX) * 0.8;
+  mat3dEl.style.transform = 'rotateY(' + (currentRotation + diff) + 'deg) rotateX(8deg)';
+}
+function end3DDrag() {
+  isDragging3D = false;
+  mat3dEl.style.cursor = 'grab';
+  // Resume auto rotation after 3 seconds
+  clearTimeout(autoRotateInterval);
+  autoRotateInterval = setTimeout(function() {
+    mat3dEl.classList.remove('paused');
+  }, 3000);
+}
+
+// Mouse drag
+function start3DDragMouse(e) {
+  isDragging3D = true;
+  drag3DStartX = e.clientX;
+  mat3dEl.classList.add('paused');
+  currentRotation = getCurrentRotation();
+  mat3dEl.style.cursor = 'grabbing';
+
+  function onMove(ev) {
+    if (!isDragging3D) return;
+    var diff = (ev.clientX - drag3DStartX) * 0.8;
+    mat3dEl.style.transform = 'rotateY(' + (currentRotation + diff) + 'deg) rotateX(8deg)';
+  }
+  function onUp() {
+    isDragging3D = false;
+    mat3dEl.style.cursor = 'grab';
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    clearTimeout(autoRotateInterval);
+    autoRotateInterval = setTimeout(function() { mat3dEl.classList.remove('paused'); }, 3000);
+  }
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onUp);
+}
+
+function getCurrentRotation() {
+  var st = getComputedStyle(mat3dEl).transform;
+  if (!st || st === 'none') return 0;
+  var matrix = new DOMMatrix(st);
+  return Math.round(Math.atan2(matrix.m13, matrix.m11) * (180 / Math.PI));
+}
+
+// ── Product Explorer (Apple Style) ──
+var currentExplorerIdx = 0;
+var explorerData = [
+  { img: 'img/kids-playing.jpg', tag: '컬러 · 모던화이트', desc: '깔끔한 화이트 톤으로 어떤 인테리어에도 자연스럽게 어울립니다.' },
+  { img: 'img/mat-structure.jpg', tag: '매트 구조 · 에어홀 시스템', desc: '뒷면의 360° 에어홀 구조로 공기가 순환하여 곰팡이와 변색을 예방합니다.' },
+  { img: 'img/mat-sizes.jpg', tag: '사이즈 · 500 / 600 / 1000mm', desc: '업계 최대 1m 사이즈. 이음새가 줄어 더 깔끔하고 위생적입니다.' },
+  { img: 'img/kids-drawing.jpg', tag: '시공 모습 · 거실', desc: '시공 후 아이들이 바닥에서 안전하게 놀 수 있는 공간이 됩니다.' },
+  { img: 'img/mat-pieces.jpg', tag: '세척 · 간편 분리', desc: '매트를 하나씩 분리해서 물걸레로 간편하게 세척할 수 있습니다.' },
+  { img: 'img/dog-sofa.jpg', tag: '반려동물 · 미끄럼 방지', desc: '마찰계수 0.75+ 최고 등급. 반려동물 슬개골을 보호합니다.' },
+];
+
+function switchExplorer(idx) {
+  currentExplorerIdx = idx;
+  var data = explorerData[idx];
+  var imgEl = document.getElementById('explorerImg');
+  imgEl.style.opacity = '0';
+  setTimeout(function() {
+    imgEl.src = data.img;
+    imgEl.onload = function() { imgEl.style.opacity = '1'; };
+    document.getElementById('explorerTag').textContent = data.tag;
+    document.getElementById('explorerDesc').textContent = data.desc;
+  }, 200);
+  document.querySelectorAll('.exp-tab').forEach(function(t, i) {
+    t.style.background = i === idx ? 'rgba(255,255,255,0.15)' : 'transparent';
+    t.style.color = i === idx ? '#fff' : 'rgba(255,255,255,0.45)';
+  });
+}
+
+var lightboxIdx = 0;
+function openLightbox(idx) {
+  lightboxIdx = idx;
+  document.getElementById('lightbox').style.display = 'flex';
+  updateLightbox();
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function updateLightbox() {
+  var d = explorerData[lightboxIdx];
+  var img = document.getElementById('lightboxImg');
+  img.style.opacity = '0';
+  setTimeout(function() {
+    img.src = d.img;
+    img.onload = function() { img.style.opacity = '1'; };
+    document.getElementById('lightboxTag').textContent = d.tag;
+    document.getElementById('lightboxDesc').textContent = d.desc;
+  }, 150);
+}
+function lightboxNext() { lightboxIdx = (lightboxIdx + 1) % explorerData.length; updateLightbox(); }
+function lightboxPrev() { lightboxIdx = (lightboxIdx - 1 + explorerData.length) % explorerData.length; updateLightbox(); }
+
+// Swipe support for lightbox
+(function() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  var startX = 0;
+  lb.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    var diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) { diff > 0 ? lightboxPrev() : lightboxNext(); }
+  }, { passive: true });
+})();
+
+// ── Smart Calculator ──
+var PRICE_PER_MAT = 62000;
+var currentPurpose = 'child';
+
+function selectPurpose(type) {
+  currentPurpose = type;
+  var labelChild = document.getElementById('label-child');
+  var labelPet = document.getElementById('label-pet');
+  var dp = document.getElementById('dynamic-point');
+
+  if (type === 'child') {
+    labelChild.style.background = 'rgba(174,203,212,0.1)';
+    labelChild.style.borderColor = 'var(--accent)';
+    labelChild.style.color = 'var(--accent)';
+    labelPet.style.background = '#fff';
+    labelPet.style.borderColor = 'rgba(0,0,0,0.08)';
+    labelPet.style.color = 'var(--muted)';
+    dp.innerHTML = '👶 층간소음 해방! 넘어져도 안전한 1.7cm 황금 두께';
+    dp.style.background = 'var(--accent)';
+  } else {
+    labelPet.style.background = 'rgba(255,69,58,0.06)';
+    labelPet.style.borderColor = 'var(--red)';
+    labelPet.style.color = 'var(--red)';
+    labelChild.style.background = '#fff';
+    labelChild.style.borderColor = 'rgba(0,0,0,0.08)';
+    labelChild.style.color = 'var(--muted)';
+    dp.innerHTML = '🐶 미끄럼 방지 최적화! 소중한 반려견 슬개골 보호';
+    dp.style.background = 'var(--red)';
+  }
+  if (document.getElementById('result-box').style.display === 'block') calculate();
 }
 
 function calculate() {
-  var price = 62000;
-  var rooms = [
-    { w: parseInt(document.getElementById('w1').value) || 0, h: parseInt(document.getElementById('h1').value) || 0, name: '거실' },
-    { w: parseInt(document.getElementById('w2').value) || 0, h: parseInt(document.getElementById('h2').value) || 0, name: '복도' },
-    { w: parseInt(document.getElementById('w3').value) || 0, h: parseInt(document.getElementById('h3').value) || 0, name: '주방' }
-  ];
+  var w1 = parseFloat(document.getElementById('w1').value) || 0;
+  var h1 = parseFloat(document.getElementById('h1').value) || 0;
+  var w2 = parseFloat(document.getElementById('w2').value) || 0;
+  var h2 = parseFloat(document.getElementById('h2').value) || 0;
+  var w3 = parseFloat(document.getElementById('w3').value) || 0;
+  var h3 = parseFloat(document.getElementById('h3').value) || 0;
 
-  var totalSheets = 0, details = [];
-  rooms.forEach(function(r) {
-    if (r.w > 0 && r.h > 0) {
-      var cols = Math.ceil(r.w / 1000);
-      var rows = Math.ceil(r.h / 1000);
-      var sheets = cols * rows;
-      totalSheets += sheets;
-      details.push(r.name + ': ' + cols + '×' + rows + ' = ' + sheets + '장');
-    }
-  });
+  var totalArea = (w1/1000)*(h1/1000) + (w2/1000)*(h2/1000) + (w3/1000)*(h3/1000);
+  if (totalArea === 0) { alert('가로, 세로 길이를 한 곳 이상 입력해주세요.'); return; }
 
-  if (totalSheets === 0) { alert('시공할 공간 치수를 입력해주세요!'); return; }
+  var ourCount = Math.ceil(totalArea * 1.1);
+  var basePrice = ourCount * PRICE_PER_MAT;
+  var isDiscount = document.getElementById('discount-check').checked;
+  var ourPrice = isDiscount ? Math.floor(basePrice * 0.95) : basePrice;
 
-  var loss = Math.ceil(totalSheets * 0.1);
-  var finalSheets = totalSheets + loss;
-  var discount = document.getElementById('discount-check').checked;
-  var unitPrice = discount ? Math.round(price * 0.95) : price;
-  var totalCost = finalSheets * unitPrice;
+  var compW = parseFloat(document.getElementById('comp-w').value) || 0;
+  var compH = parseFloat(document.getElementById('comp-h').value) || 0;
+  var compPrice = parseFloat(document.getElementById('comp-price').value) || 0;
 
-  var resultBox = document.getElementById('result-box');
-  resultBox.style.display = 'block';
+  // Title
+  var titleEl = document.getElementById('result-title');
+  if (currentPurpose === 'child') {
+    titleEl.innerHTML = '<span style="color:var(--accent)">👶 우리 아이를 위한 맞춤 견적</span>';
+  } else {
+    titleEl.innerHTML = '<span style="color:var(--red)">🐶 반려동물을 위한 맞춤 견적</span>';
+  }
 
-  document.getElementById('total-info').innerHTML =
-    details.join(' / ') + '<br>' +
-    '<span style="font-size:13px;color:var(--muted)">매트 ' + totalSheets + '장 + 자투리 ' + loss + '장 = <strong>' + finalSheets + '장</strong></span><br>' +
-    '<span style="font-size:clamp(28px,7vw,36px);font-weight:800;color:var(--accent);letter-spacing:-0.03em">' + totalCost.toLocaleString() + '원</span>' +
-    (discount ? '<br><span style="font-size:12px;color:var(--red);font-weight:600">🎁 5% 할인 적용 (장당 ' + unitPrice.toLocaleString() + '원)</span>' : '');
+  document.getElementById('total-info').textContent = '시공 총 면적: ' + totalArea.toFixed(2) + ' ㎡';
 
-  // Competitor comparison
-  var compW = parseInt(document.getElementById('comp-w').value) || 0;
-  var compH = parseInt(document.getElementById('comp-h').value) || 0;
-  var compPrice = parseInt(document.getElementById('comp-price').value) || 0;
-  var compareBox = document.getElementById('compare-box');
-  var visualContainer = document.getElementById('visual-compare-container');
-  visualContainer.innerHTML = '';
+  // Compare box
+  var compareHTML = '';
+  var compTotalCount = 0;
+  var copyText = '[돌봄매트 스마트 견적]\n\n■ 시공 면적: ' + totalArea.toFixed(2) + '㎡\n■ 1m 매트 수량: 약 ' + ourCount + '장\n\n';
 
   if (compW > 0 && compH > 0 && compPrice > 0) {
-    var compArea = (compW / 1000) * (compH / 1000);
-    var ourArea = 1;
-    var ratio = ourArea / compArea;
-    var compSheets = Math.ceil(totalSheets * ratio);
-    var compLoss = Math.ceil(compSheets * 0.1);
-    var compFinal = compSheets + compLoss;
-    var compTotal = compFinal * compPrice;
-    var diff = compTotal - totalCost;
+    var compAreaPerMat = (compW/1000) * (compH/1000);
+    compTotalCount = Math.ceil((totalArea * 1.1) / compAreaPerMat);
+    var compTotal = compTotalCount * compPrice;
+    var diff = compTotal - ourPrice;
 
-    compareBox.style.display = 'block';
-    compareBox.innerHTML =
-      '<p style="font-size:14px;font-weight:700;margin-bottom:10px;text-align:center">📊 타사 매트 비교</p>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">' +
-        '<div><p style="font-size:12px;color:var(--muted);margin-bottom:4px">타사 (' + compW + '×' + compH + 'mm)</p><p style="font-size:18px;font-weight:700;color:var(--red)">' + compTotal.toLocaleString() + '원</p><p style="font-size:11px;color:var(--muted)">' + compFinal + '장 필요</p></div>' +
-        '<div><p style="font-size:12px;color:var(--muted);margin-bottom:4px">돌봄매트 (1000mm)</p><p style="font-size:18px;font-weight:700;color:var(--accent)">' + totalCost.toLocaleString() + '원</p><p style="font-size:11px;color:var(--muted)">' + finalSheets + '장 필요</p></div>' +
-      '</div>' +
-      (diff > 0 ? '<p style="text-align:center;margin-top:12px;font-size:15px;font-weight:800;color:var(--accent)">💰 돌봄매트가 ' + diff.toLocaleString() + '원 절약!</p>' :
-       diff < 0 ? '<p style="text-align:center;margin-top:12px;font-size:14px;color:var(--soft)">가격 차이: ' + Math.abs(diff).toLocaleString() + '원 (품질·이음새·A/S 비교 필수!)</p>' :
-       '<p style="text-align:center;margin-top:12px;font-size:14px;color:var(--accent)">가격 동일! 품질과 이음새에서 돌봄매트 승!</p>');
+    compareHTML += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--muted)">' +
+      '<span>🔍 타사 (' + compW + '×' + compH + 'mm)</span>' +
+      '<span>약 ' + compTotalCount + '장 / <b>' + compTotal.toLocaleString() + '원</b></span></div>';
 
-    // Visual grid comparison
-    buildVisualCompare(visualContainer, compW, compH, compFinal, finalSheets);
+    copyText += '❌ 타사: ' + compTotal.toLocaleString() + '원\n';
+    copyText += '✅ 돌봄매트: ' + ourPrice.toLocaleString() + '원\n';
+    copyText += '👉 ' + Math.abs(diff).toLocaleString() + '원 ' + (diff > 0 ? '절약' : '차이') + '!\n\n';
+  }
+
+  var priceHTML = '';
+  if (isDiscount) {
+    priceHTML = '<div style="text-align:right"><del style="color:var(--muted);font-size:13px">' + basePrice.toLocaleString() + '원</del><br><span style="color:var(--red);font-size:20px;font-weight:800">' + ourPrice.toLocaleString() + '원</span></div>';
   } else {
-    compareBox.style.display = 'none';
+    priceHTML = '<span style="font-size:20px;font-weight:800;color:var(--text)">' + ourPrice.toLocaleString() + '원</span>';
   }
 
-  // Copy text
-  var copyText = '📊 돌봄매트 견적서\n\n';
-  copyText += '━━━━━━━━━━━\n';
-  details.forEach(function(d) { copyText += '• ' + d + '\n'; });
-  copyText += '━━━━━━━━━━━\n';
-  copyText += '매트: ' + totalSheets + '장 + 자투리 ' + loss + '장 = ' + finalSheets + '장\n';
-  copyText += '단가: ' + unitPrice.toLocaleString() + '원/장' + (discount ? ' (5% 할인)' : '') + '\n';
-  copyText += '합계: ' + totalCost.toLocaleString() + '원\n\n';
-  if (compW > 0) {
-    copyText += '📊 타사(' + compW + '×' + compH + 'mm) 비교: ' + compTotal.toLocaleString() + '원\n';
-    if (diff > 0) copyText += '💰 돌봄매트가 ' + diff.toLocaleString() + '원 절약!\n';
-  }
-  copyText += '\n🔗 돌봄매트: pf.kakao.com/_UMyBK/chat';
+  compareHTML += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:2px dashed rgba(0,0,0,0.06);font-size:14px;font-weight:700">' +
+    '<span style="color:var(--accent)">✅ 돌봄매트 1m</span>' + priceHTML + '</div>';
+
+  if (isDiscount) { copyText += '🎁 공동구매 5% 할인 적용!\n'; }
+  copyText += '\n🚀 카톡 상담: http://pf.kakao.com/_UMyBK/chat';
+
+  document.getElementById('compare-box').innerHTML = compareHTML;
   document.getElementById('copy-btn').setAttribute('data-copy', copyText);
 
-  resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Visual seam comparison
+  var vc = document.getElementById('visual-compare-container');
+  vc.innerHTML = '';
+  if (compW > 0 && compH > 0) {
+    drawGridComparison(totalArea, ourCount, compTotalCount, compW, compH, vc);
+  }
+
+  document.getElementById('result-box').style.display = 'block';
+  // Smooth scroll without jarring jump
+  setTimeout(function() {
+    var el = document.getElementById('result-box');
+    var rect = el.getBoundingClientRect();
+    if (rect.top > window.innerHeight) {
+      window.scrollBy({ top: rect.top - 100, behavior: 'smooth' });
+    }
+  }, 100);
 }
 
-function buildVisualCompare(container, compW, compH, compCount, ourCount) {
+function drawGridComparison(totalArea, ourCount, compCount, compW, compH, container) {
   var wrapper = document.createElement('div');
-  wrapper.style.cssText = 'margin-top:16px;padding:20px;background:var(--warm);border-radius:14px';
-  wrapper.innerHTML = '<p style="font-size:14px;font-weight:700;text-align:center;margin-bottom:16px">🔲 시각적 비교</p>';
+  wrapper.style.cssText = 'margin-top:20px;padding:20px 10px;background:#f5f4f0;border-radius:16px;text-align:center';
+
+  wrapper.innerHTML = '<p style="font-size:15px;font-weight:700;color:#c8a97e;margin-bottom:6px">👀 이음새(선) 비교</p>' +
+    '<p style="font-size:12px;color:#6e6e73;margin-bottom:16px;line-height:1.5">동일 면적 시공 시 바닥에 생기는 <b>선(이음새)</b> 차이<br><span style="color:#ff453a">선이 많을수록 틈새 먼지↑ 청소 어려움↑</span></p>';
 
   var flexBox = document.createElement('div');
-  flexBox.style.cssText = 'display:flex;justify-content:center;gap:24px;align-items:flex-start';
+  flexBox.style.cssText = 'display:flex;justify-content:center;gap:14px';
 
-  var scale = 0.15;
-  var cW = Math.round((compW / 1000) * (Math.ceil(compCount / Math.ceil(Math.sqrt(compCount)))) * scale * 1000 / 10);
-  var cH = Math.round((compH / 1000) * Math.ceil(Math.sqrt(compCount)) * scale * 1000 / 10);
+  var roomW_m = Math.sqrt(totalArea * (4/3));
+  var roomH_m = Math.sqrt(totalArea * (3/4));
+  var maxW = 140;
+  var scale = maxW / roomW_m;
+  var cW = Math.round(roomW_m * scale);
+  var cH = Math.round(roomH_m * scale);
 
   if (cW < 20) cW = 140;
   if (cH < 20) cH = 105;
 
+  // Competitor
   var b1 = document.createElement('div');
   b1.style.cssText = 'text-align:center';
   b1.innerHTML = '<p style="font-size:12px;font-weight:700;color:#ff453a;margin-bottom:8px">❌ 타사 매트<br><span style="font-size:11px;font-weight:400;color:#86868b">약 ' + compCount + '장</span></p>';
@@ -1056,6 +1434,7 @@ function buildVisualCompare(container, compW, compH, compCount, ourCount) {
   drawGrid(c1, compW/1000, compH/1000, scale, '#ff453a', 0.5);
   b1.appendChild(c1);
 
+  // Ours
   var b2 = document.createElement('div');
   b2.style.cssText = 'text-align:center';
   b2.innerHTML = '<p style="font-size:12px;font-weight:700;color:#c8a97e;margin-bottom:8px">✅ 돌봄매트 1m<br><span style="font-size:11px;font-weight:400;color:#86868b">약 ' + ourCount + '장</span></p>';
@@ -1116,6 +1495,7 @@ function toggleFaq(item) {
   const arrow = item.querySelector('.faq-arrow');
   const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
 
+  // Close all others
   document.querySelectorAll('.faq-item').forEach(other => {
     if (other !== item) {
       other.querySelector('.faq-answer').style.maxHeight = '0px';
