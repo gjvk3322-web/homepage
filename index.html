@@ -486,7 +486,10 @@ body.mode-pet span.for-baby{display:none!important}
      HERO
 ═══════════════════════════════════════ -->
 <section class="hero">
-  <video class="hero-bg" src="dolbom-video.mp4" poster="img/kids-playing.jpg" id="heroImg" muted loop playsinline autoplay preload="auto"></video>
+  <video class="hero-bg" poster="img/kids-playing.jpg" id="heroImg" muted loop playsinline autoplay preload="auto">
+    <source src="dolbom-video.webm" type="video/webm">
+    <source src="dolbom-video.mp4" type="video/mp4">
+  </video>
   <div class="overlay"></div>
   <div class="content">
     <div class="persona-toggle hero-anim hero-d1">
@@ -1258,7 +1261,10 @@ body.mode-pet span.for-baby{display:none!important}
 <!-- ═══ Video Modal ═══ -->
 <div class="video-modal" id="videoModal" onclick="closeVideo()">
   <div class="inner" onclick="event.stopPropagation()">
-    <video id="modalVideo" src="dolbom-video.mp4" controls playsinline></video>
+    <video id="modalVideo" controls playsinline>
+      <source src="dolbom-video.webm" type="video/webm">
+      <source src="dolbom-video.mp4" type="video/mp4">
+    </video>
     <button class="close" onclick="closeVideo()">✕</button>
   </div>
 </div>
