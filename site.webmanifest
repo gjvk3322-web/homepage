@@ -1,0 +1,31 @@
+{
+  "name": "돌봄매트 - 층간소음 62% 저감 프리미엄 TPU 매트",
+  "short_name": "돌봄매트",
+  "description": "6,700가정이 선택한 프리미엄 TPU 매트. 층간소음 62% 저감, 미끄럼 방지, 공기순환 케어.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAFAF7",
+  "theme_color": "#FAFAF7",
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "business"]
+}
