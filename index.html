@@ -234,20 +234,7 @@ footer{background:#111;padding:52px 20px 60px;text-align:center;color:var(--mute
 }
 
 
-/* ═══ PERSONA SYSTEM ═══ */
-.intro-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;transition:opacity 0.6s,visibility 0.6s;opacity:1;visibility:visible}
-.intro-overlay.hide{opacity:0;visibility:hidden;pointer-events:none}
-.intro-logo{font-size:22px;font-weight:800;letter-spacing:-0.04em;color:var(--text);margin-bottom:6px}
-.intro-sub{font-size:14px;color:var(--muted);margin-bottom:52px;font-weight:400}
-.intro-cards{display:flex;gap:14px;width:100%;max-width:380px}
-.intro-card{flex:1;background:#fff;border-radius:var(--radius);padding:40px 16px 34px;text-align:center;border:1.5px solid rgba(0,0,0,0.05);cursor:pointer;transition:all 0.35s var(--ease);box-shadow:var(--shadow-sm)}
-.intro-card:active{transform:scale(0.96)}
-.intro-card:hover{border-color:var(--accent);box-shadow:0 12px 40px rgba(139,181,192,0.18);transform:translateY(-2px)}
-.intro-card .emoji{font-size:44px;margin-bottom:18px;display:block}
-.intro-card .card-name{font-size:17px;font-weight:750;letter-spacing:-0.02em;margin-bottom:6px;color:var(--text)}
-.intro-card .card-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
-.intro-skip{margin-top:36px;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;opacity:0.5;transition:opacity 0.2s}
-.intro-skip:hover{opacity:0.8}
+/* ═══ PERSONA SYSTEM (Intro Overlay Removed) ═══ */
 
 /* Mode toggle in hero */
 .persona-toggle{display:flex;gap:6px;margin-bottom:22px}
@@ -459,24 +446,10 @@ body.mode-pet span.for-baby{display:none!important}
 </head>
 <body>
 
-<!-- ═══ INTRO SELECTOR ═══ -->
-<div class="intro-overlay" id="introOverlay">
-  <p class="intro-logo">돌봄매트</p>
-  <p class="intro-sub">어떤 바닥을 찾고 계신가요?</p>
-  <div class="intro-cards">
-    <div class="intro-card" onclick="selectPersona('baby')">
-      <span class="emoji">👶</span>
-      <p class="card-name">유아매트</p>
-      <p class="card-desc">층간소음 걱정 없이<br>마음껏 뛰어놀 수 있도록</p>
-    </div>
-    <div class="intro-card" onclick="selectPersona('pet')">
-      <span class="emoji">🐶</span>
-      <p class="card-name">애견매트</p>
-      <p class="card-desc">미끄러운 바닥에서<br>슬개골을 안전하게</p>
-    </div>
-  </div>
-  <button class="intro-skip" onclick="selectPersona('baby')">건너뛰기</button>
-</div>
+<!-- ═══ INTRO SELECTOR REMOVED ═══
+     페르소나 선택 오버레이는 이탈률 유발 요소로 제거.
+     Hero 내 토글(유아/애견)로 언제든 전환 가능.
+     URL 파라미터 ?mode=pet 으로 자동 분기 가능. -->
 
 
 <div id="page-wrap" style="overflow-x:clip;max-width:100vw">
@@ -533,20 +506,20 @@ body.mode-pet span.for-baby{display:none!important}
     <div class="carousel-card" data-card="noise"><div style="position:relative"><img loading="lazy" src="img/kids-laughing.jpg" alt="웃는 아이들" id="carImg1"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#AECBD4">층간소음 저감</p><p class="card-title">아이가 뛰어놀아도
 아래층 걱정 끝.</p><p class="card-desc">KCL 국가 공인 기관 인증. 이웃과의 평화를 지킵니다.</p></div></div>
     <!-- Card 2 · 충격 흡수 (2순위 구매동기 · 안전 공포 해소) -->
-    <div class="carousel-card" data-card="shock"><div style="position:relative"><img loading="lazy" src="img/boy-toy.jpg" alt="장난감 노는 아이" id="carImg4"><div class="badge">67% 흡수</div></div><div class="card-body"><p class="tag" style="color:#fbbf24">충격 흡수</p><p class="card-title">TPU 젖병 소재.
-넘어져도 안심.</p><p class="card-desc">젖병과 동일한 안전 소재로 부상 위험을 줄입니다.</p></div></div>
+    <div class="carousel-card" data-card="shock"><div style="position:relative"><img loading="lazy" src="img/boy-toy.jpg" alt="장난감 노는 아이" id="carImg4"><div class="badge">67% 흡수</div></div><div class="card-body"><p class="tag" style="color:#fbbf24">충격 흡수</p><p class="card-title">넘어져도 안심.
+TPU 젖병 소재.</p><p class="card-desc">젖병과 동일한 안전 소재로 부상 위험을 줄입니다.</p></div></div>
     <!-- Card 3 · 미끄럼 방지 (걸음마 시기 특화) -->
     <div class="carousel-card" data-card="slip"><div style="position:relative"><img loading="lazy" src="img/baby-walk.jpg" alt="걸음마 아기" id="carImg2"><div class="badge">논슬립 · 방오코팅</div></div><div class="card-body"><p class="tag" style="color:#E8B4A0">미끄럼 방지</p><p class="card-title">첫 걸음마부터
-안전하게.</p><p class="card-desc">논슬립 강화, 방오, 황변 코팅으로 한 번 더 강력하게!</p></div></div>
+안전하게.</p><p class="card-desc">대형 1,000매트 논슬립 강화, 방오, 황변 코팅으로 한 번 더 강력하게!</p></div></div>
     <!-- Card 4 · 오염 차단 (이물받이 90% · 결과 중심 카피로 개선) -->
     <div class="carousel-card" data-card="clean"><div style="position:relative"><img loading="lazy" src="img/mat-structure.jpg" alt="이물받이 구조"><div class="badge">90% 커넥트</div></div><div class="card-body"><p class="tag" style="color:#30d158">오염 차단</p><p class="card-title">틈새 오염
-90% 차단.</p><p class="card-desc">매트 사이 틈을 90% 줄여 먼지·음식물 오염을 원천 차단합니다.</p></div></div>
+90% 차단.</p><p class="card-desc">90% 커넥트 공법으로 매트 사이 틈을 메워 먼지·음식물 오염을 원천 차단합니다.</p></div></div>
     <!-- Card 5 · 공기순환 (특허 · 신뢰 보강 · 동영상으로 흐름 시각화) -->
     <div class="carousel-card" data-card="air"><div style="position:relative"><video src="img/air-circulation.mp4" poster="img/air-circulation-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="매트 공기순환 구조 영상" style="width:100%;height:240px;object-fit:cover;display:block"></video><div class="badge">특허 등록</div></div><div class="card-body"><p class="tag" style="color:#60a5fa">공기순환 케어</p><p class="card-title">습기·곰팡이
 걱정 끝.</p><p class="card-desc">특허받은 에어홀 구조로 매트 속 습기와 곰팡이를 막아줍니다.</p></div></div>
     <!-- Card 6 · 반려동물 (Baby 모드에선 부차적 · Pet 모드에선 1순위로 이동) -->
-    <div class="carousel-card" data-card="pet"><div style="position:relative"><img loading="lazy" src="img/dog-sofa.jpg" alt="강아지" id="carImg5"><div class="badge">스크래치 방지</div></div><div class="card-body"><p class="tag" style="color:#f472b6">반려동물도 안전</p><p class="card-title">반려동물 발톱에도
-끄떡없는.</p><p class="card-desc">내구성 높은 표면으로 반려동물과 함께 안심하세요.</p></div></div>
+    <div class="carousel-card" data-card="pet"><div style="position:relative"><img loading="lazy" src="img/dog-sofa.jpg" alt="강아지" id="carImg5"><div class="badge">스크래치 방지</div></div><div class="card-body"><p class="tag" style="color:#f472b6">반려동물도 안전</p><p class="card-title">관절도, 바닥도
+안전하게.</p><p class="card-desc">미끄럼 방지로 슬개골 보호, 스크래치 방지로 바닥 유지.</p></div></div>
   </div>
   <div class="dots" id="dots1"></div>
 </section>
@@ -1625,8 +1598,7 @@ function reorderCarousel(mode) {
 
 // ── Persona Mode System ──
 function selectPersona(mode) {
-  document.getElementById('introOverlay').classList.add('hide');
-  document.body.style.overflow = '';
+  // 오버레이 제거됨 - 오버레이 숨김 로직 삭제
   switchMode(mode);
   try { sessionStorage.setItem('dolbom-mode', mode); } catch(e) {}
 }
@@ -1697,16 +1669,25 @@ function reorderReviews(mode) {
   });
 }
 
-// Check for saved persona on load
+// 초기 모드 결정 우선순위:
+// 1순위: URL 파라미터 ?mode=pet 또는 ?source=pet (광고·인플루언서 유입)
+// 2순위: sessionStorage 저장값 (재방문)
+// 3순위: 기본값 baby
 (function() {
-  var saved = null;
-  try { saved = sessionStorage.getItem('dolbom-mode'); } catch(e) {}
-  if (saved) {
-    selectPersona(saved);
-  } else {
-    document.body.style.overflow = 'hidden';
-    document.body.classList.add('mode-baby'); // default
-  }
+  var mode = 'baby';
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var urlMode = params.get('mode') || params.get('source');
+    if (urlMode === 'pet' || urlMode === 'dog') {
+      mode = 'pet';
+    } else if (urlMode === 'baby' || urlMode === 'kid') {
+      mode = 'baby';
+    } else {
+      var saved = sessionStorage.getItem('dolbom-mode');
+      if (saved === 'pet' || saved === 'baby') mode = saved;
+    }
+  } catch(e) {}
+  switchMode(mode);
 })();
 
 </script>
