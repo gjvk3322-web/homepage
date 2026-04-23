@@ -279,6 +279,24 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 .sticky-persona .sp-btn{padding:6px 14px;border-radius:var(--radius-pill);font-size:12px;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.25s var(--ease);font-family:inherit;white-space:nowrap}
 .sticky-persona .sp-btn.active{background:#fff;color:var(--text);box-shadow:0 1px 5px rgba(0,0,0,0.06)}
 
+/* ═══ 진행률 바 (A) ═══ */
+#scrollProgress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#8BB5C0,#89B493);z-index:9999;transition:width 0.1s linear;pointer-events:none;will-change:width}
+
+/* ═══ 상단 미니 네비게이션 (C) ═══ */
+#topNav{position:fixed;top:3px;left:0;right:0;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,0.05);z-index:9998;transform:translateY(-100%);transition:transform 0.3s var(--ease);padding:8px 0}
+#topNav.show{transform:translateY(0)}
+#topNav .nav-wrap{max-width:640px;margin:0 auto;padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+#topNav .nav-wrap::-webkit-scrollbar{display:none}
+#topNav .nav-inner{display:flex;gap:6px;min-width:min-content;justify-content:center}
+#topNav .nav-btn{flex-shrink:0;padding:8px 14px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:999px;font-family:inherit;white-space:nowrap;transition:all 0.2s var(--ease);min-height:36px;display:flex;align-items:center;gap:4px}
+#topNav .nav-btn:hover{background:rgba(0,0,0,0.04);color:var(--text)}
+#topNav .nav-btn.active{background:var(--text);color:#fff}
+#topNav .nav-btn .nav-emoji{font-size:14px}
+@media(max-width:380px){
+  #topNav .nav-btn{padding:7px 10px;font-size:12px}
+  #topNav .nav-btn .nav-emoji{font-size:13px}
+}
+
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -466,6 +484,22 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 </head>
 <body>
 
+<!-- ═══ 진행률 바 (스크롤 % 표시) ═══ -->
+<div id="scrollProgress"></div>
+
+<!-- ═══ 상단 미니 네비게이션 (섹션 이동 전용) ═══ -->
+<nav id="topNav" aria-label="페이지 섹션 네비게이션">
+  <div class="nav-wrap">
+    <div class="nav-inner">
+      <button class="nav-btn" data-target="pricingSection"><span class="nav-emoji">💰</span>가격</button>
+      <button class="nav-btn" data-target="eventSection"><span class="nav-emoji">🎁</span>이벤트</button>
+      <button class="nav-btn" data-target="reviewSection"><span class="nav-emoji">🌟</span>후기</button>
+      <button class="nav-btn" data-target="calcSection"><span class="nav-emoji">📐</span>견적</button>
+      <button class="nav-btn" data-target="faqSection"><span class="nav-emoji">❓</span>FAQ</button>
+    </div>
+  </div>
+</nav>
+
 <!-- ═══ INTRO SELECTOR REMOVED ═══
      페르소나 선택 오버레이는 이탈률 유발 요소로 제거.
      Hero 내 토글(유아/애견)로 언제든 전환 가능.
@@ -514,7 +548,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
      💰 가격 공개 섹션 (업계 최초 시도)
      Hero 직후 배치 - "복잡한 조건 없이, 가격 공개"
 ═══════════════════════════════════════ -->
-<section style="background:linear-gradient(135deg,#1a1a1a 0%,#0a0a0a 100%);padding:48px 20px 40px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
+<section id="pricingSection" style="background:linear-gradient(135deg,#1a1a1a 0%,#0a0a0a 100%);padding:48px 20px 40px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
   <div style="max-width:640px;margin:0 auto" class="fade-up">
 
     <!-- 섹션 헤더 -->
@@ -698,7 +732,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
      🎁 후기 이벤트 11만원 배너 (신규)
      강력한 전환 트리거
 ═══════════════════════════════════════ -->
-<section style="background:linear-gradient(135deg,#FFE5E5 0%,#FFD4D4 100%);padding:32px 20px;overflow:hidden;position:relative">
+<section id="eventSection" style="background:linear-gradient(135deg,#FFE5E5 0%,#FFD4D4 100%);padding:32px 20px;overflow:hidden;position:relative">
   <div style="max-width:640px;margin:0 auto;position:relative;z-index:1" class="fade-up">
     <div style="text-align:center">
       <p style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px">🎁 Review Event</p>
@@ -770,7 +804,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
      🌟 실제 후기 하이라이트 3개 (신규)
      캐러셀 직후 배치 - 제품 관심 → 신뢰 변환
 ═══════════════════════════════════════ -->
-<section class="section" style="background:#FAFAF7;padding:72px 20px">
+<section id="reviewSection" class="section" style="background:#FAFAF7;padding:72px 20px">
   <div style="max-width:680px;margin:0 auto">
     <p class="section-label fade-up text-center" style="color:var(--green)">Real Voices</p>
     <h2 class="section-title text-center fade-up mb-12">실제 시공 후기.</h2>
@@ -1191,7 +1225,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
 <!-- ═══════════════════════════════════════
      FAQ (자주 묻는 질문)
 ═══════════════════════════════════════ -->
-<section class="section section-warm">
+<section id="faqSection" class="section section-warm">
   <div class="section-center">
     <p class="section-label fade-up text-center" style="color:var(--blue)">FAQ</p>
     <h2 class="section-title text-center fade-up mb-36">자주 묻는 질문.</h2>
@@ -1397,6 +1431,81 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '-40px' });
 
 document.querySelectorAll('.fade-up,.scale-in,.fade-in').forEach(el => observer.observe(el));
+
+// ── 진행률 바 + 상단 미니 네비 (A + C 조합) ──
+(function(){
+  var progressBar = document.getElementById('scrollProgress');
+  var topNav = document.getElementById('topNav');
+  var navBtns = document.querySelectorAll('#topNav .nav-btn');
+  if (!progressBar || !topNav) return;
+
+  // 각 섹션 요소 수집
+  var sections = [];
+  navBtns.forEach(function(btn){
+    var id = btn.dataset.target;
+    var el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, btn: btn });
+  });
+
+  // 네비 버튼 클릭 → 부드러운 스크롤
+  navBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      if (!el) return;
+      var offset = el.getBoundingClientRect().top + window.pageYOffset - 60; // 네비 높이만큼 빼기
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    });
+  });
+
+  // 성능 최적화: rAF(requestAnimationFrame)로 스로틀링
+  var ticking = false;
+  function updateScrollUI(){
+    var scrollTop = window.pageYOffset;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    
+    // 진행률 바
+    progressBar.style.width = progress + '%';
+    
+    // 히어로 지나면 네비 보이기 (600px 기준)
+    if (scrollTop > 600) {
+      topNav.classList.add('show');
+    } else {
+      topNav.classList.remove('show');
+    }
+    
+    // 현재 섹션 감지 (가장 위에 근접한 섹션 활성화)
+    var activeId = null;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      var rect = sections[i].el.getBoundingClientRect();
+      if (rect.top <= 120) {
+        activeId = sections[i].id;
+        break;
+      }
+    }
+    
+    // 버튼 active 상태 업데이트
+    navBtns.forEach(function(btn){
+      if (btn.dataset.target === activeId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      requestAnimationFrame(updateScrollUI);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // 페이지 로드 시 초기 상태 설정
+  updateScrollUI();
+})();
 
 // ── Air circulation video - 뷰포트 진입 시 재생 (성능 최적화) ──
 (function(){
