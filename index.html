@@ -1145,7 +1145,11 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   document.head.appendChild(styleEl);
 
   // 버튼 이벤트
-  function closeQuoteModal(){quoteModal.style.display='none';document.body.style.overflow=''}
+  function closeQuoteModal(){
+    quoteModal.style.display='none';
+    document.body.style.overflow='';
+    document.body.style.paddingRight='';
+  }
   document.getElementById('quoteImgCloseBtn').onclick=closeQuoteModal;
   quoteModal.onclick=function(e){if(e.target===quoteModal)closeQuoteModal()};
   document.getElementById('quoteImgDownloadBtn').onclick=function(){
@@ -1182,6 +1186,9 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
       document.getElementById('quoteImgPreviewHost').style.display='none';
       document.getElementById('quoteImgPreviewHost').src='';
       document.getElementById('quoteImgLoadingHost').style.display='flex';
+      // 스크롤바 너비 보정 (모달이 왼쪽으로 쏠리는 것 방지)
+      var scrollbarWidth=window.innerWidth-document.documentElement.clientWidth;
+      if(scrollbarWidth>0)document.body.style.paddingRight=scrollbarWidth+'px';
       quoteModal.style.display='flex';
       document.body.style.overflow='hidden';
     } else if(e.data&&e.data.type==='quoteImageReady'&&e.data.dataUrl){
