@@ -857,76 +857,6 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
 
 
 <!-- ═══════════════════════════════════════
-     Apple 스타일 제품 탐색기
-═══════════════════════════════════════ -->
-<section class="section-dark" style="padding:80px 0 60px">
-  <div style="max-width:640px;margin:0 auto;padding:0 24px">
-    <p class="section-label fade-up text-center" style="color:var(--accent)">Product Explorer</p>
-    <h2 style="font-size:clamp(28px,7vw,42px);font-weight:800;text-align:center;letter-spacing:-0.035em;line-height:1.12;margin-bottom:8px;color:#fff" class="fade-up">돌봄매트를<br><span style="color:var(--muted)">자세히 살펴보세요.</span></h2>
-    <p class="fade-up text-center" style="font-size:14px;color:var(--muted);margin-bottom:32px">이미지를 탭하면 크게 볼 수 있습니다</p>
-  </div>
-
-  <!-- 메인 이미지 -->
-  <div style="max-width:640px;margin:0 auto;padding:0 20px">
-    <div id="explorerMain" class="fade-up" style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#111;cursor:pointer" onclick="openLightbox(currentExplorerIdx)">
-      <img id="explorerImg" src="img/kids-playing.jpg" alt="" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.4s ease;-webkit-transform:translateZ(0);transform:translateZ(0)">
-      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:20px 20px 24px">
-        <p id="explorerTag" style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px">컬러 · 모던화이트</p>
-        <p id="explorerDesc" style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:500">깔끔한 화이트 톤으로 어떤 인테리어에도 자연스럽게 어울립니다.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 카테고리 탭 (좌우 스크롤) -->
-  <div style="max-width:640px;margin:0 auto">
-    <div style="margin-top:20px;overflow:hidden;padding:0 20px 20px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap" id="explorerTabs">
-    <button onclick="switchExplorer(0)" class="exp-tab exp-tab-active" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:rgba(255,255,255,0.15);color:#fff">
-      <span style="width:20px;height:20px;border-radius:50%;background:#d4d0ca;display:inline-block;border:1.5px solid rgba(255,255,255,0.3)"></span> 컬러
-    </button>
-    <button onclick="switchExplorer(1)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
-      ⊕ 매트 구조
-    </button>
-    <button onclick="switchExplorer(2)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
-      ⊕ 사이즈
-    </button>
-    <button onclick="switchExplorer(3)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
-      ⊕ 시공 모습
-    </button>
-    <button onclick="switchExplorer(4)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
-      ⊕ 세척
-    </button>
-    <button onclick="switchExplorer(5)" class="exp-tab" style="flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.45)">
-      ⊕ 반려동물
-    </button>
-    </div>
-  </div>
-</section>
-
-
-<!-- 라이트박스 (풀스크린) -->
-<div id="lightbox" style="position:fixed;inset:0;z-index:210;background:rgba(0,0,0,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;-webkit-transform:translateZ(0);transform:translateZ(0)">
-  <!-- 닫기 -->
-  <button onclick="closeLightbox()" style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">✕</button>
-
-  <!-- 이미지 -->
-  <div style="flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:60px 16px 0;position:relative">
-    <!-- 좌 화살표 -->
-    <button onclick="lightboxPrev()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">‹</button>
-    <!-- 우 화살표 -->
-    <button onclick="lightboxNext()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:22px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center">›</button>
-
-    <img id="lightboxImg" src="" alt="" style="max-width:100%;max-height:70vh;object-fit:contain;border-radius:12px;transition:opacity 0.3s">
-  </div>
-
-  <!-- 하단 설명 -->
-  <div style="width:100%;padding:20px 24px 40px;padding-bottom:max(40px,env(safe-area-inset-bottom))">
-    <p id="lightboxTag" style="font-size:11px;font-weight:650;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px"></p>
-    <p id="lightboxDesc" style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55"></p>
-  </div>
-</div>
-
-
-<!-- ═══════════════════════════════════════
      3D 매트 회전 (입체감 + 벡터 배경)
 ═══════════════════════════════════════ -->
 <section style="padding:80px 20px;overflow:hidden;max-width:100vw;background:radial-gradient(ellipse at 50% 40%, #1a1a22 0%, #12121a 60%, #0a0a10 100%);position:relative">
@@ -1107,17 +1037,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   </p>
 </div>
 
-<!-- 풀블리드 #2 -->
-<section class="fullbleed" style="height:80vh">
-  <img loading="lazy" src="img/girl-easel.jpg" alt="이젤 앞 아이" id="fbImg2" width="1600" height="1280" style="height:80vh">
-  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.35) 100%)"></div>
-  <div class="content fade-up">
-    <h3>
-      <span class="for-baby">서 있어도, 앉아 있어도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></span>
-      <span class="for-pet">달려도, 멈춰도,<br><span style="color:rgba(255,255,255,0.6)">미끄러짐 없이 안전하게.</span></span>
-    </h3>
-  </div>
-</section>
+<!-- 풀블리드 #2 제거됨 (유아/애견 섹션 모두 삭제) -->
 
 
 <!-- ═══════════════════════════════════════
