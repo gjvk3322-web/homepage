@@ -1160,29 +1160,6 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
 
 
 <!-- ═══════════════════════════════════════
-     반려동물 풀블리드
-═══════════════════════════════════════ -->
-<section class="fullbleed" style="height:75vh">
-  <img loading="lazy" src="img/dog-stand.jpg" alt="서 있는 강아지" id="petFbImg" width="1600" height="1200" style="height:75vh">
-  <div class="overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%)"></div>
-  <div class="content fade-up">
-    <p style="font-size:13px;font-weight:650;color:rgba(255,255,255,0.6);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">
-      <span class="for-baby">Pet Friendly</span>
-      <span class="for-pet">Baby Safe</span>
-    </p>
-    <h3 style="margin-bottom:10px">
-      <span class="for-baby">반려동물에게도<br>안전한 바닥.</span>
-      <span class="for-pet">우리 아이에게<br>가장 안전한 바닥.</span>
-    </h3>
-    <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:300">
-      <span class="for-baby">미끄럼 방지로 관절 보호.<br>발톱 스크래치에도 끄떡없는 내구성.</span>
-      <span class="for-pet">강화 논슬립 코팅.<br>넘어져도 충격 67% 흡수.</span>
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════
      견적서 (quote.html 임베드)
 ═══════════════════════════════════════ -->
 <section class="section" id="calcSection" style="padding:60px 0 80px">
@@ -1202,6 +1179,9 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   window.addEventListener('message',function(e){
     if(e.data&&e.data.type==='resize'&&e.data.height){
       qf.style.height=e.data.height+'px';
+    } else if(e.data&&e.data.type==='scrollToQuote'){
+      // iframe 내부 모달이 보이도록 견적서 섹션 상단으로 스크롤
+      qf.scrollIntoView({behavior:'smooth',block:'start'});
     }
   });
 })();
@@ -1730,16 +1710,12 @@ var imageSwaps = {
     carImg4: 'img/boy-toy.jpg',
     carImg5: 'img/dog-sofa.jpg',
     fbImg1: 'img/kids-drawing-wide.jpg',
-    fbImg2: 'img/girl-easel.jpg',
-    petFbImg: 'img/dog-stand.jpg',
     ctaImg: 'img/kids-sofa.jpg'
   },
   pet: {
     heroImg: 'img/dog-lying.jpg',
     carImg5: 'img/dog-sofa.jpg',
     fbImg1: 'img/dog-playing.jpg',
-    fbImg2: 'img/dog-puppy.jpg',
-    petFbImg: 'img/baby-walk.jpg',
     ctaImg: 'img/dog-lying.jpg'
   }
 };
