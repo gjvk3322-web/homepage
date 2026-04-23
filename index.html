@@ -122,10 +122,11 @@ a{text-decoration:none;color:inherit}
 .text-muted{color:var(--muted)}
 
 /* ═══ CAROUSEL ═══ */
-.carousel-wrap{overflow-x:auto;max-width:100vw;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-wrap{overflow-x:auto;max-width:100vw;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;overscroll-behavior-y:auto;-webkit-transform:translateZ(0);transform:translateZ(0);scrollbar-width:none}
+.carousel-wrap::-webkit-scrollbar{display:none}
 .carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);-webkit-transform:translateZ(0);transform:translateZ(0);transition:transform 0.3s var(--ease)}
 .carousel-card:active{transform:scale(0.98)}
-.carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0);pointer-events:none;-webkit-user-drag:none;user-select:none}
 .carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:50px;padding:6px 14px;font-size:10.5px;font-weight:700;color:#fff;letter-spacing:0.02em}
 .carousel-card .card-body{padding:22px 20px 28px}
 .carousel-card .tag{font-size:10.5px;font-weight:680;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
@@ -1520,6 +1521,48 @@ function setupCarouselDots(carouselId, dotsId, count) {
   }, { passive: true });
 }
 setupCarouselDots('carousel1', 'dots1', 6);
+
+// ── Carousel swipe assist (모바일 스와이프 반응성 개선) ──
+// 문제: scroll-snap + touch-action:pan-x만으론 브라우저가 방향 결정을 엄격하게 해서
+//       세로 스크롤 의도가 섞이면 가로 스와이프가 무시되는 경우 있음.
+// 해결: Pointer Events로 터치 시작점 추적 → 가로 움직임이 10px 이상 우세하면
+//       명시적으로 scrollLeft 조정해 즉시 반응.
+(function(){
+  var carousel = document.getElementById('carousel1');
+  if(!carousel) return;
+  var startX = 0, startY = 0, startScrollLeft = 0, isTracking = false, direction = null;
+  var THRESHOLD = 8; // 방향 결정 임계값 (px) - 낮을수록 민감
+  
+  carousel.addEventListener('pointerdown', function(e){
+    if(e.pointerType !== 'touch') return; // 데스크탑은 네이티브 스크롤 유지
+    startX = e.clientX;
+    startY = e.clientY;
+    startScrollLeft = carousel.scrollLeft;
+    isTracking = true;
+    direction = null;
+  }, { passive: true });
+  
+  carousel.addEventListener('pointermove', function(e){
+    if(!isTracking || e.pointerType !== 'touch') return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    // 방향 결정: 첫 움직임이 임계값을 넘으면 확정
+    if(direction === null){
+      if(Math.abs(dx) > THRESHOLD || Math.abs(dy) > THRESHOLD){
+        direction = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+    }
+    // 가로 방향이면 scrollLeft 직접 조정 (즉시 반응)
+    if(direction === 'x'){
+      carousel.scrollLeft = startScrollLeft - dx;
+    }
+  }, { passive: true });
+  
+  function endTracking(){ isTracking = false; direction = null; }
+  carousel.addEventListener('pointerup', endTracking, { passive: true });
+  carousel.addEventListener('pointercancel', endTracking, { passive: true });
+  carousel.addEventListener('pointerleave', endTracking, { passive: true });
+})();
 
 // ── 3D Mat Rotation (Interactive Drag + Auto) ──
 var mat3dEl = document.getElementById('mat3d');
