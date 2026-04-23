@@ -1176,12 +1176,28 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   var qf=document.getElementById('quoteFrame');
   if(!qf)return;
   qf.style.height='1700px';
+
+  // iframe 견적서 토스트를 홈페이지에 표시할 영역 생성
+  var quoteToast=document.createElement('div');
+  quoteToast.id='quoteToastHost';
+  quoteToast.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);background:#333;color:#fff;padding:14px 26px;border-radius:10px;font-size:14px;font-weight:500;z-index:9999;transition:transform 0.3s ease;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.15);pointer-events:none;max-width:90vw;overflow:hidden;text-overflow:ellipsis';
+  document.body.appendChild(quoteToast);
+  var quoteToastTimer=null;
+
   window.addEventListener('message',function(e){
     if(e.data&&e.data.type==='resize'&&e.data.height){
       qf.style.height=e.data.height+'px';
     } else if(e.data&&e.data.type==='scrollToQuote'){
       // iframe 내부 모달이 보이도록 견적서 섹션 상단으로 스크롤
       qf.scrollIntoView({behavior:'smooth',block:'start'});
+    } else if(e.data&&e.data.type==='quoteToast'&&e.data.message){
+      // iframe 견적서의 경고 메시지를 홈페이지 상단에 토스트로 표시
+      quoteToast.textContent=e.data.message;
+      quoteToast.style.transform='translateX(-50%) translateY(0)';
+      if(quoteToastTimer)clearTimeout(quoteToastTimer);
+      quoteToastTimer=setTimeout(function(){
+        quoteToast.style.transform='translateX(-50%) translateY(-120px)';
+      },2800);
     }
   });
 })();
