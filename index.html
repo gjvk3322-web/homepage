@@ -104,38 +104,37 @@ a{text-decoration:none;color:inherit}
 .scroll-hint{animation:scrollBounce 2s ease-in-out infinite;opacity:0.35}
 
 /* ═══ APPLE STYLE TOP BAR (2026-04-24 미니멀 네비) ═══ */
-.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background 0.3s ease}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,0.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background 0.3s ease}
 .top-bar.scrolled{background:rgba(10,10,10,0.88)}
-.top-bar .logo-link{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:6px}
-.top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:background 0.2s}
+.top-bar .logo-link{font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:6px}
+.top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:5px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;transition:background 0.2s}
 .top-bar .menu-btn:hover{background:rgba(255,255,255,0.1)}
-.top-bar .menu-btn svg{width:22px;height:22px;display:block}
+.top-bar .menu-btn svg{width:20px;height:20px;display:block}
 
 /* ═══ MENU OVERLAY (뒷배경) ═══ */
-.menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;background:rgba(0,0,0,0.4);opacity:0;visibility:hidden;transition:all 0.3s}
+.menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;background:rgba(0,0,0,0.25);opacity:0;visibility:hidden;transition:opacity 0.25s ease}
 .menu-overlay.open{opacity:1;visibility:visible}
 
-/* ═══ MENU PANEL (슬라이드 패널) ═══ */
-.menu-panel{position:fixed;top:0;right:0;bottom:0;width:85%;max-width:380px;background:#fff;z-index:1100;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,0.15)}
-.menu-panel.open{transform:translateX(0)}
-.menu-header{padding:22px 22px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06)}
-.menu-header .menu-title{font-size:17px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em}
-.menu-header .close-btn{background:none;border:none;cursor:pointer;padding:6px;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s;width:36px;height:36px}
+/* ═══ MENU PANEL (드롭다운 카드 스타일 — 2026-04-24 미니멀) ═══ */
+.menu-panel{position:fixed;top:50px;right:10px;left:auto;bottom:auto;width:calc(100% - 20px);max-width:280px;max-height:calc(100vh - 70px);background:#fff;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.04);transform:translateY(-6px) scale(0.97);transform-origin:top right;opacity:0;visibility:hidden;transition:all 0.26s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;z-index:1100;overflow:hidden}
+.menu-panel.open{transform:translateY(0) scale(1);opacity:1;visibility:visible}
+
+.menu-header{padding:10px 16px 8px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.05)}
+.menu-header .menu-title{font-size:10px;font-weight:700;color:#aaa;letter-spacing:0.1em;text-transform:uppercase}
+.menu-header .close-btn{background:none;border:none;cursor:pointer;padding:3px;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s;width:24px;height:24px}
 .menu-header .close-btn:hover{background:rgba(0,0,0,0.05)}
 
-.menu-list{flex:1;overflow-y:auto;padding:8px 0;-webkit-overflow-scrolling:touch}
+.menu-list{flex:1;overflow-y:auto;padding:4px 0 6px;-webkit-overflow-scrolling:touch}
 .menu-list::-webkit-scrollbar{display:none}
-.menu-list a{display:flex;align-items:center;gap:14px;padding:14px 22px;color:#1a1a1a;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.15s;border:none;background:none;width:100%;text-align:left;font-family:inherit;cursor:pointer;letter-spacing:-0.01em}
+.menu-list a{display:flex;align-items:center;padding:10px 16px;color:#1a1a1a;text-decoration:none;font-size:14px;font-weight:500;transition:background 0.15s;border:none;background:none;width:100%;text-align:left;font-family:inherit;cursor:pointer;letter-spacing:-0.015em}
 .menu-list a:hover,.menu-list a:active{background:rgba(0,0,0,0.04)}
-.menu-list a .menu-icon{font-size:18px;width:26px;flex-shrink:0;text-align:center}
-.menu-list a .arrow{margin-left:auto;font-size:14px;color:#c0c0c0}
-.menu-divider{height:1px;background:rgba(0,0,0,0.06);margin:10px 20px}
-.menu-section-label{padding:14px 22px 6px;font-size:10px;font-weight:700;color:#999;letter-spacing:0.08em;text-transform:uppercase}
+.menu-divider{height:1px;background:rgba(0,0,0,0.06);margin:5px 16px}
+.menu-section-label{padding:8px 16px 3px;font-size:10px;font-weight:700;color:#b8b8b8;letter-spacing:0.08em;text-transform:uppercase}
 
-.menu-footer{padding:16px 20px 24px;padding-bottom:max(24px,env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,0.06)}
-.menu-footer .kakao-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#FEE500;color:#3C1E1E;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;width:100%;box-sizing:border-box;transition:background 0.2s}
+.menu-footer{padding:8px 12px 12px;border-top:1px solid rgba(0,0,0,0.05)}
+.menu-footer .kakao-cta{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 14px;background:#FEE500;color:#3C1E1E;border-radius:11px;font-size:13.5px;font-weight:700;text-decoration:none;width:100%;box-sizing:border-box;transition:background 0.2s}
 .menu-footer .kakao-cta:hover{background:#FDD800}
-.menu-footer .phone-link{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;color:#666;font-size:13px;text-decoration:none;margin-top:8px}
+.menu-footer .phone-link{display:flex;align-items:center;justify-content:center;gap:5px;padding:6px;color:#999;font-size:11px;text-decoration:none;margin-top:2px}
 
 body.menu-open{overflow:hidden}
 
@@ -144,6 +143,11 @@ body.mode-baby .menu-list a .for-pet{display:none}
 body.mode-baby .menu-list a .for-baby{display:inline}
 body.mode-pet .menu-list a .for-baby{display:none}
 body.mode-pet .menu-list a .for-pet{display:inline}
+
+/* 데스크톱에서 더 컴팩트하게 */
+@media (min-width:768px){
+  .menu-panel{top:54px;right:14px;max-width:260px}
+}
 
 /* ═══ HERO ═══ */
 .hero{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden;max-width:100vw;display:flex;align-items:flex-end;-webkit-transform:translateZ(0);transform:translateZ(0)}
@@ -518,34 +522,30 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 <!-- 슬라이드 패널 -->
 <aside class="menu-panel" id="menuPanel" aria-hidden="true">
   <div class="menu-header">
-    <span class="menu-title">돌봄매트</span>
+    <span class="menu-title">Menu</span>
     <button class="close-btn" onclick="toggleMenu()" aria-label="메뉴 닫기">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
     </button>
   </div>
 
   <nav class="menu-list">
-    <a href="#pricingSection" onclick="closeMenu()"><span class="menu-icon">💰</span><span>가격 공개</span><span class="arrow">›</span></a>
+    <a href="#pricingSection" onclick="closeMenu()">가격 공개</a>
     <a href="#keyFeaturesSection" onclick="closeMenu()">
-      <span class="menu-icon">⭐</span>
-      <span>
-        <span class="for-baby">우리 아이를 위한 핵심</span><span class="for-pet">반려견을 위한 핵심</span>
-      </span>
-      <span class="arrow">›</span>
+      <span class="for-baby">우리 아이를 위한 핵심</span><span class="for-pet">반려견을 위한 핵심</span>
     </a>
-    <a href="#comparisonSection" onclick="closeMenu()"><span class="menu-icon">🔍</span><span>같은 매트가 아닙니다</span><span class="arrow">›</span></a>
-    <a href="#reviewSection" onclick="closeMenu()"><span class="menu-icon">💬</span><span>실제 시공 후기</span><span class="arrow">›</span></a>
-    <a href="#calcSection" onclick="closeMenu()"><span class="menu-icon">🏠</span><span>우리 집 맞춤 견적</span><span class="arrow">›</span></a>
-    <a href="#faqSection" onclick="closeMenu()"><span class="menu-icon">❓</span><span>자주 묻는 질문</span><span class="arrow">›</span></a>
+    <a href="#comparisonSection" onclick="closeMenu()">같은 매트가 아닙니다</a>
+    <a href="#reviewSection" onclick="closeMenu()">실제 시공 후기</a>
+    <a href="#calcSection" onclick="closeMenu()">우리 집 맞춤 견적</a>
+    <a href="#faqSection" onclick="closeMenu()">자주 묻는 질문</a>
 
     <div class="menu-divider"></div>
     <div class="menu-section-label">상세 페이지</div>
 
-    <a href="baby-mat.html"><span class="menu-icon">👶</span><span>유아매트 상세</span><span class="arrow">›</span></a>
-    <a href="dog-mat.html"><span class="menu-icon">🐶</span><span>애견매트 상세</span><span class="arrow">›</span></a>
-    <a href="cases.html"><span class="menu-icon">📍</span><span>시공사례 (6,700곳)</span><span class="arrow">›</span></a>
-    <a href="event.html"><span class="menu-icon">🎁</span><span>이벤트·할인</span><span class="arrow">›</span></a>
-    <a href="https://my.dolbommat.com/sample.html"><span class="menu-icon">📦</span><span>무료 샘플 신청</span><span class="arrow">›</span></a>
+    <a href="baby-mat.html">유아매트 상세</a>
+    <a href="dog-mat.html">애견매트 상세</a>
+    <a href="cases.html">시공사례 (6,700곳)</a>
+    <a href="event.html">이벤트·할인</a>
+    <a href="https://my.dolbommat.com/sample.html">무료 샘플 신청</a>
   </nav>
 
   <div class="menu-footer">
