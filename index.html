@@ -104,19 +104,19 @@ a{text-decoration:none;color:inherit}
 .scroll-hint{animation:scrollBounce 2s ease-in-out infinite;opacity:0.35}
 
 /* ═══ APPLE STYLE TOP BAR (2026-04-24 미니멀 네비) ═══ */
-.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,0.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background 0.3s ease}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:rgba(0,0,0,0.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background 0.3s ease}
 .top-bar.scrolled{background:rgba(10,10,10,0.88)}
-.top-bar .logo-link{font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:6px}
-.top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:5px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;transition:background 0.2s}
+.top-bar .logo-link{font-size:13px;font-weight:800;color:#fff;letter-spacing:0.12em;text-decoration:none;display:flex;align-items:center;gap:6px}
+.top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;transition:background 0.2s}
 .top-bar .menu-btn:hover{background:rgba(255,255,255,0.1)}
-.top-bar .menu-btn svg{width:20px;height:20px;display:block}
+.top-bar .menu-btn svg{width:18px;height:18px;display:block}
 
 /* ═══ MENU OVERLAY (뒷배경) ═══ */
 .menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;background:rgba(0,0,0,0.25);opacity:0;visibility:hidden;transition:opacity 0.25s ease}
 .menu-overlay.open{opacity:1;visibility:visible}
 
 /* ═══ MENU PANEL (드롭다운 카드 스타일 — 2026-04-24 미니멀) ═══ */
-.menu-panel{position:fixed;top:50px;right:10px;left:auto;bottom:auto;width:calc(100% - 20px);max-width:280px;max-height:calc(100vh - 70px);background:#fff;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.04);transform:translateY(-6px) scale(0.97);transform-origin:top right;opacity:0;visibility:hidden;transition:all 0.26s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;z-index:1100;overflow:hidden}
+.menu-panel{position:fixed;top:46px;right:10px;left:auto;bottom:auto;width:calc(100% - 20px);max-width:280px;max-height:calc(100vh - 65px);background:#fff;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.04);transform:translateY(-6px) scale(0.97);transform-origin:top right;opacity:0;visibility:hidden;transition:all 0.26s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;z-index:1100;overflow:hidden}
 .menu-panel.open{transform:translateY(0) scale(1);opacity:1;visibility:visible}
 
 .menu-header{padding:10px 16px 8px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.05)}
@@ -146,7 +146,7 @@ body.mode-pet .menu-list a .for-pet{display:inline}
 
 /* 데스크톱에서 더 컴팩트하게 */
 @media (min-width:768px){
-  .menu-panel{top:54px;right:14px;max-width:260px}
+  .menu-panel{top:48px;right:14px;max-width:260px}
 }
 
 /* ═══ HERO ═══ */
@@ -510,7 +510,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
      미니멀 로고 + 햄버거 메뉴
 ═══════════════════════════════════════ -->
 <header class="top-bar" id="topBar">
-  <a href="index.html" class="logo-link">돌봄매트</a>
+  <a href="index.html" class="logo-link">DOLBOMMAT</a>
   <button class="menu-btn" onclick="toggleMenu()" aria-label="메뉴 열기" id="menuBtn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
   </button>
@@ -530,12 +530,10 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 
   <nav class="menu-list">
     <a href="#pricingSection" onclick="closeMenu()">가격 공개</a>
-    <a href="#keyFeaturesSection" onclick="closeMenu()">
-      <span class="for-baby">우리 아이를 위한 핵심</span><span class="for-pet">반려견을 위한 핵심</span>
-    </a>
-    <a href="#comparisonSection" onclick="closeMenu()">같은 매트가 아닙니다</a>
-    <a href="#reviewSection" onclick="closeMenu()">실제 시공 후기</a>
-    <a href="#calcSection" onclick="closeMenu()">우리 집 맞춤 견적</a>
+    <a href="#keyFeaturesSection" onclick="closeMenu()">제품 소개</a>
+    <a href="#comparisonSection" onclick="closeMenu()">차별화</a>
+    <a href="#reviewSection" onclick="closeMenu()">시공후기</a>
+    <a href="#calcSection" onclick="closeMenu()">맞춤견적</a>
     <a href="#faqSection" onclick="closeMenu()">자주 묻는 질문</a>
 
     <div class="menu-divider"></div>
