@@ -38,6 +38,23 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="style.css">
 
+<!-- 캐러셀 전용 CSS (index.html에서 가져옴 - 가로 스와이프) -->
+<style>
+.carousel-wrap{overflow-x:auto;max-width:100vw;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;overscroll-behavior-y:auto;-webkit-transform:translateZ(0);transform:translateZ(0);scrollbar-width:none}
+.carousel-wrap::-webkit-scrollbar{display:none}
+.carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:22px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);-webkit-transform:translateZ(0);transform:translateZ(0);transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);position:relative}
+.carousel-card:active{transform:scale(0.98)}
+.carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0);pointer-events:none;-webkit-user-drag:none;user-select:none}
+.carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:50px;padding:6px 14px;font-size:10.5px;font-weight:700;color:#fff;letter-spacing:0.02em}
+.carousel-card .card-body{padding:22px 20px 28px}
+.carousel-card .tag{font-size:10.5px;font-weight:680;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.carousel-card .card-title{font-size:19px;font-weight:750;letter-spacing:-0.025em;line-height:1.3;margin-bottom:10px;color:#fff;white-space:pre-line}
+.carousel-card .card-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.65}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.15);transition:all 0.4s cubic-bezier(0.22,1,0.36,1)}
+.dot.active{width:24px;background:rgba(255,255,255,0.9)}
+</style>
+
 <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
 
 <!-- 1. Product -->
@@ -135,104 +152,6 @@
     <h3 style="font-size:clamp(26px,6.5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15">뛰어놀아도,<br>넘어져도 안심.</h3>
   </div>
 </div>
-
-<!-- 제품 장점 -->
-<section class="section section-warm">
-  <div class="section-center">
-    <p class="section-label fade-up text-center" style="color:var(--blue)">Key Features</p>
-    <h2 class="section-title text-center fade-up mb-48">아이를 위한<br><span class="text-muted">다섯 가지 약속.</span></h2>
-
-    <div class="grid-1" style="gap:16px">
-      <div class="card fade-up">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">🔇</p>
-          <p style="font-size:clamp(36px,9vw,52px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px">62%</p>
-          <p class="card-tag">층간소음 저감</p>
-          <p class="card-desc">KCL 국가 공인 기관 테스트 인증.<br>아래층 걱정 없이 뛰어놀 수 있습니다.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-1">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">🛡</p>
-          <p style="font-size:clamp(36px,9vw,52px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px">0.75+</p>
-          <p class="card-tag" style="color:var(--green)">미끄럼 방지</p>
-          <p class="card-desc">마찰계수 최고 등급 달성.<br>물에 젖어도 미끄러지지 않습니다.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-2">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">🧸</p>
-          <p style="font-size:clamp(36px,9vw,52px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px">67%</p>
-          <p class="card-tag" style="color:var(--red)">충격 흡수</p>
-          <p class="card-desc">TPU 젖병 소재 적용.<br>아이가 넘어져도 충격을 흡수합니다.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-3">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">💨</p>
-          <p style="font-size:clamp(36px,9vw,52px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px">360°</p>
-          <p class="card-tag" style="color:var(--blue)">공기순환 케어</p>
-          <p class="card-desc">특허 등록 에어홀 구조.<br>곰팡이·변색 걱정 제로.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-4">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">✨</p>
-          <p style="font-size:clamp(36px,9vw,52px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px">100%</p>
-          <p class="card-tag" style="color:#ec4899">간편 세척</p>
-          <p class="card-desc">물걸레 한 번이면 끝.<br>양념·음료 오염도 깨끗하게.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 제품 구조 -->
-<section class="section">
-  <div class="section-center">
-    <p class="section-label fade-up text-center" style="color:var(--accent)">Product Detail</p>
-    <h2 class="section-title text-center fade-up mb-36">22mm에 담긴<br><span class="text-muted">돌봄의 기술력.</span></h2>
-
-    <div class="scale-in mb-16"><img loading="lazy" src="img/mat-structure.jpg" alt="매트 구조" style="border-radius:24px;width:100%"></div>
-    <p class="fade-up text-center mb-36" style="font-size:15px;color:var(--soft);line-height:1.6">
-      간편하게 들어올려 세척 가능한 구조.<br>공기순환 에어홀이 뒷면에 설계되어 있습니다.
-    </p>
-
-    <div class="scale-in mb-16"><img loading="lazy" src="img/mat-sizes.jpg" alt="매트 사이즈" style="border-radius:24px;width:100%"></div>
-    <p class="fade-up text-center mb-36" style="font-size:15px;color:var(--soft);line-height:1.6">
-      500mm · 600mm · <strong>1000mm</strong><br>세 가지 사이즈로 공간에 맞게 선택.
-    </p>
-
-    <div class="grid-2">
-      <div class="spec-card fade-up"><div class="bar" style="background:#8b5cf6"></div><p class="label">소재</p><p class="value">TPU</p><p class="sub">젖병 동일 소재</p></div>
-      <div class="spec-card fade-up delay-1"><div class="bar" style="background:#f59e0b"></div><p class="label">두께</p><p class="value">22mm</p><p class="sub">최적 설계</p></div>
-      <div class="spec-card fade-up delay-2"><div class="bar" style="background:var(--green)"></div><p class="label">유해물질</p><p class="value">ZERO</p><p class="sub">유럽 CE 인증</p></div>
-      <div class="spec-card fade-up delay-3"><div class="bar" style="background:var(--blue)"></div><p class="label">내구연한</p><p class="value">5년+</p><p class="sub">아이와 함께 성장</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 색상 -->
-<section class="section section-warm">
-  <div class="section-center text-center">
-    <p class="section-label fade-up" style="color:var(--accent)">Colors</p>
-    <h2 class="section-title fade-up mb-36">인테리어에 맞게<br><span class="text-muted">컬러를 선택하세요.</span></h2>
-    <div class="grid-2 fade-up">
-      <div style="background:#e8e5df;border-radius:20px;padding:40px 16px;text-align:center">
-        <div style="width:60px;height:60px;border-radius:50%;background:#d4d0ca;margin:0 auto 12px;border:2px solid rgba(0,0,0,0.06)"></div>
-        <p style="font-size:15px;font-weight:700">모던화이트</p>
-        <p style="font-size:12px;color:var(--muted);margin-top:4px">가장 인기</p>
-      </div>
-      <div style="background:#e2ddd6;border-radius:20px;padding:40px 16px;text-align:center">
-        <div style="width:60px;height:60px;border-radius:50%;background:#c8bfb3;margin:0 auto 12px;border:2px solid rgba(0,0,0,0.06)"></div>
-        <p style="font-size:15px;font-weight:700">내추럴우드</p>
-        <p style="font-size:12px;color:var(--muted);margin-top:4px">따뜻한 톤</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 
      "일단 핵심부터." 캐러셀
 ═══════════════════════════════════════ -->

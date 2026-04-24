@@ -38,6 +38,23 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="style.css">
 
+<!-- 캐러셀 전용 CSS (index.html에서 가져옴 - 가로 스와이프) -->
+<style>
+.carousel-wrap{overflow-x:auto;max-width:100vw;scroll-snap-type:x mandatory;display:flex;gap:14px;padding:0 20px 16px;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain;overscroll-behavior-y:auto;-webkit-transform:translateZ(0);transform:translateZ(0);scrollbar-width:none}
+.carousel-wrap::-webkit-scrollbar{display:none}
+.carousel-card{flex:0 0 82%;max-width:340px;scroll-snap-align:center;border-radius:22px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);-webkit-transform:translateZ(0);transform:translateZ(0);transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);position:relative}
+.carousel-card:active{transform:scale(0.98)}
+.carousel-card img{width:100%;height:240px;object-fit:cover;-webkit-transform:translateZ(0);transform:translateZ(0);pointer-events:none;-webkit-user-drag:none;user-select:none}
+.carousel-card .badge{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:50px;padding:6px 14px;font-size:10.5px;font-weight:700;color:#fff;letter-spacing:0.02em}
+.carousel-card .card-body{padding:22px 20px 28px}
+.carousel-card .tag{font-size:10.5px;font-weight:680;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.carousel-card .card-title{font-size:19px;font-weight:750;letter-spacing:-0.025em;line-height:1.3;margin-bottom:10px;color:#fff;white-space:pre-line}
+.carousel-card .card-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.65}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.15);transition:all 0.4s cubic-bezier(0.22,1,0.36,1)}
+.dot.active{width:24px;background:rgba(255,255,255,0.9)}
+</style>
+
 <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
 
 <!-- 1. Product -->
@@ -128,68 +145,6 @@
     <h3 style="font-size:clamp(26px,6.5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15">우리 댕댕이도<br>안전하게.</h3>
   </div>
 </div>
-
-<!-- 핵심 메시지 -->
-<section class="section">
-  <div class="section-center text-center">
-    <p class="fade-up" style="font-size:clamp(22px,5.5vw,30px);font-weight:700;line-height:1.55;letter-spacing:-0.02em">
-      반려동물이 뛰어다닐 때<br>미끄러지지 않는 바닥.
-      <span style="color:var(--muted)"><br>관절 건강을 지켜주는 돌봄매트.</span>
-    </p>
-  </div>
-</section>
-
-<!-- 장점 카드 -->
-<section class="section section-warm">
-  <div class="section-center">
-    <p class="section-label fade-up text-center" style="color:var(--green)">Why Dolbom Pet Mat</p>
-    <h2 class="section-title text-center fade-up mb-48">댕댕이를 위한<br><span class="text-muted">세 가지 약속.</span></h2>
-
-    <div class="grid-1" style="gap:16px">
-      <div class="card fade-up">
-        <img loading="lazy" src="img/dog-sofa.jpg" alt="소파 앞 강아지">
-        <div class="card-body" style="text-align:center">
-          <p class="card-tag" style="color:var(--green)">미끄럼 방지</p>
-          <p class="card-title">강화 논슬립 코팅</p>
-          <p class="card-desc">반려동물이 뛰어다녀도 미끄러지지 않아<br>슬개골 탈구 등 관절 질환을 예방합니다.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-1">
-        <img loading="lazy" src="img/dog-sit.jpg" alt="앉아있는 강아지">
-        <div class="card-body" style="text-align:center">
-          <p class="card-tag" style="color:var(--blue)">스크래치 방지</p>
-          <p class="card-title">발톱에도 끄떡없는 내구성</p>
-          <p class="card-desc">강화된 표면 코팅으로<br>반려동물 발톱 스크래치에도 깨끗합니다.</p>
-        </div>
-      </div>
-      <div class="card fade-up delay-2">
-        <div style="padding:32px 24px;text-align:center">
-          <p style="font-size:40px;margin-bottom:16px">✨</p>
-          <p class="card-tag" style="color:#ec4899">간편 세척</p>
-          <p class="card-title">배변 사고도 걱정 없이</p>
-          <p class="card-desc">방수 처리된 표면으로<br>물걸레 한 번이면 깨끗하게 세척됩니다.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 스펙 -->
-<section class="section">
-  <div class="section-center">
-    <p class="section-label fade-up text-center" style="color:var(--accent)">Specs</p>
-    <h2 class="section-title text-center fade-up mb-36">반려동물에 최적화된<br><span class="text-muted">기술 스펙.</span></h2>
-
-    <div class="grid-2">
-      <div class="spec-card fade-up"><div class="bar" style="background:var(--green)"></div><p class="label">표면 코팅</p><p class="value">3중</p><p class="sub">논슬립·방오·흡수</p></div>
-      <div class="spec-card fade-up delay-1"><div class="bar" style="background:#8b5cf6"></div><p class="label">소재</p><p class="value">TPU</p><p class="sub">안전 소재</p></div>
-      <div class="spec-card fade-up delay-2"><div class="bar" style="background:var(--blue)"></div><p class="label">층간소음</p><p class="value">62%</p><p class="sub">저감</p></div>
-      <div class="spec-card fade-up delay-3"><div class="bar" style="background:var(--gold)"></div><p class="label">내구성</p><p class="value">5년+</p><p class="sub">스크래치 방지</p></div>
-    </div>
-  </div>
-</section>
-
-
 
      "일단 핵심부터." 캐러셀
 ═══════════════════════════════════════ -->
