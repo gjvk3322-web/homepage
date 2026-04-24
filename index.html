@@ -103,20 +103,47 @@ a{text-decoration:none;color:inherit}
 .hero-d1{animation-delay:0.3s}.hero-d2{animation-delay:0.5s}.hero-d3{animation-delay:0.7s}.hero-d4{animation-delay:0.9s}.hero-d5{animation-delay:1.3s}
 .scroll-hint{animation:scrollBounce 2s ease-in-out infinite;opacity:0.35}
 
-/* ═══ GNB — 2026-04-24 복원: 멀티페이지 네비게이션 ═══ */
-.gnb{position:fixed;top:0;left:0;right:0;z-index:110;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 20px;text-align:center;font-size:13px;color:var(--light);contain:layout style}
-.gnb .gold{color:var(--gold);font-weight:700}
-.gnb .link{color:#4FA8FF;font-weight:600;cursor:pointer}
+/* ═══ APPLE STYLE TOP BAR (2026-04-24 미니멀 네비) ═══ */
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background 0.3s ease}
+.top-bar.scrolled{background:rgba(10,10,10,0.88)}
+.top-bar .logo-link{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:6px}
+.top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:background 0.2s}
+.top-bar .menu-btn:hover{background:rgba(255,255,255,0.1)}
+.top-bar .menu-btn svg{width:22px;height:22px;display:block}
 
-/* ═══ STICKY NAV — 2026-04-24 복원: 멀티페이지 네비게이션 ═══ */
-.site-nav{position:fixed;top:38px;left:0;right:0;z-index:105;background:rgba(250,250,247,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;will-change:transform}
-.site-nav .brand{font-size:16px;font-weight:750;letter-spacing:-0.02em;white-space:nowrap;color:var(--text)}
-.site-nav .nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px 0}
-.site-nav .nav-links::-webkit-scrollbar{display:none}
-.site-nav .nav-links a{font-size:13px;font-weight:500;color:var(--muted);padding:8px 12px;border-radius:980px;white-space:nowrap;transition:all 0.25s}
-.site-nav .nav-links a:hover,.site-nav .nav-links a.active{color:var(--text);background:rgba(0,0,0,0.05)}
-.nav-cta{background:#4FA8FF;border:none;border-radius:980px;padding:7px 14px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;flex-shrink:0;cursor:pointer;font-family:inherit;transition:all 0.25s}
-.nav-cta:hover{background:#3d96ed}
+/* ═══ MENU OVERLAY (뒷배경) ═══ */
+.menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;background:rgba(0,0,0,0.4);opacity:0;visibility:hidden;transition:all 0.3s}
+.menu-overlay.open{opacity:1;visibility:visible}
+
+/* ═══ MENU PANEL (슬라이드 패널) ═══ */
+.menu-panel{position:fixed;top:0;right:0;bottom:0;width:85%;max-width:380px;background:#fff;z-index:1100;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,0.15)}
+.menu-panel.open{transform:translateX(0)}
+.menu-header{padding:22px 22px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06)}
+.menu-header .menu-title{font-size:17px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em}
+.menu-header .close-btn{background:none;border:none;cursor:pointer;padding:6px;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s;width:36px;height:36px}
+.menu-header .close-btn:hover{background:rgba(0,0,0,0.05)}
+
+.menu-list{flex:1;overflow-y:auto;padding:8px 0;-webkit-overflow-scrolling:touch}
+.menu-list::-webkit-scrollbar{display:none}
+.menu-list a{display:flex;align-items:center;gap:14px;padding:14px 22px;color:#1a1a1a;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.15s;border:none;background:none;width:100%;text-align:left;font-family:inherit;cursor:pointer;letter-spacing:-0.01em}
+.menu-list a:hover,.menu-list a:active{background:rgba(0,0,0,0.04)}
+.menu-list a .menu-icon{font-size:18px;width:26px;flex-shrink:0;text-align:center}
+.menu-list a .arrow{margin-left:auto;font-size:14px;color:#c0c0c0}
+.menu-divider{height:1px;background:rgba(0,0,0,0.06);margin:10px 20px}
+.menu-section-label{padding:14px 22px 6px;font-size:10px;font-weight:700;color:#999;letter-spacing:0.08em;text-transform:uppercase}
+
+.menu-footer{padding:16px 20px 24px;padding-bottom:max(24px,env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,0.06)}
+.menu-footer .kakao-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#FEE500;color:#3C1E1E;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;width:100%;box-sizing:border-box;transition:background 0.2s}
+.menu-footer .kakao-cta:hover{background:#FDD800}
+.menu-footer .phone-link{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;color:#666;font-size:13px;text-decoration:none;margin-top:8px}
+
+body.menu-open{overflow:hidden}
+
+/* 페르소나 모드별 메뉴 라벨 토글 */
+body.mode-baby .menu-list a .for-pet{display:none}
+body.mode-baby .menu-list a .for-baby{display:inline}
+body.mode-pet .menu-list a .for-baby{display:none}
+body.mode-pet .menu-list a .for-pet{display:inline}
 
 /* ═══ HERO ═══ */
 .hero{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden;max-width:100vw;display:flex;align-items:flex-end;-webkit-transform:translateZ(0);transform:translateZ(0)}
@@ -475,26 +502,59 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 <body>
 
 <!-- ═══════════════════════════════════════
-     GNB (상단 안내 바)
-     2026-04-24 복원: 멀티페이지 구조 전환
+     APPLE STYLE TOP BAR (2026-04-24)
+     미니멀 로고 + 햄버거 메뉴
 ═══════════════════════════════════════ -->
-<div class="gnb">
-  <span style="opacity:0.7">누구나 </span><span class="gold">온누리상품권 7% 할인</span><span style="opacity:0.7"> 가능 </span><a href="event.html" style="text-decoration:none"><span class="link">더 알아보기 &gt;</span></a>
-</div>
+<header class="top-bar" id="topBar">
+  <a href="index.html" class="logo-link">돌봄매트</a>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="메뉴 열기" id="menuBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</header>
 
-<!-- ═══════════════════════════════════════
-     메인 네비게이션
-═══════════════════════════════════════ -->
-<nav class="site-nav">
-  <a href="index.html" class="brand">돌봄매트</a>
-  <div class="nav-links">
-    <a href="baby-mat.html">유아매트</a>
-    <a href="dog-mat.html">애견매트</a>
-    <a href="cases.html">시공사례</a>
-    <a href="event.html">이벤트</a>
+<!-- 오버레이 (배경 어둡게) -->
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+<!-- 슬라이드 패널 -->
+<aside class="menu-panel" id="menuPanel" aria-hidden="true">
+  <div class="menu-header">
+    <span class="menu-title">돌봄매트</span>
+    <button class="close-btn" onclick="toggleMenu()" aria-label="메뉴 닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>
   </div>
-  <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank"><button class="nav-cta">카톡상담</button></a>
-</nav>
+
+  <nav class="menu-list">
+    <a href="#pricingSection" onclick="closeMenu()"><span class="menu-icon">💰</span><span>가격 공개</span><span class="arrow">›</span></a>
+    <a href="#keyFeaturesSection" onclick="closeMenu()">
+      <span class="menu-icon">⭐</span>
+      <span>
+        <span class="for-baby">우리 아이를 위한 핵심</span><span class="for-pet">반려견을 위한 핵심</span>
+      </span>
+      <span class="arrow">›</span>
+    </a>
+    <a href="#comparisonSection" onclick="closeMenu()"><span class="menu-icon">🔍</span><span>같은 매트가 아닙니다</span><span class="arrow">›</span></a>
+    <a href="#reviewSection" onclick="closeMenu()"><span class="menu-icon">💬</span><span>실제 시공 후기</span><span class="arrow">›</span></a>
+    <a href="#calcSection" onclick="closeMenu()"><span class="menu-icon">🏠</span><span>우리 집 맞춤 견적</span><span class="arrow">›</span></a>
+    <a href="#faqSection" onclick="closeMenu()"><span class="menu-icon">❓</span><span>자주 묻는 질문</span><span class="arrow">›</span></a>
+
+    <div class="menu-divider"></div>
+    <div class="menu-section-label">상세 페이지</div>
+
+    <a href="baby-mat.html"><span class="menu-icon">👶</span><span>유아매트 상세</span><span class="arrow">›</span></a>
+    <a href="dog-mat.html"><span class="menu-icon">🐶</span><span>애견매트 상세</span><span class="arrow">›</span></a>
+    <a href="cases.html"><span class="menu-icon">📍</span><span>시공사례 (6,700곳)</span><span class="arrow">›</span></a>
+    <a href="event.html"><span class="menu-icon">🎁</span><span>이벤트·할인</span><span class="arrow">›</span></a>
+    <a href="https://my.dolbommat.com/sample.html"><span class="menu-icon">📦</span><span>무료 샘플 신청</span><span class="arrow">›</span></a>
+  </nav>
+
+  <div class="menu-footer">
+    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" class="kakao-cta">
+      💬 카카오톡 상담하기
+    </a>
+    <a href="tel:0507-1345-4146" class="phone-link">📞 0507-1345-4146</a>
+  </div>
+</aside>
 
 <!-- ═══ INTRO SELECTOR REMOVED ═══
      페르소나 선택 오버레이는 이탈률 유발 요소로 제거.
@@ -747,7 +807,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
 <!-- ═══════════════════════════════════════
      "일단 핵심부터." 캐러셀
 ═══════════════════════════════════════ -->
-<section class="section section-dark" style="padding-bottom:72px">
+<section id="keyFeaturesSection" class="section section-dark" style="padding-bottom:72px">
   <div style="padding:0 24px" class="fade-up">
     <h2 class="section-title" style="margin-bottom:10px">
       <span class="for-baby">우리 아이를 위한 핵심.</span>
@@ -971,7 +1031,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
 <!-- ═══════════════════════════════════════
      비교 테이블 (돌봄매트 vs 일반매트)
 ═══════════════════════════════════════ -->
-<section class="section section-dark">
+<section id="comparisonSection" class="section section-dark">
   <div class="section-center">
     <p class="section-label fade-up text-center" style="color:var(--accent)">Comparison</p>
     <h2 class="section-title text-center fade-up mb-12" style="color:#fff">같은 매트가<br><span style="color:var(--muted)">아닙니다.</span></h2>
@@ -1829,6 +1889,54 @@ function reorderReviews(mode) {
     }
   } catch(e) {}
   switchMode(mode);
+})();
+
+// ═══════════════════════════════════════
+// APPLE STYLE HAMBURGER MENU (2026-04-24)
+// ═══════════════════════════════════════
+function toggleMenu() {
+  var overlay = document.getElementById('menuOverlay');
+  var panel = document.getElementById('menuPanel');
+  var isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    closeMenu();
+  } else {
+    overlay.classList.add('open');
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+  }
+}
+function closeMenu() {
+  var overlay = document.getElementById('menuOverlay');
+  var panel = document.getElementById('menuPanel');
+  overlay.classList.remove('open');
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('menu-open');
+}
+// ESC 키로 메뉴 닫기
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.keyCode === 27) {
+    var panel = document.getElementById('menuPanel');
+    if (panel && panel.classList.contains('open')) closeMenu();
+  }
+});
+// 스크롤 시 탑바 배경 진해짐 (hero 벗어날 때)
+(function() {
+  var tb = document.getElementById('topBar');
+  if (!tb) return;
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        if (window.scrollY > 60) tb.classList.add('scrolled');
+        else tb.classList.remove('scrolled');
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 })();
 
 </script>
