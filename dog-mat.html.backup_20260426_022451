@@ -57,159 +57,58 @@
 
 <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
 
-<!-- 추적 스크립트 (모든 페이지 공통) -->
-<script src="tracking.js" defer></script>
-
-  <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
-
-  <!-- 1. Product (애견매트) -->
-  <script type="application/ld+json">
+<!-- 1. Product -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "@id": "https://www.dolbommat.com/dog-mat.html#product",
   "name": "돌봄매트 애견매트 (반려동물 전용)",
-  "description": "반려동물 미끄럼 방지 3중 논슬립 코팅, 슬개골 탈구 예방, 스크래치 방지 강화 코팅. TPU 안전 소재, 층간소음 62% 저감, 내구연한 5년 이상.",
-  "image": "https://www.dolbommat.com/og-image.jpg",
-  "brand": {
-    "@type": "Brand",
-    "name": "돌봄매트"
-  },
-  "category": [
-    "애견매트",
-    "반려동물매트",
-    "강아지매트",
-    "고양이매트",
-    "미끄럼방지매트",
-    "층간소음매트"
-  ],
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://www.dolbommat.com/#organization",
-    "name": "돌봄매트",
-    "alternateName": [
-      "DOLBOMMAT",
-      "돌봄"
-    ],
-    "url": "https://www.dolbommat.com/",
-    "logo": "https://www.dolbommat.com/logo.png",
-    "telephone": "+82-507-1345-4146",
-    "email": "dolbommat@naver.com",
-    "foundingDate": "2020-11-23",
-    "founder": {
-      "@type": "Person",
-      "name": "허민석"
-    },
-    "sameAs": [
-      "https://www.instagram.com/dolbomstore",
-      "https://blog.naver.com/dolbommatt1004",
-      "https://pf.kakao.com/_UMyBK"
-    ]
+  "description": "반려동물 미끄럼 방지 3중 논슬립 코팅, 슬개골 탈구 예방, 스크래치 방지 강화 코팅. TPU 안전 소재, 층간소음 62% 저감, 내구연한 5년+.",
+  "brand": { "@type": "Brand", "name": "돌봄매트" },
+  "category": "반려동물 용품 / 바닥재",
+  "image": "https://www.dolbommat.com/img/og-dog-mat.jpg",
+  "material": "TPU (Thermoplastic Polyurethane)",
+  "audience": {
+    "@type": "PeopleAudience",
+    "audienceType": "반려동물 보호자"
   },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "KRW",
     "lowPrice": "64500",
     "highPrice": "76500",
+    "offerCount": "2",
     "availability": "https://schema.org/InStock",
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "부산광역시"
-      },
-      {
-        "@type": "City",
-        "name": "울산광역시"
-      },
-      {
-        "@type": "City",
-        "name": "대구광역시"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "경상남도"
-      },
-      {
-        "@type": "City",
-        "name": "포항시"
-      },
-      {
-        "@type": "City",
-        "name": "경주시"
-      },
-      {
-        "@type": "City",
-        "name": "김천시"
-      },
-      {
-        "@type": "City",
-        "name": "구미시"
-      },
-      {
-        "@type": "City",
-        "name": "경산시"
-      },
-      {
-        "@type": "City",
-        "name": "영천시"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "경기도"
-      },
-      {
-        "@type": "City",
-        "name": "인천광역시"
-      },
-      {
-        "@type": "City",
-        "name": "서울특별시"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "충청남도"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "충청북도"
-      }
-    ],
-    "seller": {
-      "@id": "https://www.dolbommat.com/#organization"
-    }
+    "seller": { "@type": "Organization", "name": "돌봄매트" }
   },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "reviewCount": "6700",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
+    "reviewCount": "6700"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "표면 코팅", "value": "3중 (논슬립·방오·흡수)" },
+    { "@type": "PropertyValue", "name": "층간소음 저감", "value": "62%" },
+    { "@type": "PropertyValue", "name": "스크래치 방지", "value": "발톱 내구성 인증" },
+    { "@type": "PropertyValue", "name": "내구연한", "value": "5년 이상" }
+  ]
 }
-  </script>
+</script>
 
-  <!-- 2. BreadcrumbList -->
-  <script type="application/ld+json">
+<!-- 2. BreadcrumbList -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "홈",
-      "item": "https://www.dolbommat.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "애견매트",
-      "item": "https://www.dolbommat.com/dog-mat.html"
-    }
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.dolbommat.com/" },
+    { "@type": "ListItem", "position": 2, "name": "애견매트", "item": "https://www.dolbommat.com/dog-mat.html" }
   ]
 }
-  </script>
+</script>
 
+<!-- 추적 스크립트 (모든 페이지 공통) -->
+<script src="tracking.js" defer></script>
 </head>
 <body>
 
@@ -294,6 +193,8 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   </div>
   <div class="dots" id="dots1"></div>
 </section>
+
+
 
 <section id="comparisonSection" class="section section-dark">
   <div class="section-center">
@@ -386,6 +287,11 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
     </p>
   </div>
 </section>
+
+
+
+
+
 
 <section class="section" id="calcSection" style="padding:60px 0 80px">
   <div style="max-width:540px;margin:0 auto;padding:0 16px">
@@ -612,6 +518,8 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   });
 })();
 </script>
+
+
 
 <!-- CTA -->
 <section class="section section-dark" style="text-align:center;padding:80px 20px 120px">

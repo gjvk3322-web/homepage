@@ -40,13 +40,8 @@
 
 <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
 
-<!-- 추적 스크립트 (모든 페이지 공통) -->
-<script src="tracking.js" defer></script>
-
-  <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
-
-  <!-- 1. 온누리상품권 7% 할인 Offer -->
-  <script type="application/ld+json">
+<!-- 1. 온누리상품권 7% 할인 Offer -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Offer",
@@ -59,16 +54,14 @@
   },
   "discount": "7%",
   "availability": "https://schema.org/InStock",
-  "offeredBy": {
-    "@id": "https://www.dolbommat.com/#organization"
-  },
+  "offeredBy": { "@type": "Organization", "name": "돌봄매트" },
   "validFrom": "2026-01-01",
   "eligibleCustomerType": "https://schema.org/Enduser"
 }
-  </script>
+</script>
 
-  <!-- 2. 무료 샘플 이벤트 -->
-  <script type="application/ld+json">
+<!-- 2. 무료 샘플 이벤트 -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Offer",
@@ -78,116 +71,41 @@
   "price": "0",
   "priceCurrency": "KRW",
   "availability": "https://schema.org/InStock",
-  "offeredBy": {
-    "@id": "https://www.dolbommat.com/#organization"
-  }
+  "offeredBy": { "@type": "Organization", "name": "돌봄매트" }
 }
-  </script>
+</script>
 
-  <!-- 3. 무료 실측 서비스 (시공 가능 지역만 명시) -->
-  <script type="application/ld+json">
+<!-- 3. 무료 실측 서비스 -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "무료 실측 방문 서비스",
   "description": "전문가가 직접 방문하여 정확한 견적을 안내. 당일 시공 가능, 2년 A/S 보증.",
-  "provider": {
-    "@id": "https://www.dolbommat.com/#organization"
-  },
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "부산광역시"
-    },
-    {
-      "@type": "City",
-      "name": "울산광역시"
-    },
-    {
-      "@type": "City",
-      "name": "대구광역시"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "경상남도"
-    },
-    {
-      "@type": "City",
-      "name": "포항시"
-    },
-    {
-      "@type": "City",
-      "name": "경주시"
-    },
-    {
-      "@type": "City",
-      "name": "김천시"
-    },
-    {
-      "@type": "City",
-      "name": "구미시"
-    },
-    {
-      "@type": "City",
-      "name": "경산시"
-    },
-    {
-      "@type": "City",
-      "name": "영천시"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "경기도"
-    },
-    {
-      "@type": "City",
-      "name": "인천광역시"
-    },
-    {
-      "@type": "City",
-      "name": "서울특별시"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "충청남도"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "충청북도"
-    }
-  ],
-  "serviceType": "무료 실측 방문",
+  "provider": { "@type": "Organization", "name": "돌봄매트" },
+  "areaServed": { "@type": "Country", "name": "대한민국" },
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "KRW",
-    "description": "무료 방문 실측"
+    "priceCurrency": "KRW"
   }
 }
-  </script>
+</script>
 
-  <!-- 4. BreadcrumbList -->
-  <script type="application/ld+json">
+<!-- 4. BreadcrumbList -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "홈",
-      "item": "https://www.dolbommat.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "이벤트",
-      "item": "https://www.dolbommat.com/event.html"
-    }
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.dolbommat.com/" },
+    { "@type": "ListItem", "position": 2, "name": "이벤트", "item": "https://www.dolbommat.com/event.html" }
   ]
 }
-  </script>
+</script>
 
+<!-- 추적 스크립트 (모든 페이지 공통) -->
+<script src="tracking.js" defer></script>
 </head>
 <body>
 

@@ -6,12 +6,12 @@
        메인 홈 · 최우선
        ═══════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://www.dolbommat.com/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.dolbommat.com/og-image.jpg</image:loc>
+      <image:loc>https://dolbommat.com/og-image.jpg</image:loc>
       <image:title>돌봄매트 - 층간소음 62% 저감 프리미엄 TPU 매트</image:title>
       <image:caption>6,700가정이 선택한 돌봄매트</image:caption>
     </image:image>
@@ -21,15 +21,15 @@
        제품 페이지
        ═══════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://www.dolbommat.com/baby-mat.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/baby-mat.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.dolbommat.com/dog-mat.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/dog-mat.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -38,8 +38,8 @@
        시공사례
        ═══════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://www.dolbommat.com/cases.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/cases.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -48,8 +48,8 @@
        이벤트
        ═══════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://www.dolbommat.com/event.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/event.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -61,29 +61,29 @@
 
   <!--
   <url>
-    <loc>https://www.dolbommat.com/busan.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/busan.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.dolbommat.com/daegu.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/daegu.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.dolbommat.com/incheon.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/incheon.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.dolbommat.com/seoul.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://dolbommat.com/seoul.html</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

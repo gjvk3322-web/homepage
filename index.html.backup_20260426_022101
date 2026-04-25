@@ -286,6 +286,7 @@ footer{background:#111;padding:52px 20px 60px;text-align:center;color:var(--mute
   .carousel-wrap{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 }
 
+
 /* ═══ PERSONA SYSTEM (Intro Overlay Removed) ═══ */
 
 /* Mode toggle in hero */
@@ -323,110 +324,51 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
      📊 구조화 데이터 (JSON-LD) · 구글·네이버 검색 노출 최적화
      ═══════════════════════════════════════════════════════════════ -->
 
-<!-- ═══════════════════════════════════════════════════════════════
-     📊 통합 추적 시스템 (GA4 + Meta + Kakao + Naver + 이벤트 추적)
-     ⚠️ 모든 ID는 tracking.js 상단 CONFIG 객체에서 한 번에 관리
-     ═══════════════════════════════════════════════════════════════ -->
-<script src="tracking.js" defer></script>
-
-
-  <!-- ===== JSON-LD 구조화된 데이터 (SEO 강화) ===== -->
-  <!-- 1. LocalBusiness (부산본사) -->
-  <script type="application/ld+json">
+<!-- 1. LocalBusiness (지역 비즈니스) -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://www.dolbommat.com/#localbusiness-busan",
-  "name": "돌봄매트 부산본사",
-  "alternateName": [
-    "돌봄매트",
-    "DOLBOMMAT",
-    "돌봄"
-  ],
-  "description": "층간소음 62% 저감 프리미엄 TPU 매트 시공 전문업체. 6,700가정·국공립 어린이집 80곳·5성급 호텔 키즈룸 시공 완료.",
+  "@id": "https://www.dolbommat.com/#business",
+  "name": "돌봄매트",
+  "alternateName": "Dolbom Mat",
+  "description": "층간소음 62% 저감 프리미엄 TPU 매트 시공 전문업체. 6,700가정이 선택한 돌봄매트.",
   "url": "https://www.dolbommat.com/",
-  "logo": "https://www.dolbommat.com/logo.png",
-  "image": "https://www.dolbommat.com/og-image.jpg",
   "telephone": "+82-507-1345-4146",
-  "email": "dolbommat@naver.com",
   "priceRange": "₩₩",
-  "foundingDate": "2020-11-23",
-  "founder": {
-    "@type": "Person",
-    "name": "허민석"
-  },
+  "image": "https://www.dolbommat.com/og-image.jpg",
+  "logo": "https://www.dolbommat.com/logo.png",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "강변대로 570 부산건축자재판매단지 F동 11호",
-    "addressLocality": "사상구",
+    "addressCountry": "KR",
     "addressRegion": "부산광역시",
-    "addressCountry": "KR"
+    "addressLocality": "사상구",
+    "streetAddress": "엄궁 건축자재단지"
   },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59",
-      "description": "카카오톡 채널 24시간 응대"
-    }
-  ],
   "areaServed": [
-    {
-      "@type": "City",
-      "name": "부산광역시"
-    },
-    {
-      "@type": "City",
-      "name": "울산광역시"
-    },
-    {
-      "@type": "City",
-      "name": "대구광역시"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "경상남도"
-    },
-    {
-      "@type": "City",
-      "name": "포항시"
-    },
-    {
-      "@type": "City",
-      "name": "경주시"
-    },
-    {
-      "@type": "City",
-      "name": "김천시"
-    },
-    {
-      "@type": "City",
-      "name": "구미시"
-    },
-    {
-      "@type": "City",
-      "name": "경산시"
-    },
-    {
-      "@type": "City",
-      "name": "영천시"
-    }
+    {"@type": "State", "name": "서울특별시"},
+    {"@type": "State", "name": "부산광역시"},
+    {"@type": "State", "name": "인천광역시"},
+    {"@type": "State", "name": "대구광역시"},
+    {"@type": "State", "name": "대전광역시"},
+    {"@type": "State", "name": "광주광역시"},
+    {"@type": "State", "name": "울산광역시"},
+    {"@type": "State", "name": "경기도"},
+    {"@type": "State", "name": "강원도"},
+    {"@type": "State", "name": "충청남도"},
+    {"@type": "State", "name": "충청북도"},
+    {"@type": "State", "name": "전라남도"},
+    {"@type": "State", "name": "전라북도"},
+    {"@type": "State", "name": "경상남도"},
+    {"@type": "State", "name": "경상북도"},
+    {"@type": "State", "name": "제주특별자치도"}
   ],
-  "sameAs": [
-    "https://www.instagram.com/dolbomstore",
-    "https://blog.naver.com/dolbommatt1004",
-    "https://pf.kakao.com/_UMyBK",
-    "https://pf.kakao.com/_UMyBK/chat"
-  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
@@ -434,103 +376,17 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     "bestRating": "5",
     "worstRating": "1"
   },
-  "identifier": [
-    {
-      "@type": "PropertyValue",
-      "name": "사업자등록번호",
-      "value": "680-37-00893"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "통신판매업신고번호",
-      "value": "2021-부산강서구-0154"
-    }
+  "sameAs": [
+    "http://pf.kakao.com/_UMyBK"
   ]
 }
-  </script>
+</script>
 
-  <!-- 2. LocalBusiness (경기지점) -->
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.dolbommat.com/#localbusiness-gyeonggi",
-  "name": "돌봄매트 경기지점",
-  "alternateName": [
-    "돌봄매트 안산",
-    "돌봄매트 수도권"
-  ],
-  "description": "수도권 매트 시공 전문. 경기·인천·서울·충청 지역 직접 방문 시공.",
-  "url": "https://www.dolbommat.com/",
-  "logo": "https://www.dolbommat.com/logo.png",
-  "image": "https://www.dolbommat.com/og-image.jpg",
-  "telephone": "+82-507-1345-4146",
-  "email": "dolbommat@naver.com",
-  "priceRange": "₩₩",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "산단로 325 리드스마트스퀘어 F동 205호",
-    "addressLocality": "단원구",
-    "addressRegion": "경기도 안산시",
-    "addressCountry": "KR"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59",
-      "description": "카카오톡 채널 24시간 응대"
-    }
-  ],
-  "areaServed": [
-    {
-      "@type": "AdministrativeArea",
-      "name": "경기도"
-    },
-    {
-      "@type": "City",
-      "name": "인천광역시"
-    },
-    {
-      "@type": "City",
-      "name": "서울특별시"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "충청남도"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "충청북도"
-    }
-  ],
-  "sameAs": [
-    "https://www.instagram.com/dolbomstore",
-    "https://blog.naver.com/dolbommatt1004",
-    "https://pf.kakao.com/_UMyBK",
-    "https://pf.kakao.com/_UMyBK/chat"
-  ],
-  "parentOrganization": {
-    "@id": "https://www.dolbommat.com/#localbusiness-busan"
-  }
-}
-  </script>
-
-  <!-- 3. Product (제품) -->
-  <script type="application/ld+json">
+<!-- 2. Product (제품) -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "@id": "https://www.dolbommat.com/#product",
   "name": "돌봄매트 프리미엄 TPU 매트",
   "description": "층간소음 62% 저감, 미끄럼 방지, 공기순환 케어 시스템을 갖춘 프리미엄 TPU 바닥매트. 1m × 1m 대형 사이즈로 이음새 최소화.",
   "brand": {
@@ -538,23 +394,6 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     "name": "돌봄매트"
   },
   "image": "https://www.dolbommat.com/og-image.jpg",
-  "category": [
-    "층간소음매트",
-    "매트시공",
-    "시공매트",
-    "미끄럼방지매트",
-    "유아매트",
-    "애견매트",
-    "어린이집매트",
-    "TPU매트",
-    "거실매트",
-    "놀이매트"
-  ],
-  "manufacturer": {
-    "@type": "Organization",
-    "name": "돌봄매트",
-    "url": "https://www.dolbommat.com/"
-  },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "KRW",
@@ -570,15 +409,13 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "reviewCount": "6700",
-    "bestRating": "5",
-    "worstRating": "1"
+    "reviewCount": "6700"
   }
 }
-  </script>
+</script>
 
-  <!-- 4. FAQPage (자주 묻는 질문 - 구글 검색 결과에 리치 스니펫으로 노출) -->
-  <script type="application/ld+json">
+<!-- 3. FAQPage (자주 묻는 질문 - 구글 검색 결과에 리치 스니펫으로 노출) -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -588,7 +425,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
       "name": "시공 시간이 얼마나 걸리나요?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "평형에 따라 차이가 있지만 평균 2~3시간 정도 소요됩니다. 24평 기준 약 2시간, 33평 기준 약 3시간입니다. 가구가 많거나 구조가 복잡한 경우 추가 시간이 소요될 수 있습니다."
+        "text": "보통 34평 기준 3~4시간 정도 소요됩니다. 돌봄매트는 전문 시공팀 2명이 함께 방문하여 작업합니다. 당일 시공이 가능하며 시공 후 바로 생활하실 수 있습니다."
       }
     },
     {
@@ -596,7 +433,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
       "name": "바닥손상 / 이사할 때 뜯어서 가져갈 수 있나요?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "네, 바닥에 직접 접착하지 않고 마스킹 테이프 + 3M 폼 테이프 이중 구조로 시공해 바닥 손상 없이 깔끔하게 뜯어갈 수 있습니다. 일반 테이프 시공 타사와 차별화된 부분입니다. 이사 시공도 도와드리고 있으니 카카오톡으로 문의해주세요."
+        "text": "네, 바닥 손상 걱정 없이 가능합니다. 돌봄매트는 특허받은 공기순환통로 구조로 매트 아래 습기가 고이지 않아, 장기간 시공 후에도 바닥재에 곰팡이나 변색 걱정이 없습니다. 또한 마스킹 테이프 위에 3M 폼 테이프를 부착하는 이중 구조로, 이사할 때 바닥 손상 없이 깔끔하게 뜯어갈 수 있습니다. 일반 테이프 시공 타사와 차별화된 부분입니다. 이사 시공도 도와드리고 있으니 카카오톡으로 문의해주세요."
       }
     },
     {
@@ -612,7 +449,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
       "name": "시공 가능한 지역이 어디인가요?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "부산본사와 경기지점에서 시공팀을 운영합니다. [부산팀] 부산·울산·대구·경상남도·경상북도(포항·경주·김천·구미·경산·영천) 시공 가능. [경기팀] 경기도·인천·서울·충청남도·충청북도 시공 가능. ※ 광주광역시·강원도·전라도·제주도·경상북도(위 6곳 외)는 현재 시공이 어렵습니다. 정확한 지역은 카카오톡으로 문의해주세요."
+        "text": "수도권·충남·영남 지역에서 시공 가능합니다. 서울 경기 인천 수도권, 충남, 부산 대구 울산 경남 경북 영남권이 시공 권역입니다. 해당 지역 외 방문이 필요한 경우 카카오톡으로 문의주시면 일정 조정을 도와드립니다."
       }
     },
     {
@@ -625,166 +462,45 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     }
   ]
 }
-  </script>
+</script>
 
-  <!-- 5. WebSite (사이트 검색 기능 지원) -->
-  <script type="application/ld+json">
+<!-- 4. WebSite (사이트 검색 기능 지원) -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://www.dolbommat.com/#website",
   "url": "https://www.dolbommat.com/",
   "name": "돌봄매트",
-  "description": "층간소음 62% 저감 프리미엄 TPU 매트 시공 전문",
-  "inLanguage": "ko-KR",
-  "publisher": {
-    "@id": "https://www.dolbommat.com/#organization"
-  }
+  "inLanguage": "ko-KR"
 }
-  </script>
+</script>
 
-  <!-- 6. Organization (브랜드 정보) -->
-  <script type="application/ld+json">
+<!-- 5. Organization (브랜드 정보) -->
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://www.dolbommat.com/#organization",
   "name": "돌봄매트",
-  "alternateName": [
-    "DOLBOMMAT",
-    "돌봄"
-  ],
-  "legalName": "돌봄",
   "url": "https://www.dolbommat.com/",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://www.dolbommat.com/logo.png",
-    "width": "512",
-    "height": "512"
+  "logo": "https://www.dolbommat.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+82-507-1345-4146",
+    "contactType": "customer service",
+    "areaServed": "KR",
+    "availableLanguage": "Korean"
   },
-  "image": "https://www.dolbommat.com/og-image.jpg",
-  "description": "층간소음 62% 저감 프리미엄 TPU 매트 시공 전문업체. 2020년 창업, 6,700가정 시공 완료.",
-  "foundingDate": "2020-11-23",
-  "founder": {
-    "@type": "Person",
-    "name": "허민석"
-  },
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": "+82-507-1345-4146",
-      "contactType": "customer service",
-      "areaServed": "KR",
-      "availableLanguage": "Korean",
-      "hoursAvailable": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      }
-    }
-  ],
-  "address": [
-    {
-      "@type": "PostalAddress",
-      "name": "부산본사",
-      "streetAddress": "강변대로 570 부산건축자재판매단지 F동 11호",
-      "addressLocality": "사상구",
-      "addressRegion": "부산광역시",
-      "addressCountry": "KR"
-    },
-    {
-      "@type": "PostalAddress",
-      "name": "경기지점",
-      "streetAddress": "산단로 325 리드스마트스퀘어 F동 205호",
-      "addressLocality": "단원구",
-      "addressRegion": "경기도 안산시",
-      "addressCountry": "KR"
-    }
-  ],
   "sameAs": [
-    "https://www.instagram.com/dolbomstore",
-    "https://blog.naver.com/dolbommatt1004",
-    "https://pf.kakao.com/_UMyBK",
-    "https://pf.kakao.com/_UMyBK/chat"
-  ],
-  "identifier": [
-    {
-      "@type": "PropertyValue",
-      "name": "사업자등록번호",
-      "value": "680-37-00893"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "통신판매업신고번호",
-      "value": "2021-부산강서구-0154"
-    }
+    "http://pf.kakao.com/_UMyBK"
   ]
 }
-  </script>
+</script>
 
-  <!-- 7. Service (시공 서비스 정보) -->
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "https://www.dolbommat.com/#service",
-  "name": "돌봄매트 시공 서비스",
-  "description": "TPU 소재 프리미엄 매트 직접 시공. 층간소음 62% 저감, 미끄럼 방지, 무료 샘플 제공.",
-  "provider": {
-    "@id": "https://www.dolbommat.com/#organization"
-  },
-  "serviceType": "층간소음매트 시공",
-  "category": [
-    "층간소음매트",
-    "매트시공",
-    "시공매트",
-    "미끄럼방지매트",
-    "유아매트",
-    "애견매트",
-    "어린이집매트",
-    "TPU매트"
-  ],
-  "areaServed": [
-    "부산광역시",
-    "울산광역시",
-    "대구광역시",
-    "경상남도",
-    "포항시",
-    "경주시",
-    "김천시",
-    "구미시",
-    "경산시",
-    "영천시",
-    "경기도",
-    "인천광역시",
-    "서울특별시",
-    "충청남도",
-    "충청북도"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "KRW",
-    "price": "0",
-    "description": "무료 샘플 제공 + 무료 시공 견적",
-    "availability": "https://schema.org/InStock"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "6700",
-    "bestRating": "5"
-  }
-}
-  </script>
+<!-- ═══════════════════════════════════════════════════════════════
+     📊 통합 추적 시스템 (GA4 + Meta + Kakao + Naver + 이벤트 추적)
+     ⚠️ 모든 ID는 tracking.js 상단 CONFIG 객체에서 한 번에 관리
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="tracking.js" defer></script>
 
 </head>
 <body>
@@ -843,7 +559,9 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
      Hero 내 토글(유아/애견)로 언제든 전환 가능.
      URL 파라미터 ?mode=pet 으로 자동 분기 가능. -->
 
+
 <div id="page-wrap" style="overflow-x:clip;max-width:100vw">
+
 
 <!-- ═══════════════════════════════════════
      HERO
@@ -878,6 +596,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     <svg width="20" height="30" viewBox="0 0 20 30" fill="none"><rect x="1" y="1" width="18" height="28" rx="9" stroke="#fff" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="#fff"><animate attributeName="cy" values="10;18;10" dur="2s" repeatCount="indefinite"/></circle></svg>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════
      💰 가격 공개 섹션 (업계 최초 시도)
@@ -1061,6 +780,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
   details summary::-webkit-details-marker{display:none}
 </style>
 
+
 <!-- ═══════════════════════════════════════
      🎁 후기 이벤트 11만원 배너 (신규)
      강력한 전환 트리거
@@ -1079,6 +799,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════
      "일단 핵심부터." 캐러셀
@@ -1130,6 +851,7 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
   </div>
   <div class="dots" id="dots1"></div>
 </section>
+
 
 <!-- ═══════════════════════════════════════
      비교 테이블 (돌봄매트 vs 일반매트)
@@ -1226,6 +948,10 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
   </div>
 </section>
 
+
+
+
+
 <!-- ═══════════════════════════════════════
      🌟 실제 후기 하이라이트 3개 (신규)
      캐러셀 직후 배치 - 제품 관심 → 신뢰 변환
@@ -1305,6 +1031,7 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════
      신뢰 섹션 — 6,700곳 시공 실적 + 지도
 ═══════════════════════════════════════ -->
@@ -1326,6 +1053,7 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════
      크기 비교 + 이음새 비교
@@ -1392,7 +1120,9 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
 
 <!-- 풀블리드 #2 제거됨 (유아/애견 섹션 모두 삭제) -->
 
+
 <!-- 360° VIEW 섹션 제거됨 -->
+
 
 <!-- ═══════════════════════════════════════
      견적서 (quote.html 임베드)
@@ -1623,6 +1353,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
 })();
 </script>
 
+
 <!-- ═══════════════════════════════════════
      FAQ (자주 묻는 질문)
 ═══════════════════════════════════════ -->
@@ -1682,7 +1413,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
           </div>
           <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s">
             <div style="padding:0 22px 20px">
-              <p style="font-size:14px;color:var(--soft);line-height:1.8"><strong style="color:var(--text)">부산본사·경기지점에서<br>시공팀을 운영합니다.</strong><br><br>· <strong style="color:var(--text)">부산팀</strong>: 부산·울산·대구·경상남도<br>&nbsp;&nbsp;경상북도(포항·경주·김천·구미·경산·영천)<br>· <strong style="color:var(--text)">경기팀</strong>: 경기·인천·서울·충청남도·충청북도<br><br><span style="color:#c0392b;font-size:13px">※ 광주광역시·강원도·전라도·제주도·경상북도(위 6곳 외)는<br>&nbsp;&nbsp;&nbsp;현재 시공이 어렵습니다.</span><br><br>해당 지역 외 방문이 필요한 경우,<br>카카오톡으로 문의해주시면 일정 조정을 도와드릴게요.</p>
+              <p style="font-size:14px;color:var(--soft);line-height:1.8"><strong style="color:var(--text)">수도권·충남·영남 지역에서<br>시공 가능합니다.</strong><br><br>· 수도권: 서울·경기·인천<br>· 충청: 충남<br>· 영남: 부산·대구·울산·경남·경북<br><br>해당 지역 외 방문이 필요한 경우,<br>카카오톡으로 문의해주시면 일정 조정을 도와드릴게요.</p>
             </div>
           </div>
         </div>
@@ -1749,6 +1480,8 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   </div>
 </section>
 
+
+
 <!-- ═══════════════════════════════════════
      Final CTA
 ═══════════════════════════════════════ -->
@@ -1785,6 +1518,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
 </footer>
 </div><!-- /page-wrap -->
 
+
 <!-- ═══ Floating CTA ═══ -->
 <div class="float-cta" id="floatCta">
   <div class="inner">
@@ -1793,6 +1527,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
     <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" class="btn-kakao">카톡 상담</a>
   </div>
 </div>
+
 
 <!-- ═══ Video Modal ═══ -->
 <div class="video-modal" id="videoModal" onclick="closeVideo()">
@@ -1804,6 +1539,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
     <button class="close" onclick="closeVideo()">✕</button>
   </div>
 </div>
+
 
 <!-- ═══════════════════════════════════════
      JAVASCRIPT
@@ -2006,6 +1742,7 @@ function selectProduct() {}
 function calculate() {}
 function copyToClipboard() {}
 
+
 // ── Size Tab + Seam Slider ──
 var sizeData={600:{area:2.8,seam:66,boxSize:120,note:'* 1,000mm 40장 기준, 600mm 대비'},700:{area:2.0,seam:56,boxSize:140,note:'* 1,000mm 40장 기준, 700mm 대비'},800:{area:1.6,seam:44,boxSize:160,note:'* 1,000mm 40장 기준, 800mm 대비'}};
 function switchSize(s){var d=sizeData[s];if(!d)return;document.querySelectorAll('.sz-tab').forEach(function(t){t.classList.toggle('sz-tab-active',t.getAttribute('data-size')==s)});var b=document.getElementById('otherBox');b.style.width=d.boxSize+'px';b.style.height=d.boxSize+'px';document.getElementById('otherNum').textContent=s;document.getElementById('statArea').textContent=d.area;document.getElementById('statAreaLabel').textContent=s+'mm 대비 면적';document.getElementById('statSeam').textContent=d.seam;document.getElementById('statNote').textContent=d.note;document.getElementById('areaMsg').textContent='돌봄매트 1장 = '+s+'mm 매트 약 '+d.area+'장';switchSeam(s);}
@@ -2048,6 +1785,7 @@ function toggleFaq(item) {
     arrow.textContent = '－';
   }
 }
+
 
 // ── Image Swap Maps ──
 var imageSwaps = {
@@ -2139,6 +1877,7 @@ function switchMode(mode) {
 
   // Reorder carousel
   reorderCarousel(mode);
+
 
   // Update calculator purpose
   if (mode === 'pet') { selectPurpose('pet'); }
@@ -2252,6 +1991,7 @@ document.addEventListener('keydown', function(e) {
 })();
 
 </script>
+
 
 </body>
 </html>
