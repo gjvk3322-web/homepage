@@ -306,7 +306,16 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
     <h2 class="section-title text-center fade-up" style="margin-bottom:36px">우리 집 맞춤 견적.</h2>
   </div>
   <div class="fade-up" style="max-width:500px;margin:0 auto;padding:0 16px">
-    <iframe src="https://my.dolbommat.com/quote.html?embed=1&v=20260425" allow="web-share; clipboard-write" style="width:100%;border:none;border-radius:20px;box-shadow:0 4px 28px rgba(0,0,0,0.06);overflow:hidden" id="quoteFrame" scrolling="no" loading="lazy"></iframe>
+    <iframe data-src="https://my.dolbommat.com/quote.html?embed=1" allow="web-share; clipboard-write" style="width:100%;border:none;border-radius:20px;box-shadow:0 4px 28px rgba(0,0,0,0.06);overflow:hidden" id="quoteFrame" scrolling="no" loading="lazy"></iframe>
+    <script>
+      (function(){
+        var qf=document.getElementById('quoteFrame');
+        if(qf){
+          var hourBuster=Math.floor(Date.now()/3600000);
+          qf.src=qf.dataset.src+'&v='+hourBuster;
+        }
+      })();
+    </script>
   </div>
 </section>
 <script>
