@@ -377,25 +377,42 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   // 견적서 저장 버튼 - 모바일은 갤러리, PC는 다운로드 + 텍스트 복사
   // quote.html 스타일 헬퍼: 이미지 강조 + 텍스트 복사
 function hoHighlightImageAndCopy(){
+  console.log('[돌봄] 가이드 박스 클릭됨!');
   var img=document.getElementById('quoteImgPreviewHost');
+  var hint=document.getElementById('quoteLongPressHint');
+  
+  // 1. 가이드 박스 즉각 피드백 (클릭 작동 확인 - 살짝 눌리는 효과)
+  if(hint){
+    hint.style.transition='transform 0.15s ease';
+    hint.style.transform='scale(0.95)';
+    setTimeout(function(){hint.style.transform='scale(1)';},150);
+  }
+  
+  // 2. 이미지 강조 (outline - box-shadow보다 확실함)
   if(img){
+    console.log('[돌봄] 이미지 발견, outline 펄스 시작');
     img.scrollIntoView({behavior:'smooth',block:'center'});
-    // box-shadow 직접 토글 (펄스 효과) - animation보다 안정적
+    img.style.transition='outline 0.15s ease';
     var step=0;
-    var maxStep=6;  // 3회 펄스 (on/off 6번)
+    var maxStep=6;  // 3회 펄스
     var iv=setInterval(function(){
       if(step%2===0){
-        img.style.boxShadow='0 0 0 6px rgba(255,143,0,0.7)';
+        img.style.outline='6px solid rgba(255,143,0,0.85)';
+        img.style.outlineOffset='3px';
       } else {
-        img.style.boxShadow='0 0 0 0 rgba(255,143,0,0)';
+        img.style.outline='6px solid rgba(255,143,0,0)';
       }
       step++;
       if(step>=maxStep){
         clearInterval(iv);
-        img.style.boxShadow='';
+        img.style.outline='';
+        img.style.outlineOffset='';
       }
     },300);
+  } else {
+    console.log('[돌봄] ❌ 이미지 못 찾음 - quoteImgPreviewHost');
   }
+  
   hoCopyQuoteTextOnly();
 }
 function hoCopyQuoteTextOnly(){
