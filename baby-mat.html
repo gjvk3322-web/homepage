@@ -53,7 +53,7 @@
 .dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
 .dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.15);transition:all 0.4s cubic-bezier(0.22,1,0.36,1)}
 .dot.active{width:24px;background:rgba(255,255,255,0.9)}
-</style>
+@keyframes hoPulseHint{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.85;transform:scale(1.015)}}@keyframes hoImgHighlight{0%,100%{box-shadow:0 0 0 0 rgba(46,125,50,0)}50%{box-shadow:0 0 0 8px rgba(46,125,50,0.45)}}#quoteImgPreviewHost.ho-highlight{animation:hoImgHighlight 0.6s ease-in-out 2}</style>
 
 <!-- ═══ 구조화 데이터 (JSON-LD) ═══ -->
 
@@ -326,7 +326,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   var quoteModal=document.createElement('div');
   quoteModal.id='quoteImgModalHost';
   quoteModal.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9998;display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto';
-  quoteModal.innerHTML='<div style="background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;animation:modalFadeIn 0.3s ease"><div style="flex:1;overflow-y:auto;padding:24px 24px 12px;text-align:center"><div id="quoteImgLoadingHost" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;min-height:320px"><div style="width:48px;height:48px;border:4px solid #E8F5E9;border-top:4px solid #2E7D32;border-radius:50%;animation:qmSpin 0.8s linear infinite"></div><div style="margin-top:16px;font-size:14px;color:#666;font-weight:500">📸 견적서 이미지 생성 중...</div><div style="margin-top:4px;font-size:11px;color:#999">잠시만 기다려주세요</div></div><img id="quoteImgPreviewHost" src="" alt="돌봄매트 견적서" style="display:none;width:auto;max-width:100%;max-height:60vh;border-radius:12px;border:1px solid #e8e8e3;margin:8px 0;object-fit:contain"><div id="quoteMobileHint" style="display:none;background:linear-gradient(135deg,#FFF8E1,#FFF3CD);border:1.5px solid #FFC107;border-radius:10px;padding:12px;margin:8px 0;text-align:center"><div style="font-size:13px;font-weight:700;color:#E65100;margin-bottom:4px">👆 이미지를 <span style="background:#E65100;color:#fff;padding:2px 8px;border-radius:6px;font-size:12px">꾸욱 길게</span> 눌러주세요</div><div style="font-size:11px;color:#666;line-height:1.5">메뉴가 뜨면 <strong>사진에 저장</strong> 또는 <strong>이미지 저장</strong>을 선택해주세요</div></div></div><div style="position:sticky;bottom:0;background:#fff;padding:12px 20px 20px;border-top:1px solid #eee;border-radius:0 0 20px 20px"><div style="font-size:11px;color:#4CAF50;font-weight:600;margin-bottom:6px;text-align:center">💬 카카오톡 채널로 견적서를 보내주시면 빠른상담 가능합니다</div><div style="display:flex;gap:8px;margin-bottom:8px"><button id="quoteImgDownloadBtn" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;background:#2E7D32;color:#fff;border:none;border-radius:10px;font-family:inherit;cursor:pointer"><div style="display:flex;align-items:center;font-size:14px;font-weight:700"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.3);font-size:11px;font-weight:700;margin-right:6px">1</span>견적서 저장</div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:2px">(이미지 저장)</div></button><a id="quoteImgKakaoBtn" style="flex:1;display:flex;align-items:center;justify-content:center;padding:14px 12px;background:#FEE500;border-radius:10px;text-decoration:none;font-size:14px;font-weight:700;color:#3C1E1E;cursor:pointer"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.12);font-size:11px;font-weight:700;margin-right:6px">2</span>카톡 상담하기</a></div><button id="quoteImgCloseBtn" style="width:100%;padding:11px;background:#f0f0f0;color:#666;border:none;border-radius:10px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">닫기</button></div></div>';
+  quoteModal.innerHTML='<div style="background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;animation:modalFadeIn 0.3s ease"><div style="flex:1;overflow-y:auto;padding:24px 24px 12px;text-align:center"><div id="quoteImgLoadingHost" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;min-height:320px"><div style="width:48px;height:48px;border:4px solid #E8F5E9;border-top:4px solid #2E7D32;border-radius:50%;animation:qmSpin 0.8s linear infinite"></div><div style="margin-top:16px;font-size:14px;color:#666;font-weight:500">📸 견적서 이미지 생성 중...</div><div style="margin-top:4px;font-size:11px;color:#999">잠시만 기다려주세요</div></div><img id="quoteImgPreviewHost" src="" alt="돌봄매트 견적서" onclick="hoCopyQuoteTextOnly()" style="display:none;width:auto;max-width:100%;max-height:60vh;border-radius:12px;border:1px solid #e8e8e3;margin:8px 0;object-fit:contain;cursor:pointer"></div><div style="position:sticky;bottom:0;background:#fff;padding:12px 20px 20px;border-top:1px solid #eee;border-radius:0 0 20px 20px"><div id="quoteLongPressHint" class="ho-long-press-hint" style="display:none;margin:8px 0 12px;padding:12px 14px;background:linear-gradient(135deg,#FFF9C4,#FFE082);border:1.5px solid #FFD54F;border-radius:12px;text-align:center;animation:hoPulseHint 1.8s infinite;cursor:pointer" onclick="hoHighlightImageAndCopy()"><div style="font-size:13px;font-weight:700;color:#5D4037;line-height:1.4"><span style="font-size:18px;margin-right:2px">👆</span> 이미지를 <strong style="color:#E65100">꾸욱 길게</strong> 눌러주세요</div><div style="font-size:11px;color:#7D5935;margin-top:3px">메뉴가 뜨면 <strong>사진에 저장</strong> 또는 <strong>이미지 저장</strong> 선택!</div></div><button id="quoteImgDownloadBtn" style="display:none;width:100%;padding:16px 14px;background:#2E7D32;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:10px">견적서 다운로드</button><div style="font-size:12px;color:#4CAF50;font-weight:600;margin-bottom:10px;text-align:center">저장한 견적서를 카톡 상담 시 함께 보내주세요</div><a id="quoteImgKakaoBtn" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;background:#FEE500;border-radius:12px;text-decoration:none;font-size:15px;font-weight:700;color:#3C1E1E;cursor:pointer;margin-bottom:8px">카톡 상담 시작하기</a><button id="quoteImgCloseBtn" style="width:100%;padding:11px;background:#f0f0f0;color:#666;border:none;border-radius:10px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">닫기</button></div></div>';
   document.body.appendChild(quoteModal);
   var savedQuoteDataUrl=null;
 
@@ -382,6 +382,24 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   }
   
   // 견적서 저장 버튼 - 모바일은 갤러리, PC는 다운로드 + 텍스트 복사
+  // quote.html 스타일 헬퍼: 이미지 강조 + 텍스트 복사
+function hoHighlightImageAndCopy(){
+  var img=document.getElementById('quoteImgPreviewHost');
+  if(img){
+    img.scrollIntoView({behavior:'smooth',block:'center'});
+    img.classList.remove('ho-highlight');
+    void img.offsetWidth;
+    img.classList.add('ho-highlight');
+    setTimeout(function(){img.classList.remove('ho-highlight')},2500);
+  }
+  hoCopyQuoteTextOnly();
+}
+function hoCopyQuoteTextOnly(){
+  if(typeof copyQuoteTextToClipboard==='function'){
+    copyQuoteTextToClipboard();
+    if(typeof showHomeToast==='function')showHomeToast('✅ 견적 텍스트 복사 완료! 이미지를 길게 눌러 저장하세요');
+  }
+}
   document.getElementById('quoteImgDownloadBtn').onclick=function(){
     if(!savedQuoteDataUrl)return;
     var isMobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
@@ -463,7 +481,13 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
       savedQuoteText=e.data.quoteText||'';
       document.getElementById('quoteImgLoadingHost').style.display='none';
       document.getElementById('quoteImgPreviewHost').src=e.data.dataUrl;
-      document.getElementById('quoteImgPreviewHost').style.display='block';if(/Android|iPhone|iPad/i.test(navigator.userAgent)){var __mh=document.getElementById('quoteMobileHint');if(__mh)__mh.style.display='block';}
+      document.getElementById('quoteImgPreviewHost').style.display='block';
+    // 모바일/PC 분기: 모바일=가이드 박스, PC=다운로드 버튼
+    var __isMob=/Android|iPhone|iPad/i.test(navigator.userAgent);
+    var __hint=document.getElementById('quoteLongPressHint');
+    var __dlBtn=document.getElementById('quoteImgDownloadBtn');
+    if(__hint)__hint.style.display=__isMob?'block':'none';
+    if(__dlBtn)__dlBtn.style.display=__isMob?'none':'block';
     } else if(e.data&&e.data.type==='quoteImageError'){
       // iframe에서 이미지 생성 실패 → 모달 닫기
       closeQuoteModal();
