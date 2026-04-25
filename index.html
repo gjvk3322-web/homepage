@@ -1141,7 +1141,7 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
 (function(){
   var qf=document.getElementById('quoteFrame');
   if(!qf)return;
-  qf.style.height='2400px';
+  qf.style.height='1500px';
 
   // iframe 견적서 토스트를 홈페이지에 표시할 영역 생성 (화면 중앙)
   var quoteToast=document.createElement('div');
@@ -1278,11 +1278,9 @@ function hoCopyQuoteTextOnly(){
 
   window.addEventListener('message',function(e){
     if(e.data&&e.data.type==='resize'&&e.data.height){
-      // 더 큰 값일 때만 적용 (한 방향으로만 커짐 - 견적서 저장 잘림 방지)
-      var current=parseInt(qf.style.height)||0;
-      if(e.data.height>current){
-        qf.style.height=e.data.height+'px';
-      }
+      // 양방향 리사이즈 + 최소 600px 보장 + 여유 20px
+      var newHeight=Math.max(600, e.data.height+20);
+      qf.style.height=newHeight+'px';
     } else if(e.data&&e.data.type==='scrollToQuote'){
       // iframe 내부 모달이 보이도록 견적서 섹션 상단으로 스크롤
       qf.scrollIntoView({behavior:'smooth',block:'start'});
