@@ -114,7 +114,7 @@
 
 <!-- GNB -->
 <a href="event.html" class="gnb" style="display:block;text-decoration:none;color:inherit">
-  <span style="opacity:0.7">누구나 </span><span class="gold">온누리상품권 7% 할인</span><span style="opacity:0.7"> 가능 </span><span class="link">더 알아보기 &gt;</span>
+  <span style="opacity:0.7">누구나 </span><span class="gold">온누리상품권 7% 할인</span><span style="opacity:0.7"> 가능 </span><span class="link">혜택 받기 &gt;</span>
 </a>
 
 <!-- NAV -->
@@ -377,7 +377,6 @@ TPU 의료용품·유아식기 소재.</p><p class="card-desc"><strong style="co
   // 견적서 저장 버튼 - 모바일은 갤러리, PC는 다운로드 + 텍스트 복사
   // quote.html 스타일 헬퍼: 이미지 강조 + 텍스트 복사
 function hoHighlightImageAndCopy(){
-  console.log('[돌봄] 가이드 박스 클릭됨!');
   var img=document.getElementById('quoteImgPreviewHost');
   var hint=document.getElementById('quoteLongPressHint');
   
@@ -390,7 +389,6 @@ function hoHighlightImageAndCopy(){
   
   // 2. 이미지 강조 (outline - box-shadow보다 확실함)
   if(img){
-    console.log('[돌봄] 이미지 발견, outline 펄스 시작');
     img.scrollIntoView({behavior:'smooth',block:'center'});
     img.style.transition='outline 0.15s ease';
     var step=0;
@@ -410,7 +408,6 @@ function hoHighlightImageAndCopy(){
       }
     },300);
   } else {
-    console.log('[돌봄] ❌ 이미지 못 찾음 - quoteImgPreviewHost');
   }
   
   hoCopyQuoteTextOnly();
@@ -529,7 +526,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   <div class="fade-up">
     <h2 style="font-size:clamp(26px,6.5vw,40px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15;margin-bottom:16px">우리 댕댕이를 위한<br>첫 번째 선택.</h2>
     <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:36px">무료 샘플을 직접 만져보세요.<br>반려동물 관절 건강을 지켜드립니다.</p>
-    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank"><button style="background:linear-gradient(135deg,var(--accent),#a08060);color:#fff;border:none;border-radius:980px;padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기</button></a>
+    <a href="https://my.dolbommat.com/sample.html"><button style="background:linear-gradient(135deg,var(--accent),#a08060);color:#fff;border:none;border-radius:980px;padding:16px 44px;font-size:16px;font-weight:700">무료 샘플 신청하기</button></a>
     <p style="margin-top:20px;font-size:13px;color:var(--muted)">0507-1345-4146 · 카카오톡 24시간 상담</p>
   </div>
 </section>
@@ -547,7 +544,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
 
 <div class="float-cta">
   <div class="inner">
-    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="flex:1"><button class="btn-dark" style="width:100%">무료 샘플 신청</button></a>
+    <a href="https://my.dolbommat.com/sample.html" style="flex:1"><button class="btn-dark" style="width:100%">무료 샘플 신청</button></a>
     <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" style="flex:1"><button class="btn-dark" style="width:100%;background:#FEE500;color:#3C1E1E">카톡상담</button></a>
   </div>
 </div>
