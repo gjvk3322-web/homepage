@@ -387,11 +387,21 @@ function hoHighlightImageAndCopy(){
   var img=document.getElementById('quoteImgPreviewHost');
   if(img){
     img.scrollIntoView({behavior:'smooth',block:'center'});
-    // inline style 직접 적용 (CSS class 방식보다 안정적)
-    img.style.animation='none';
-    void img.offsetWidth;
-    img.style.animation='hoImgHighlight 0.8s ease-in-out 3';
-    setTimeout(function(){img.style.animation=''},2500);
+    // box-shadow 직접 토글 (펄스 효과) - animation보다 안정적
+    var step=0;
+    var maxStep=6;  // 3회 펄스 (on/off 6번)
+    var iv=setInterval(function(){
+      if(step%2===0){
+        img.style.boxShadow='0 0 0 6px rgba(255,143,0,0.7)';
+      } else {
+        img.style.boxShadow='0 0 0 0 rgba(255,143,0,0)';
+      }
+      step++;
+      if(step>=maxStep){
+        clearInterval(iv);
+        img.style.boxShadow='';
+      }
+    },300);
   }
   hoCopyQuoteTextOnly();
 }
