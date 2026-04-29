@@ -1520,6 +1520,7 @@ function hoCopyQuoteTextOnly(){
 window.hoHighlightImageAndCopy=hoHighlightImageAndCopy;
 window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   document.getElementById('quoteImgDownloadBtn').onclick=function(){
+    if(window.dolbomTrack)window.dolbomTrack('quote_download',{event_category:'conversion',event_label:'견적서 다운로드 (홈페이지 모달)',page_path:location.pathname});
     if(!savedQuoteDataUrl)return;
     var isMobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
     
@@ -1559,6 +1560,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   
   // 카톡 상담하기 버튼 - 텍스트 복사 후 카톡 이동
   document.getElementById('quoteImgKakaoBtn').onclick=function(){
+    if(window.dolbomTrack)window.dolbomTrack('kakao_channel_click',{event_category:'engagement',event_label:'카톡 채널 (홈페이지 견적 모달)',page_path:location.pathname});
     copyQuoteTextToClipboard().then(function(){
       showHomeToast('✅ 견적서 복사 완료! 카톡에 붙여넣기 해주세요');
       setTimeout(function(){
