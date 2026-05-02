@@ -1817,6 +1817,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// ── Auto Scroll Hint: 가격 섹션 미리보기 (1.8초 후 살짝 스크롤) ──
+(function(){
+  // 사용자가 이미 스크롤했으면 실행 X
+  var userScrolled = false;
+  window.addEventListener('scroll', function once(){
+    userScrolled = true;
+  }, { once: true, passive: true });
+
+  // 페이지 로드 후 1.8초 대기 → 자동 스크롤 80px (0.8초 애니메이션)
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      if (userScrolled) return; // 이미 스크롤했으면 중단
+      if (window.scrollY > 10) return; // 이미 스크롤 위치가 있으면 중단
+
+      // 부드럽게 90px 스크롤 (가격 섹션 헤더 노출)
+      window.scrollTo({
+        top: 90,
+        behavior: 'smooth'
+      });
+    }, 1800);
+  });
+})();
+
 // ── Intersection Observer for animations ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
