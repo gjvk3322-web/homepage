@@ -191,9 +191,20 @@ body.mode-pet .menu-list a .for-pet{display:inline}
 .carousel-card .card-title{font-size:19px;font-weight:750;letter-spacing:-0.025em;line-height:1.3;margin-bottom:10px;color:var(--light);white-space:pre-line}
 .carousel-card .card-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.65}
 .dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
-.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.15);transition:all 0.4s var(--ease)}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.15);transition:all 0.4s var(--ease);cursor:pointer;border:none;padding:0}
 .dot.active{width:24px;background:rgba(255,255,255,0.9)}
 .dot-dark{background:rgba(0,0,0,0.1)}.dot-dark.active{background:var(--text)}
+
+/* 캐러셀 좌우 화살표 (PC만) */
+.carousel-container{position:relative}
+.carousel-arrow{position:absolute;top:120px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:5;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background 0.2s,opacity 0.2s;font-family:inherit;line-height:1;padding:0}
+.carousel-arrow.prev{left:10px}
+.carousel-arrow.next{right:10px}
+.carousel-arrow:hover{background:rgba(0,0,0,0.85)}
+.carousel-arrow:disabled{opacity:0.3;cursor:default}
+@media (hover:hover) and (min-width:768px){
+  .carousel-arrow{display:flex}
+}
 
 /* ═══ FULL-BLEED IMAGE ═══ */
 .fullbleed{position:relative;overflow:hidden;max-width:100vw;contain:layout style paint;-webkit-transform:translateZ(0);transform:translateZ(0)}
@@ -893,11 +904,11 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
       </h3>
       <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.35);color:#FF6B6B;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;margin-bottom:14px">
         <span>🎁</span>
-        <span>1000매트 22T 기준 <span style="color:#fff">최대 34만원 할인</span></span>
+        <span>1000매트 22T 기준 <span style="color:#fff">최대 41만원 할인</span></span>
       </div>
       <p style="font-size:13.5px;color:var(--muted);line-height:1.7">
         돌봄매트는 <strong style="color:#fff;font-weight:600">본사 직영</strong>입니다.<br>
-        대리점 마진 없이, 합리적인 가격으로 본사에서 시공합니다!
+        대리점 마진 <strong style="color:#fff;font-weight:600">0원</strong>, 합리적인 가격으로 본사에서 시공합니다!
       </p>
       <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5">
         <strong style="color:rgba(255,255,255,0.75);font-weight:600">34평 거실·복도·주방 확장형</strong> 평균 기준
@@ -924,8 +935,8 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
           </div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px">
-          <span style="color:#FF6B6B;font-weight:700">🎁 최대 34만원 할인</span>
-          <span style="color:var(--muted)">34평 시공 시 약 <strong style="color:#fff;font-weight:700">272만원</strong></span>
+          <span style="color:#FF6B6B;font-weight:700">🎁 최대 41만원 할인</span>
+          <span style="color:var(--muted)">40장 시공 시 약 <strong style="color:#fff;font-weight:700">264만원</strong></span>
         </div>
       </div>
 
@@ -946,8 +957,8 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
           </div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px">
-          <span style="color:#FF6B6B;font-weight:700">🎁 최대 29만원 할인</span>
-          <span style="color:var(--muted)">34평 시공 시 약 <strong style="color:#fff;font-weight:700">229만원</strong></span>
+          <span style="color:#FF6B6B;font-weight:700">🎁 최대 37만원 할인</span>
+          <span style="color:var(--muted)">40장 시공 시 약 <strong style="color:#fff;font-weight:700">221만원</strong></span>
         </div>
       </div>
 
@@ -967,8 +978,8 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
           </div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:11.5px">
-          <span style="color:#FF6B6B;font-weight:700">🎁 최대 30만원 할인</span>
-          <span style="color:var(--muted)">34평 시공 시 약 <strong style="color:#fff;font-weight:700">240만원</strong></span>
+          <span style="color:#FF6B6B;font-weight:700">🎁 최대 38만원 할인</span>
+          <span style="color:var(--muted)">160장 시공 시 약 <strong style="color:#fff;font-weight:700">232만원</strong></span>
         </div>
       </div>
 
@@ -977,7 +988,7 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     <!-- 할인 혜택 접기/펼치기 -->
     <details open style="margin-top:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden">
       <summary style="padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.75);font-weight:600;user-select:none;-webkit-user-select:none">
-        <span>💰 적용된 혜택 상세</span>
+        <span>적용된 혜택 상세</span>
         <span class="details-arrow" style="transition:transform 0.25s;font-size:11px;color:var(--muted)">▼</span>
       </summary>
       <div style="padding:4px 18px 20px;border-top:1px solid rgba(255,255,255,0.06);margin-top:-1px">
@@ -1111,7 +1122,10 @@ body.mode-pet .carousel-card[data-card="slip"]{display:none!important}
     </p>
   </div>
 
-  <div class="carousel-wrap" id="carousel1">
+  <div class="carousel-container">
+    <button class="carousel-arrow prev" type="button" aria-label="이전 카드" data-carousel="carousel1">‹</button>
+    <button class="carousel-arrow next" type="button" aria-label="다음 카드" data-carousel="carousel1">›</button>
+    <div class="carousel-wrap" id="carousel1">
     <!-- Card 1 · 층간소음 (1순위 구매동기 · Hero와 메시지 일관성) -->
     <div class="carousel-card" data-card="noise"><div style="position:relative"><img loading="lazy" src="img/kids-laughing.jpg" alt="웃는 아이들" id="carImg1" width="340" height="240"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#AECBD4">층간소음 저감</p><p class="card-title">아이가 뛰어놀아도
 아래층 걱정 끝.</p><p class="card-desc">KCL 국가 공인 <strong style="color:#AECBD4">62% 저감</strong><br>이웃과의 평화를 지킵니다.</p></div></div>
@@ -1143,6 +1157,7 @@ TPU 의료용품·유아식기 소재</p><p class="card-desc"><strong style="col
     <!-- Pet Card A · 층간소음 -->
     <div class="carousel-card" data-card="pet-noise"><div style="position:relative"><img loading="lazy" src="img/dog-lying.jpg" alt="엎드려있는 강아지" width="340" height="240"><div class="badge">62% 저감</div></div><div class="card-body"><p class="tag" style="color:#AECBD4">층간소음 저감</p><p class="card-title">뛰는 소리도
 걱정 없이.</p><p class="card-desc">KCL 국가 공인 <strong style="color:#AECBD4">62% 저감</strong><br>짖는 소리·발소리도 이웃에 덜 전달됩니다.</p></div></div>
+  </div>
   </div>
   <div class="dots" id="dots1"></div>
 </section>
@@ -2293,6 +2308,121 @@ document.addEventListener('keydown', function(e) {
       ticking = true;
     }
   }, { passive: true });
+})();
+
+// ── 캐러셀 화살표 + 도트 인디케이터 ──
+(function(){
+  function initCarouselNav(carouselId, dotsId) {
+    var carousel = document.getElementById(carouselId);
+    var dotsContainer = document.getElementById(dotsId);
+    if (!carousel || !dotsContainer) return;
+
+    function getVisibleCards() {
+      // display:none이 아닌 카드만 추출
+      return Array.from(carousel.querySelectorAll('.carousel-card')).filter(function(card){
+        return card.offsetParent !== null;
+      });
+    }
+
+    function rebuildDots() {
+      var cards = getVisibleCards();
+      dotsContainer.innerHTML = '';
+      cards.forEach(function(card, idx){
+        var dot = document.createElement('button');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', (idx + 1) + '번 카드로 이동');
+        dot.addEventListener('click', function(){
+          card.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateActiveDot() {
+      var cards = getVisibleCards();
+      if (cards.length === 0) return;
+      var carouselRect = carousel.getBoundingClientRect();
+      var carouselCenter = carouselRect.left + carouselRect.width / 2;
+      var closestIdx = 0;
+      var minDist = Infinity;
+      cards.forEach(function(card, idx){
+        var rect = card.getBoundingClientRect();
+        var cardCenter = rect.left + rect.width / 2;
+        var dist = Math.abs(cardCenter - carouselCenter);
+        if (dist < minDist) { minDist = dist; closestIdx = idx; }
+      });
+      Array.from(dotsContainer.children).forEach(function(dot, idx){
+        dot.classList.toggle('active', idx === closestIdx);
+      });
+      // 화살표 disabled 상태 갱신
+      var prev = document.querySelector('.carousel-arrow.prev[data-carousel="' + carouselId + '"]');
+      var next = document.querySelector('.carousel-arrow.next[data-carousel="' + carouselId + '"]');
+      if (prev) prev.disabled = (closestIdx === 0);
+      if (next) next.disabled = (closestIdx === cards.length - 1);
+    }
+
+    function scrollToCard(direction) {
+      var cards = getVisibleCards();
+      if (cards.length === 0) return;
+      var carouselRect = carousel.getBoundingClientRect();
+      var carouselCenter = carouselRect.left + carouselRect.width / 2;
+      var currentIdx = 0;
+      var minDist = Infinity;
+      cards.forEach(function(card, idx){
+        var rect = card.getBoundingClientRect();
+        var cardCenter = rect.left + rect.width / 2;
+        var dist = Math.abs(cardCenter - carouselCenter);
+        if (dist < minDist) { minDist = dist; currentIdx = idx; }
+      });
+      var targetIdx = Math.max(0, Math.min(cards.length - 1, currentIdx + direction));
+      cards[targetIdx].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    }
+
+    // 화살표 클릭
+    document.querySelectorAll('.carousel-arrow[data-carousel="' + carouselId + '"]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        scrollToCard(btn.classList.contains('prev') ? -1 : 1);
+      });
+    });
+
+    // 스크롤 시 활성 도트 갱신 (throttle)
+    var scrollTimeout;
+    carousel.addEventListener('scroll', function(){
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(function(){
+        updateActiveDot();
+        scrollTimeout = null;
+      }, 80);
+    }, { passive: true });
+
+    // 초기화
+    rebuildDots();
+    updateActiveDot();
+
+    // 외부에서 호출 가능 (모드 전환 시)
+    carousel._rebuild = function(){
+      rebuildDots();
+      setTimeout(updateActiveDot, 100);
+    };
+  }
+
+  // 초기 실행
+  document.addEventListener('DOMContentLoaded', function(){
+    initCarouselNav('carousel1', 'dots1');
+  });
+
+  // baby/pet 모드 변경 시 도트 갱신
+  var originalSwitchMode = window.switchMode;
+  if (typeof originalSwitchMode === 'function') {
+    window.switchMode = function(mode) {
+      originalSwitchMode(mode);
+      setTimeout(function(){
+        var carousel = document.getElementById('carousel1');
+        if (carousel && carousel._rebuild) carousel._rebuild();
+      }, 50);
+    };
+  }
 })();
 
 </script>
