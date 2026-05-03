@@ -1869,15 +1869,15 @@ const navSentinel = document.createElement('div');
 navSentinel.style.cssText = 'position:absolute;top:500px;width:1px;height:1px;pointer-events:none';
 document.body.prepend(navSentinel);
 
-const ctaSentinel = document.createElement('div');
-ctaSentinel.style.cssText = 'position:absolute;top:700px;width:1px;height:1px;pointer-events:none';
-document.body.prepend(ctaSentinel);
-
 const floatCta = document.getElementById('floatCta');
+const ctaTriggerSection = document.getElementById('pricingSection');
 
-new IntersectionObserver(([e]) => {
-  floatCta.classList.toggle('show', !e.isIntersecting);
-}, { threshold: 0 }).observe(ctaSentinel);
+// 가격 섹션이 보이기 시작하거나 위로 지나갔으면 CTA 표시
+// (hero 영역에 있을 때는 숨김, 가격 섹션부터는 계속 표시)
+new IntersectionObserver(([entry]) => {
+  const passedOrShowing = entry.isIntersecting || entry.boundingClientRect.top < 0;
+  floatCta.classList.toggle('show', passedOrShowing);
+}, { threshold: 0 }).observe(ctaTriggerSection);
 
 // (video section removed)
 
