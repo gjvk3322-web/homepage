@@ -1870,14 +1870,13 @@ navSentinel.style.cssText = 'position:absolute;top:500px;width:1px;height:1px;po
 document.body.prepend(navSentinel);
 
 const floatCta = document.getElementById('floatCta');
-const ctaTriggerSection = document.getElementById('pricingSection');
+const heroSection = document.querySelector('.hero');
 
-// 가격 섹션이 보이기 시작하거나 위로 지나갔으면 CTA 표시
-// (hero 영역에 있을 때는 숨김, 가격 섹션부터는 계속 표시)
+// hero(메인 비주얼)가 화면에서 완전히 사라지면 CTA 표시
+// hero가 1px이라도 보이면 숨김
 new IntersectionObserver(([entry]) => {
-  const passedOrShowing = entry.isIntersecting || entry.boundingClientRect.top < 0;
-  floatCta.classList.toggle('show', passedOrShowing);
-}, { threshold: 0 }).observe(ctaTriggerSection);
+  floatCta.classList.toggle('show', !entry.isIntersecting);
+}, { threshold: 0 }).observe(heroSection);
 
 // (video section removed)
 
