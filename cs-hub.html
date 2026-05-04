@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>돌봄매트 · 링크 하나로 간편하게</title>
+<script src="https://www.dolbommat.com/tracking.js" defer></script>
+<meta name="description" content="견적·샘플·예약·후기까지! 후기 작성 시 최대 11만원 캐시백. 6,700곳이 선택한 본사 직영 TPU 매트.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="돌봄매트 · 링크 하나로 간편하게">
+<meta property="og:description" content="견적·샘플·예약·후기까지! 후기 작성 시 최대 11만원 캐시백">
+<meta property="og:image" content="https://my.dolbommat.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://my.dolbommat.com/cs-hub.html">
+<meta property="og:site_name" content="돌봄매트">
+<meta property="og:locale" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="돌봄매트 · 링크 하나로 간편하게">
+<meta name="twitter:description" content="견적·샘플·예약·후기까지! 후기 작성 시 최대 11만원 캐시백">
+<meta name="twitter:image" content="https://my.dolbommat.com/og-image.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --text:#191f28;
+  --text2:#4e5968;
+  --text3:#8b95a1;
+  --border:#e5e8eb;
+  --primary:#e8736c;
+  --primary-light:#fdf0ef;
+  --primary-dark:#d45a53;
+  --baby-blue:#b9d5d8;
+  --baby-blue-light:#d8e7e9;
+  --baby-blue-dark:#8eb4b8;
+  --baby-blue-deep:#5e9499;
+  --orange:#f59f00;
+  --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,0.06);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  max-width:480px;
+  margin:0 auto;
+  padding-bottom:32px;
+  overflow-x:hidden;
+}
+
+/* 히어로 - 여백 추가 */
+.hero{
+  background:linear-gradient(180deg,var(--baby-blue) 0%,var(--baby-blue-light) 100%);
+  padding:28px 20px;
+  position:relative;
+}
+.ref-badge{
+  display:none;
+  background:#fff;
+  border:1px solid var(--baby-blue-dark);
+  border-radius:14px;
+  padding:5px 12px;
+  font-size:11px;
+  color:var(--baby-blue-deep);
+  font-weight:700;
+  margin-bottom:12px;
+  text-align:center;
+}
+.ref-badge.show{display:inline-block}
+
+/* 로고 + 텍스트 가로 정렬 */
+.hero-row{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.logo-wrap{
+  width:90px;
+  height:90px;
+  flex-shrink:0;
+}
+.logo-img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.hero-text{flex:1;min-width:0}
+.hero-title{
+  font-size:19px;
+  font-weight:800;
+  color:var(--text);
+  line-height:1.35;
+  letter-spacing:-0.5px;
+  margin-bottom:6px;
+}
+.hero-sub{
+  font-size:12px;
+  color:var(--text2);
+  font-weight:500;
+  letter-spacing:-0.2px;
+  line-height:1.5;
+}
+
+/* 신뢰 카드 */
+.trust-section{
+  background:#fff;
+  padding:16px 14px;
+  border-bottom:1px solid var(--border);
+}
+.trust-list{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.trust-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px 6px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:78px;
+}
+.trust-card-num{
+  font-size:14px;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:-0.5px;
+  margin-bottom:5px;
+}
+.trust-card-desc{
+  font-size:11px;
+  color:var(--text2);
+  font-weight:500;
+  line-height:1.35;
+  letter-spacing:-0.2px;
+}
+.trust-card.blue .trust-card-num{color:var(--baby-blue-deep)}
+.trust-card.coral .trust-card-num{color:var(--primary)}
+.trust-card.amber .trust-card-num{color:var(--orange)}
+
+/* 컨테이너 */
+.container{padding:20px 14px 0}
+
+.section-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:14px;
+  padding:0 4px;
+  letter-spacing:-0.3px;
+}
+
+/* 단계별 가이드 - 간격 확대 */
+.steps{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px 18px;
+  margin-bottom:20px;
+}
+.step{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 0;
+  position:relative;
+  text-decoration:none;
+  color:inherit;
+}
+.step:not(:last-child)::after{
+  content:'';
+  position:absolute;
+  left:14px;
+  top:46px;
+  bottom:-14px;
+  width:2px;
+  background:var(--baby-blue-light);
+}
+.step-num{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--baby-blue-deep);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:700;
+  flex-shrink:0;
+  position:relative;
+  z-index:1;
+}
+.step-content{flex:1;min-width:0}
+.step-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:3px;
+  letter-spacing:-0.2px;
+}
+.step-desc{
+  font-size:11px;
+  color:var(--text3);
+  font-weight:400;
+  line-height:1.4;
+}
+.step-action{
+  background:var(--baby-blue-light);
+  color:var(--baby-blue-deep);
+  padding:5px 12px;
+  border-radius:14px;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.step-action.highlight{
+  background:var(--primary-light);
+  color:var(--primary);
+}
+
+/* 추가 정보 */
+.extra-menu{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.extra-item{
+  display:flex;
+  align-items:center;
+  padding:14px 18px;
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
+  transition:background 0.15s;
+}
+.extra-item:active{background:var(--baby-blue-light)}
+.extra-content{flex:1;min-width:0}
+.extra-title{
+  font-size:13px;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.2px;
+}
+.extra-desc{
+  font-size:11px;
+  color:var(--text3);
+  margin-top:2px;
+  font-weight:400;
+}
+.extra-arrow{
+  color:var(--text3);
+  font-size:14px;
+  font-weight:400;
+  margin-left:8px;
+}
+
+/* FAQ 섹션 */
+.faq-section{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.faq-item{
+  border-bottom:1px solid var(--border);
+}
+.faq-item:last-child{border-bottom:none}
+.faq-question{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  cursor:pointer;
+  transition:background 0.15s;
+  user-select:none;
+}
+.faq-question:active{background:var(--baby-blue-light)}
+.faq-q-text{
+  flex:1;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+  letter-spacing:-0.2px;
+  line-height:1.5;
+  padding-right:8px;
+}
+.faq-icon{
+  color:var(--baby-blue-deep);
+  font-size:16px;
+  font-weight:400;
+  transition:transform 0.25s;
+  flex-shrink:0;
+}
+.faq-item.open .faq-icon{
+  transform:rotate(45deg);
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease, padding 0.3s ease;
+  padding:0 18px;
+  font-size:12px;
+  color:var(--text2);
+  line-height:1.7;
+  letter-spacing:-0.2px;
+}
+.faq-item.open .faq-answer{
+  max-height:400px;
+  padding:0 18px 16px;
+}
+.faq-answer strong{
+  color:var(--baby-blue-deep);
+  font-weight:600;
+}
+
+/* 카톡 상담 */
+.contact-area{margin-bottom:8px}
+.btn-kakao{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  background:#fee500;
+  color:#1a1a1a;
+  padding:14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  font-family:inherit;
+  border:none;
+  cursor:pointer;
+  transition:transform 0.15s;
+  letter-spacing:-0.2px;
+}
+.btn-kakao:active{transform:scale(0.98)}
+
+/* 푸터 */
+.footer{
+  margin-top:14px;
+  padding:0 14px;
+  text-align:center;
+  font-size:11px;
+  color:var(--text3);
+  font-weight:400;
+  line-height:1.6;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.steps,.extra-menu,.faq-section,.contact-area{animation:fadeUp 0.4s ease both}
+.steps{animation-delay:0.1s}
+.extra-menu{animation-delay:0.2s}
+.faq-section{animation-delay:0.3s}
+.contact-area{animation-delay:0.4s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+.logo-img{animation:float 3s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<!-- 히어로 -->
+<div class="hero">
+  <div id="refBadge" class="ref-badge"><span id="refName"></span> 추천 받으셨군요</div>
+  <div class="hero-row">
+    <div class="logo-wrap">
+      <img src="dolbom-logo.png" alt="돌봄매트" class="logo-img">
+    </div>
+    <div class="hero-text">
+      <div class="hero-title">층간소음 62% 저감<br>프리미엄 TPU 매트</div>
+      <div class="hero-sub">아이와 반려동물의 안전을 책임집니다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 신뢰 정보 -->
+<div class="trust-section">
+  <div class="trust-list">
+    <div class="trust-card blue">
+      <div class="trust-card-num">5성급 호텔</div>
+      <div class="trust-card-desc">키즈룸 시공 완료</div>
+    </div>
+    <div class="trust-card coral">
+      <div class="trust-card-num">80개+</div>
+      <div class="trust-card-desc">국공립 어린이집 시공 완료</div>
+    </div>
+    <div class="trust-card amber">
+      <div class="trust-card-num">6,700곳</div>
+      <div class="trust-card-desc">시공 완료</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 단계별 가이드 -->
+  <div class="section-title">처음이시라면 이렇게 시작하세요</div>
+  <div class="steps">
+    
+    <a href="quote.html" class="step" id="stepQuote">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">우리집 견적 받기</div>
+        <div class="step-desc">평수 입력하면 즉시 가격 확인</div>
+      </div>
+      <div class="step-action">계산</div>
+    </a>
+
+    <a href="sample.html" class="step" id="stepSample">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">무료 샘플 받기</div>
+        <div class="step-desc">직접 만져보고 품질 확인</div>
+      </div>
+      <div class="step-action">신청</div>
+    </a>
+
+    <a href="booking.html" class="step" id="stepBooking">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">시공 예약</div>
+        <div class="step-desc">원하는 날짜 선택해 신청</div>
+      </div>
+      <div class="step-action">예약</div>
+    </a>
+
+    <a href="cs-review-info.html" class="step" id="stepReview">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">시공 후 후기 작성</div>
+        <div class="step-desc">최대 11만원 캐시백</div>
+      </div>
+      <div class="step-action highlight">미션</div>
+    </a>
+
+  </div>
+
+  <!-- 자세한 정보 -->
+  <div class="extra-menu">
+    <a href="https://www.dolbommat.com" class="extra-item">
+      <div class="extra-content">
+        <div class="extra-title">홈페이지</div>
+        <div class="extra-desc">제품 소개 · 인증서 · 시공 후기</div>
+      </div>
+      <div class="extra-arrow">›</div>
+    </a>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-title">자주 묻는 질문</div>
+  <div class="faq-section">
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">시공 시간이 얼마나 걸리나요?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        보통 <strong>34평 기준 3~4시간</strong> 정도 소요됩니다.<br><br>
+        돌봄매트는 <strong>전문 시공팀 2명</strong>이 함께 방문합니다.<br>
+        당일 시공이 가능하며, 시공 후 바로 생활하실 수 있습니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">바닥손상 / 이사할 때 뜯어서 가져갈 수 있나요?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <strong>네, 바닥 손상 걱정 없이 가능합니다!</strong><br><br>
+        특허받은 <strong>공기순환통로 구조</strong>로 매트 아래 습기가 고이지 않아, 장기간 시공 후에도 바닥재에 곰팡이나 변색 걱정이 없어요.<br><br>
+        <strong>마스킹 테이프 위에 3M 폼 테이프</strong>를 부착하는 이중 구조라서, 이사할 때 바닥 손상 없이 깔끔하게 뜯어갈 수 있습니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">바닥 난방(온돌)과 함께 사용해도 되나요?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <strong>네, 문제없습니다.</strong><br><br>
+        돌봄매트는 <strong>내열성이 뛰어난 TPU 소재</strong>를 사용하여 바닥 난방 위에서도 안전하게 사용 가능합니다.<br><br>
+        유해물질 걱정도 없어요.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">시공 가능한 지역이 어디인가요?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <strong>부산·경기 본사에서 시공팀을 운영합니다.</strong><br><br>
+        <strong>· 부산팀</strong>: 부산·울산·대구·경상남도, 경상북도(포항·경주·김천·구미·경산·영천)<br>
+        <strong>· 경기팀</strong>: 서울·경기·인천·충청남도·충청북도<br><br>
+        ※ 광주광역시·강원도·전라도·제주도·경상북도(위 6곳 외)는 현재 시공이 어렵습니다. 카카오톡으로 문의해주세요.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">무료 샘플을 받아볼 수 있나요?</div>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <strong>네, 무료로 보내드립니다!</strong><br><br>
+        위에 있는 <strong>"무료 샘플 받기"</strong> 버튼을 눌러 신청하시면 2~3일 내 배송됩니다.<br><br>
+        실제 매트를 직접 만져보고 결정하세요.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 카톡 상담 -->
+  <div class="contact-area">
+    <a href="http://pf.kakao.com/_UMyBK/chat" class="btn-kakao">
+      카카오톡 24시 상담
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  돌봄매트 · TPU 바닥매트 전문 · 본사 직영 · KC 안전확인 인증
+</div>
+
+<script>
+function toggleFaq(el){
+  var item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+(function(){
+  var urlParams = new URLSearchParams(window.location.search);
+  var ch = urlParams.get('ch');
+  
+  if (!ch) {
+    var path = window.location.pathname;
+    var match = path.match(/\/([a-zA-Z0-9_-]+)$/);
+    if (match && match[1] !== 'cs-hub.html') {
+      ch = match[1];
+    }
+  }
+  
+  if (ch) {
+    var badge = document.getElementById('refBadge');
+    var name = document.getElementById('refName');
+    if (badge && name) {
+      name.textContent = ch;
+      badge.classList.add('show');
+    }
+    
+    try {
+      var saved = JSON.parse(localStorage.getItem('dolbom_shared') || '{}');
+      saved.channel = ch;
+      saved.lastVisit = new Date().toISOString();
+      localStorage.setItem('dolbom_shared', JSON.stringify(saved));
+    } catch(e) {}
+    
+    var menuItems = [
+      {id: 'stepQuote',    url: 'quote.html'},
+      {id: 'stepSample',   url: 'sample.html'},
+      {id: 'stepBooking',  url: 'booking.html'},
+      {id: 'stepReview',   url: 'cs-review-info.html'}
+    ];
+    
+    menuItems.forEach(function(item){
+      var el = document.getElementById(item.id);
+      if (el) {
+        el.href = item.url + '?ch=' + encodeURIComponent(ch);
+      }
+    });
+  }
+  
+  try {
+    var saved = JSON.parse(localStorage.getItem('dolbom_shared') || '{}');
+    if (saved.phone && saved.name) {
+      var API_URL = 'https://script.google.com/macros/s/AKfycbwo33sv9L1y722IdcfUm_i_nhmgZCCQX-grPEXGYbLemeI3WUx-f3C1Mi8ZxunmZ6D6lw/exec';
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'text/plain'},
+        body: JSON.stringify({
+          action: 'trackEntry',
+          name: saved.name,
+          phone: saved.phone,
+          ref: ch || '',
+          page: 'cs-hub',
+          consent: 'Y'
+        })
+      }).catch(function(){});
+    }
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>
