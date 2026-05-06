@@ -239,7 +239,7 @@ if(window.wcs){
     <a href="cases.html">시공사례</a>
     <a href="event.html">이벤트</a>
   </div>
-  <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank"><button class="nav-cta">카톡상담</button></a>
+  <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" onclick="try{if(window.wcs&&window.wcs.trans){var _c={};_c.type='lead';wcs.trans(_c);}}catch(e){}"><button class="nav-cta">카톡상담</button></a>
 </nav>
 
 <!-- HERO -->
@@ -569,6 +569,9 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   document.getElementById('quoteImgKakaoBtn').onclick=function(){
     copyQuoteTextToClipboard().then(function(){
       showHomeToast('✅ 견적서 복사 완료! 카톡에 붙여넣기 해주세요');
+      // ═══ 네이버 광고 전환 추적 (lead) - 카톡 상담 ═══
+      try { if (window.wcs && window.wcs.trans) { var _conv = {}; _conv.type = 'lead'; wcs.trans(_conv); } } catch(e) { console.warn('네이버 전환 추적 실패:', e); }
+      // ═══════════════════════════════════════════════
       setTimeout(function(){
         window.open('https://pf.kakao.com/_UMyBK/chat','_blank');
       },800);
@@ -641,7 +644,7 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
   <div style="display:flex;justify-content:center;gap:16px;margin-top:12px">
     <a href="https://instagram.com/dolbomstore" target="_blank">Instagram</a>
     <a href="https://blog.naver.com/dolbommatt1004" target="_blank">Blog</a>
-    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank">카카오톡</a>
+    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" onclick="try{if(window.wcs&&window.wcs.trans){var _c={};_c.type='lead';wcs.trans(_c);}}catch(e){}">카카오톡</a>
   </div>
   <p style="margin-top:12px;font-size:11px;opacity:0.4">© 2026 돌봄매트. All rights reserved.</p>
 </footer>
