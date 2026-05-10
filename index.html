@@ -870,6 +870,7 @@ if(window.wcs){
   <nav class="menu-list">
     <a href="#pricingSection" onclick="closeMenu()">가격 공개</a>
     <a href="#keyFeaturesSection" onclick="closeMenu()">제품 소개</a>
+    <a href="#casesSection" onclick="closeMenu()">시공 사례</a>
     <a href="#comparisonSection" onclick="closeMenu()">차별화</a>
     <a href="#reviewSection" onclick="closeMenu()">시공후기</a>
     <a href="#calcSection" onclick="closeMenu()">맞춤견적</a>
@@ -939,6 +940,233 @@ if(window.wcs){
      💰 가격 공개 섹션 (업계 최초 시도)
      Hero 직후 배치 - "복잡한 조건 없이, 가격 공개"
 ═══════════════════════════════════════ -->
+
+<!-- ═══════════════════════════════════════
+     🖼️ 시공 사례 갤러리 (제품별 토글) · 2026-05-10
+     실제 시공 디자인을 카테고리별로 슬라이드
+═══════════════════════════════════════ -->
+<style>
+.cases-viewer{position:relative;border-radius:24px;overflow:hidden;background:#1a1a1a;margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,0.08)}
+.cases-image-wrap{position:relative;aspect-ratio:16/10;background:#1a1a1a;overflow:hidden}
+.cases-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.25s ease}
+.cases-image-wrap img.fading{opacity:0.25}
+.cases-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;background:#1a1a1a}
+.cases-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:none;background:rgba(255,255,255,0.92);border-radius:50%;font-size:30px;color:#222;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.18);z-index:2;font-weight:300;line-height:1;padding:0;font-family:inherit}
+.cases-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+.cases-nav:active{transform:translateY(-50%) scale(0.95)}
+.cases-prev{left:16px}
+.cases-prev span{margin-bottom:3px;margin-right:2px}
+.cases-next{right:16px}
+.cases-next span{margin-bottom:3px;margin-left:2px}
+.cases-counter{position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.55);color:#fff;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;z-index:2;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cases-tabs-wrap{display:flex;justify-content:center;width:100%}
+.cases-tabs{display:inline-flex;gap:6px;background:#EFEFEF;border-radius:100px;padding:6px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.cases-tabs::-webkit-scrollbar{display:none}
+.cases-tab{padding:10px 18px;border:none;background:transparent;color:var(--soft);font-size:13px;font-weight:600;border-radius:100px;cursor:pointer;white-space:nowrap;transition:all 0.25s;font-family:inherit}
+.cases-tab.active{background:#1a1a1a;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.cases-tab:not(.active):hover{background:rgba(0,0,0,0.05)}
+@media (max-width:600px){
+  .cases-tab{padding:8px 13px;font-size:12px}
+  .cases-nav{width:40px;height:40px;font-size:26px}
+  .cases-image-wrap{aspect-ratio:4/3}
+  .cases-tabs-wrap{justify-content:flex-start;padding:0 4px;overflow-x:auto;scrollbar-width:none}
+  .cases-tabs-wrap::-webkit-scrollbar{display:none}
+}
+</style>
+
+<section id="casesSection" class="section" style="background:#FAFAF7;padding:72px 20px">
+  <div style="max-width:980px;margin:0 auto">
+    <p class="section-label fade-up text-center" style="color:var(--accent)">Real Cases</p>
+    <h2 class="section-title text-center fade-up" style="margin-bottom:8px">실제 시공 사례.</h2>
+    <p class="fade-up text-center" style="font-size:14px;color:var(--soft);line-height:1.7;margin-bottom:36px">
+      🏠 제품별 실제 시공 디자인을 직접 확인해보세요.<br>
+      6,700가정에서 만든 진짜 공간들입니다.
+    </p>
+
+    <!-- 메인 이미지 영역 -->
+    <div class="cases-viewer fade-up" id="casesViewer">
+      <div class="cases-image-wrap">
+        <img id="casesImg" src="" alt="돌봄매트 시공 사례" loading="lazy">
+        <div class="cases-empty" id="casesEmpty" style="display:none">📷 준비 중입니다</div>
+        <button class="cases-nav cases-prev" onclick="caseNav(-1)" aria-label="이전 사진"><span>‹</span></button>
+        <button class="cases-nav cases-next" onclick="caseNav(1)" aria-label="다음 사진"><span>›</span></button>
+        <div class="cases-counter">
+          <span id="caseCurrent">1</span> / <span id="caseTotal">1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 토글 (제품 카테고리) - 통일감 4개 -->
+    <div class="cases-tabs-wrap fade-up">
+      <div class="cases-tabs" role="tablist">
+        <button class="cases-tab active" data-cat="1000modern" onclick="setCaseCategory('1000modern')" role="tab">1,000 모던</button>
+        <button class="cases-tab" data-cat="500modern" onclick="setCaseCategory('500modern')" role="tab">500 모던</button>
+        <button class="cases-tab" data-cat="500marble" onclick="setCaseCategory('500marble')" role="tab">500 마블</button>
+        <button class="cases-tab" data-cat="500cotton" onclick="setCaseCategory('500cotton')" role="tab">500 코튼</button>
+      </div>
+    </div>
+
+    <!-- 사이즈 안내 -->
+    <p class="fade-up text-center" style="font-size:12px;color:var(--soft);margin-top:12px;margin-bottom:0;letter-spacing:0.3px">
+      <strong style="color:var(--ink)">1,000</strong> = 1m × 1m  &nbsp;·&nbsp;  <strong style="color:var(--ink)">500</strong> = 50cm × 50cm
+    </p>
+  </div>
+</section>
+
+<script>
+// ===== 시공 사례 갤러리 =====
+// 사진 추가/제거: 아래 caseData 배열에 파일 경로만 넣으면 됨
+// 권장 폴더 구조: img/cases/{카테고리}/01.jpg, 02.jpg, ...
+// 권장 비율: 16:10 (or 4:3 in mobile)
+const caseData = {
+  '1000modern': [
+    'img/cases/1000-modern/01.jpg',
+    'img/cases/1000-modern/02.jpg',
+    'img/cases/1000-modern/03.jpg',
+    'img/cases/1000-modern/04.jpg',
+    'img/cases/1000-modern/05.jpg'
+  ],
+  '500modern': [
+    'img/cases/500-modern/01.jpg',
+    'img/cases/500-modern/02.jpg',
+    'img/cases/500-modern/03.jpg'
+  ],
+  '500marble': [
+    'img/cases/500-marble/01.jpg',
+    'img/cases/500-marble/02.jpg',
+    'img/cases/500-marble/03.jpg'
+  ],
+  '500cotton': [
+    'img/cases/500-cotton/01.jpg',
+    'img/cases/500-cotton/02.jpg',
+    'img/cases/500-cotton/03.jpg'
+  ]
+};
+
+let currentCaseCategory = '1000modern';
+let currentCaseIndex = 0;
+
+function setCaseCategory(cat) {
+  if (currentCaseCategory === cat) return;
+  currentCaseCategory = cat;
+  currentCaseIndex = 0;
+
+  document.querySelectorAll('.cases-tab').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.classList.toggle('active', isActive);
+
+    // 🆕 활성 탭이 항상 보이도록 자동 스크롤 (모바일에서 잘림 방지)
+    if (isActive) {
+      // 부모 컨테이너 안에서만 스크롤 (페이지 전체 스크롤 없음)
+      const tabsWrap = btn.closest('.cases-tabs');
+      if (tabsWrap) {
+        const tabRect = btn.getBoundingClientRect();
+        const wrapRect = tabsWrap.getBoundingClientRect();
+        // 활성 탭이 컨테이너 가운데에 오도록 스크롤
+        const offset = (tabRect.left + tabRect.width / 2) - (wrapRect.left + wrapRect.width / 2);
+        tabsWrap.scrollBy({ left: offset, behavior: 'smooth' });
+      }
+    }
+  });
+
+  updateCaseImage();
+}
+
+function caseNav(dir) {
+  const photos = caseData[currentCaseCategory];
+  if (!photos || photos.length <= 1) return;
+  currentCaseIndex = (currentCaseIndex + dir + photos.length) % photos.length;
+  updateCaseImage();
+}
+
+// 카테고리별 SEO alt 텍스트
+const caseAltText = {
+  '1000modern': '돌봄매트 1,000 모던 거실 시공 사례',
+  '500modern':  '돌봄매트 500 모던 시공 사례',
+  '500marble':  '돌봄매트 500 마블 시공 사례',
+  '500cotton':  '돌봄매트 500 코튼 시공 사례'
+};
+
+function updateCaseImage() {
+  const photos = caseData[currentCaseCategory];
+  const img = document.getElementById('casesImg');
+  const empty = document.getElementById('casesEmpty');
+  const counter = document.querySelector('.cases-counter');
+  
+  // 🆕 카테고리별 alt 동적 변경 (SEO)
+  if (img && caseAltText[currentCaseCategory]) {
+    img.alt = caseAltText[currentCaseCategory] + ' ' + (currentCaseIndex + 1);
+  }
+
+  if (!photos || photos.length === 0) {
+    img.style.display = 'none';
+    empty.style.display = 'flex';
+    counter.style.display = 'none';
+    return;
+  }
+
+  img.style.display = 'block';
+  empty.style.display = 'none';
+  counter.style.display = 'block';
+
+  img.classList.add('fading');
+  setTimeout(() => {
+    img.src = photos[currentCaseIndex];
+    document.getElementById('caseCurrent').textContent = currentCaseIndex + 1;
+    document.getElementById('caseTotal').textContent = photos.length;
+    img.onload = () => img.classList.remove('fading');
+    img.onerror = () => {
+      img.classList.remove('fading');
+      // 사진 로드 실패 시 placeholder
+      img.style.display = 'none';
+      empty.style.display = 'flex';
+      empty.textContent = '📷 사진 준비 중입니다';
+    };
+  }, 100);
+
+  // 다음 사진 미리 로드
+  if (photos.length > 1) {
+    const nextIdx = (currentCaseIndex + 1) % photos.length;
+    new Image().src = photos[nextIdx];
+  }
+}
+
+// 키보드 좌/우 화살표
+document.addEventListener('keydown', function(e) {
+  const viewer = document.getElementById('casesViewer');
+  if (!viewer) return;
+  const rect = viewer.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  if (!inView) return;
+  if (e.key === 'ArrowLeft') caseNav(-1);
+  else if (e.key === 'ArrowRight') caseNav(1);
+});
+
+// 모바일 스와이프 지원
+(function() {
+  const viewer = document.getElementById('casesViewer');
+  if (!viewer) return;
+  let startX = 0, startY = 0;
+  viewer.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, {passive:true});
+  viewer.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const dx = startX - endX;
+    const dy = Math.abs(startY - endY);
+    // 가로 스와이프만 (세로 스크롤과 충돌 방지)
+    if (Math.abs(dx) > 50 && dy < 80) {
+      caseNav(dx > 0 ? 1 : -1);
+    }
+  }, {passive:true});
+})();
+
+// 초기 로드
+updateCaseImage();
+</script>
+
 <section id="pricingSection" style="background:linear-gradient(135deg,#1a1a1a 0%,#0a0a0a 100%);padding:48px 20px 40px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
   <div style="max-width:640px;margin:0 auto" class="fade-up">
 
