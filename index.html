@@ -156,7 +156,7 @@ body.mode-pet .menu-list a .for-pet{display:inline}
 .hero .content{position:relative;z-index:1;padding:110px 24px 64px;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .hero .sub{font-size:12px;font-weight:600;letter-spacing:0.15em;color:rgba(255,255,255,0.65);text-transform:uppercase;margin-bottom:16px}
 .hero h1{font-size:clamp(38px,9.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-0.045em;color:#fff;margin-bottom:18px;max-width:600px;text-shadow:0 2px 40px rgba(0,0,0,0.15);word-break:keep-all}
-.hero .desc{font-size:clamp(14px,3.3vw,17px);color:rgba(255,255,255,0.7);line-height:1.65;max-width:300px;margin-bottom:36px;font-weight:400}
+.hero .desc{font-size:clamp(14px,3.3vw,17px);color:rgba(255,255,255,0.7);line-height:1.4;max-width:300px;margin-bottom:36px;font-weight:400}
 .hero .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn-white{background:rgba(255,255,255,0.97);color:#1d1d1f;border:none;border-radius:var(--radius-pill);padding:15px 34px;font-size:15px;font-weight:660;transition:all 0.25s var(--ease);box-shadow:0 2px 12px rgba(0,0,0,0.08)}
 .btn-white:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
@@ -932,8 +932,8 @@ if(window.wcs){
       <span class="for-pet">뛰어다녀도,<br>슬개골 걱정도,<br>미끄러질 일도 없이.</span>
     </h1>
     <p class="desc hero-anim hero-d4">
-      <span class="for-baby">층간소음 62% 저감. 미끄럼 방지.<br>6,700곳이 선택한 프리미엄 매트.</span>
-      <span class="for-pet">강화 논슬립 코팅. 스크래치 방지.<br>6,700곳이 선택한 프리미엄 매트.</span>
+      <span class="for-baby">층간소음은 줄이고, 미끄럼은 잡고<br>마루까지 생각한 공기순환 TPU 대형매트<br>누적 6,700곳이 선택한 프리미엄 매트</span>
+      <span class="for-pet">강화 논슬립 코팅. 스크래치 방지<br>마루까지 생각한 공기순환 TPU 대형매트<br>누적 6,700곳이 선택한 프리미엄 매트</span>
     </p>
     <div class="btns hero-anim hero-d5">
     </div>
@@ -995,6 +995,7 @@ if(window.wcs){
     <div class="cases-viewer fade-up" id="casesViewer">
       <div class="cases-image-wrap">
         <img id="casesImg" src="" alt="돌봄매트 시공 사례" loading="lazy">
+        <video id="casesVideo" src="img/air-tunnel.mp4" muted loop playsinline preload="auto" style="display:none;width:100%;height:100%;object-fit:cover"></video>
         <div class="cases-empty" id="casesEmpty" style="display:none">📷 준비 중입니다</div>
         <button class="cases-nav cases-prev" onclick="caseNav(-1)" aria-label="이전 사진"><span>‹</span></button>
         <button class="cases-nav cases-next" onclick="caseNav(1)" aria-label="다음 사진"><span>›</span></button>
@@ -1007,7 +1008,8 @@ if(window.wcs){
     <!-- 토글 (제품 카테고리) - 통일감 4개 -->
     <div class="cases-tabs-wrap fade-up">
       <div class="cases-tabs" role="tablist">
-        <button class="cases-tab active" data-cat="1000modern" onclick="setCaseCategory('1000modern')" role="tab">1,000 모던</button>
+        <button class="cases-tab active" data-cat="airtunnel" onclick="setCaseCategory('airtunnel')" role="tab">공기순환 통로</button>
+        <button class="cases-tab" data-cat="1000modern" onclick="setCaseCategory('1000modern')" role="tab">1,000 모던</button>
         <button class="cases-tab" data-cat="500modern" onclick="setCaseCategory('500modern')" role="tab">500 모던</button>
         <button class="cases-tab" data-cat="500marble" onclick="setCaseCategory('500marble')" role="tab">500 마블</button>
         <button class="cases-tab" data-cat="500cotton" onclick="setCaseCategory('500cotton')" role="tab">500 코튼</button>
@@ -1122,7 +1124,7 @@ const caseData = {
   ]
 };
 
-let currentCaseCategory = '1000modern';
+let currentCaseCategory = 'airtunnel';
 let currentCaseIndex = 0;
 
 function setCaseCategory(cat) {
@@ -1171,6 +1173,24 @@ function updateCaseImage() {
   const img = document.getElementById('casesImg');
   const empty = document.getElementById('casesEmpty');
   const counter = document.querySelector('.cases-counter');
+  const video = document.getElementById('casesVideo');
+  const prevBtn = document.querySelector('.cases-prev');
+  const nextBtn = document.querySelector('.cases-next');
+
+  // 공기순환 통로 = 영상 (슬라이드 없이 자동재생)
+  if (currentCaseCategory === 'airtunnel') {
+    if (img) img.style.display = 'none';
+    if (empty) empty.style.display = 'none';
+    if (counter) counter.style.display = 'none';
+    if (prevBtn) prevBtn.style.display = 'none';
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (video) { video.style.display = 'block'; video.play().catch(function(){}); }
+    return;
+  }
+  // 그 외 카테고리: 영상 숨기고 화살표 복구
+  if (video) { video.style.display = 'none'; video.pause(); }
+  if (prevBtn) prevBtn.style.display = '';
+  if (nextBtn) nextBtn.style.display = '';
   
   // 🆕 카테고리별 alt 동적 변경 (SEO)
   if (img && caseAltText[currentCaseCategory]) {
