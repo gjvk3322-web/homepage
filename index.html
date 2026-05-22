@@ -956,6 +956,7 @@ if(window.wcs){
 <style>
 .cases-viewer{position:relative;border-radius:24px;overflow:hidden;background:#1a1a1a;margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,0.08)}
 .cases-image-wrap{position:relative;aspect-ratio:16/10;background:#1a1a1a;overflow:hidden}
+.cases-image-wrap.air-mode{aspect-ratio:1280/1240}
 .cases-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.25s ease}
 .cases-image-wrap img.fading{opacity:0.25}
 .cases-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;background:#1a1a1a}
@@ -995,7 +996,7 @@ if(window.wcs){
     <div class="cases-viewer fade-up" id="casesViewer">
       <div class="cases-image-wrap">
         <img id="casesImg" src="" alt="돌봄매트 시공 사례" loading="lazy">
-        <video id="casesVideo" src="img/air-tunnel.mp4" muted loop playsinline preload="auto" style="display:none;width:100%;height:100%;object-fit:cover"></video>
+        <video id="casesVideo" src="img/air-tunnel.mp4" muted loop playsinline preload="auto" style="display:none;width:100%;height:100%;object-fit:contain"></video>
         <div class="cases-empty" id="casesEmpty" style="display:none">📷 준비 중입니다</div>
         <button class="cases-nav cases-prev" onclick="caseNav(-1)" aria-label="이전 사진"><span>‹</span></button>
         <button class="cases-nav cases-next" onclick="caseNav(1)" aria-label="다음 사진"><span>›</span></button>
@@ -1176,9 +1177,11 @@ function updateCaseImage() {
   const video = document.getElementById('casesVideo');
   const prevBtn = document.querySelector('.cases-prev');
   const nextBtn = document.querySelector('.cases-next');
+  const wrap = document.querySelector('.cases-image-wrap');
 
   // 공기순환 통로 = 영상 (슬라이드 없이 자동재생)
   if (currentCaseCategory === 'airtunnel') {
+    if (wrap) wrap.classList.add('air-mode');
     if (img) img.style.display = 'none';
     if (empty) empty.style.display = 'none';
     if (counter) counter.style.display = 'none';
@@ -1187,7 +1190,8 @@ function updateCaseImage() {
     if (video) { video.style.display = 'block'; video.play().catch(function(){}); }
     return;
   }
-  // 그 외 카테고리: 영상 숨기고 화살표 복구
+  // 그 외 카테고리: 영상 숨기고 화살표·틀 복구
+  if (wrap) wrap.classList.remove('air-mode');
   if (video) { video.style.display = 'none'; video.pause(); }
   if (prevBtn) prevBtn.style.display = '';
   if (nextBtn) nextBtn.style.display = '';
