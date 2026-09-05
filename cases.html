@@ -193,7 +193,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   <nav class="header-links">
     <a href="https://www.dolbommat.com">홈</a>
     <a href="https://www.dolbommat.com/quote.html">맞춤견적</a>
-    <a href="http://pf.kakao.com/_dolbommat/chat" id="hd-kakao">카톡 상담</a>
+    <a href="http://pf.kakao.com/_UMyBK/chat" id="hd-kakao">카톡 상담</a>
   </nav>
 </header>
 
@@ -228,13 +228,13 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   <h3>우리 집도 이렇게 될 수 있을까?</h3>
   <p>주소와 평형만 알려주시면 1분 안에 예상 견적을 안내해드려요.</p>
   <div class="foot-btns">
-    <a class="btn-kakao" href="http://pf.kakao.com/_dolbommat/chat" id="ft-kakao">카카오톡 상담하기</a>
+    <a class="btn-kakao" href="http://pf.kakao.com/_UMyBK/chat" id="ft-kakao">카카오톡 상담하기</a>
     <a class="btn-line" href="https://www.dolbommat.com/quote.html">맞춤 견적 보기</a>
   </div>
 </section>
 
 <footer>
-  돌봄매트 · 부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호<br>
+  돌봄매트<br>부산본사 · 부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호<br>경기지점 · 경기도 안산시 단원구 산단로 325 에프동 205호<br>
   0507-1345-4146 · dolbommat@naver.com
 </footer>
 
@@ -254,7 +254,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   </div>
   <div class="lb-bottom">
     <span id="lbCounter"></span>
-    <a class="lb-cta" href="http://pf.kakao.com/_dolbommat/chat" id="lb-kakao">이 사례로 상담하기</a>
+    <a class="lb-cta" href="http://pf.kakao.com/_UMyBK/chat" id="lb-kakao">이 사례로 상담하기</a>
   </div>
 </div>
 
@@ -335,7 +335,7 @@ function renderGrid(){
     el.innerHTML=`
       <div class="thumb">
         <img src="${c.photos.length?photoUrl(c.photos[matchPhotoIdx(c)].id,800):''}" alt="${esc(c.title)} — ${esc(c.mat)} 시공 사진" loading="${idx<6?'eager':'lazy'}">
-        <span class="photo-n">📷 ${c.photos.length}</span>
+        <span class="photo-n">${c.photos.length}장</span>
       </div>
       <div class="title">${esc(c.title)}</div>
       <div class="meta">
