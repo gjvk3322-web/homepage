@@ -1,27 +1,6 @@
-# 돌봄매트 robots.txt
-# 모든 검색엔진 크롤링 허용
-
 User-agent: *
 Allow: /
-Disallow: /backup_*/
-Disallow: /naver*.html
+Disallow: /cs-hub.html
+Disallow: /c.html
 
-# 네이버 봇
-User-agent: Yeti
-Allow: /
-Crawl-delay: 1
-
-# 구글 봇
-User-agent: Googlebot
-Allow: /
-
-# 다음 봇
-User-agent: Daumoa
-Allow: /
-
-# 빙 봇
-User-agent: Bingbot
-Allow: /
-
-# 사이트맵 위치
 Sitemap: https://www.dolbommat.com/sitemap.xml
