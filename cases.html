@@ -24,8 +24,9 @@
   gtag('js', new Date());
   gtag('config', 'G-WNRMST82MC');
 </script>
+<!-- 통합 추적(GA4 G-Z98MT8N5WK + 메타·카카오 픽셀 + 네이버 WA) — index.html과 동일, ID는 tracking.js에서 관리 -->
+<script src="tracking.js" defer></script>
 
-<link rel="preload" href="cases.json" as="fetch">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://drive.google.com">
 <link rel="preconnect" href="https://lh3.googleusercontent.com">
@@ -130,13 +131,11 @@ header{
   background:var(--paper-dim);border-radius:6px;padding:3px 8px;
 }
 .state-msg{padding:80px 0;text-align:center;color:var(--ink-faint);font-size:15px;display:none}
-/* 스켈레톤 — 데이터 도착 전 자리 표시 */
-@keyframes sk{0%{background-position:100% 0}100%{background-position:-100% 0}}
-.sk,.case-card .thumb.sk,.best-card.sk-best{background:linear-gradient(90deg,var(--paper-dim) 25%,#ecebe8 50%,var(--paper-dim) 75%);background-size:200% 100%;animation:sk 1.4s ease-in-out infinite;border-radius:8px}
-.sk-card .thumb{border-radius:12px}
-.sk-card .sk-t{height:15px;margin-top:12px;width:78%}
-.sk-card .sk-m{height:12px;margin-top:8px;width:45%}
-.best-card.sk-best{aspect-ratio:4/3;cursor:default}
+/* 첫 로딩 스켈레톤 — 데이터 오기 전 카드 자리 표시 */
+.sk .thumb{background:linear-gradient(90deg,#f0efec 25%,#e7e5e1 37%,#f0efec 63%);background-size:400% 100%;animation:sk 1.2s ease-in-out infinite}
+.sk .line{height:14px;border-radius:6px;margin-top:12px;background:#efeeeb;width:80%}
+.sk .line.s{width:45%;height:12px;margin-top:8px}
+@keyframes sk{0%{background-position:100% 0}100%{background-position:0 0}}
 .more-btn{
   display:block;margin:40px auto 0;
   padding:13px 42px;border:1px solid var(--ink);border-radius:100px;
@@ -156,7 +155,7 @@ header{
 .lb-meta .tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
 .lb-close{color:#fff;font-size:26px;line-height:1;padding:4px 8px;flex:0 0 auto}
 .lb-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0;padding:0 16px}
-.lb-stage img{width:100%;height:100%;object-fit:contain}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
 .lb-nav{
   position:absolute;top:50%;transform:translateY(-50%);
   width:44px;height:44px;border-radius:50%;
@@ -179,6 +178,22 @@ header{
 .btn-line{border:1px solid var(--ink);padding:14px 28px;border-radius:100px;font-size:15px;font-weight:600}
 footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink-faint);line-height:1.8}
 
+/* 하단 고정 CTA — 홈페이지(index.html) float-cta와 같은 룩. 인트로가 화면에서 사라지면 나타나고, 마무리 CTA 구간에 닿으면 숨김 */
+.float-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;
+  padding:10px 16px;padding-bottom:max(10px,env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-top:1px solid rgba(0,0,0,.06);
+  transform:translate3d(0,100%,0);transition:transform .45s cubic-bezier(.22,1,.36,1);
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+}
+.float-cta.show{transform:translate3d(0,0,0)}
+.float-cta .inner{max-width:460px;margin:0 auto;display:flex;gap:8px}
+.float-cta a{display:flex;align-items:center;justify-content:center;border-radius:14px;padding:14px 16px;font-size:14px;font-weight:700;white-space:nowrap}
+.float-cta .btn-main{flex:1.2;background:#8BB5C0;color:#fff;box-shadow:0 2px 8px rgba(139,181,192,.25)}
+.float-cta .btn-kakao{flex:1;background:var(--kakao);color:#3C1E1E}
+
 @media (max-width:860px){
   .best-grid{grid-template-columns:1fr;gap:14px}
   .case-grid{grid-template-columns:repeat(2,1fr);gap:20px 12px}
@@ -200,7 +215,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   <a class="logo" href="https://www.dolbommat.com">DOLBOMMAT</a>
   <nav class="header-links">
     <a href="https://www.dolbommat.com">홈</a>
-    <a href="https://www.dolbommat.com/quote.html">맞춤견적</a>
+    <a href="https://my.dolbommat.com/quote.html">맞춤견적</a>
     <a href="http://pf.kakao.com/_UMyBK/chat" id="hd-kakao">카톡 상담</a>
   </nav>
 </header>
@@ -226,7 +241,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
 
 <section class="grid-wrap">
   <div class="case-grid" id="caseGrid"></div>
-  <div class="state-msg" id="loadingMsg">시공사례를 불러오는 중이에요...</div>
+  <div class="state-msg" id="loadingMsg" style="display:block">시공사례를 불러오는 중이에요...</div>
   <div class="state-msg" id="emptyMsg">조건에 맞는 시공사례가 아직 없어요. 필터를 바꿔보세요.</div>
   <div class="state-msg" id="errorMsg">사례를 불러오지 못했어요. 잠시 후 새로고침해주세요.</div>
   <button class="more-btn" id="moreBtn" style="display:none">시공사례 더보기</button>
@@ -237,7 +252,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   <p>주소와 평형만 알려주시면 1분 안에 예상 견적을 안내해드려요.</p>
   <div class="foot-btns">
     <a class="btn-kakao" href="http://pf.kakao.com/_UMyBK/chat" id="ft-kakao">카카오톡 상담하기</a>
-    <a class="btn-line" href="https://www.dolbommat.com/quote.html">맞춤 견적 보기</a>
+    <a class="btn-line" href="https://my.dolbommat.com/quote.html">맞춤 견적 보기</a>
   </div>
 </section>
 
@@ -245,6 +260,14 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
   돌봄매트<br>부산본사 · 부산 사상구 강변대로 570 부산건축자재판매단지 F동 11호<br>경기지점 · 경기도 안산시 단원구 산단로 325 에프동 205호<br>
   0507-1345-4146 · dolbommat@naver.com
 </footer>
+
+<!-- ===== 하단 고정 CTA (홈페이지 메인과 동일) ===== -->
+<div class="float-cta" id="floatCta">
+  <div class="inner">
+    <a href="https://my.dolbommat.com/quote.html" class="btn-main">우리집 맞춤 견적</a>
+    <a href="http://pf.kakao.com/_UMyBK/chat" target="_blank" class="btn-kakao" id="fc-kakao">카톡 상담</a>
+  </div>
+</div>
 
 <!-- ===== 라이트박스 ===== -->
 <div class="lb" id="lb" role="dialog" aria-modal="true">
@@ -269,26 +292,31 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
 <script>
 /* =====================================================================
    시공사례 데이터·카테고리는 구글 시트에서 관리됩니다.
-   등록/수정/카테고리 설정: my.dolbommat.com/cases-admin.html (마케팅팀 전용)
+   등록/수정/카테고리 설정/순서: my.dolbommat.com/cases-admin.html (마케팅팀 전용)
 
-   [2026-09-16] 방문자 화면은 Apps Script를 기다리지 않습니다.
-   마케팅팀이 저장하면 Apps Script가 cases.json + 카드 사진(cases-img/w800/)을
-   이 레포에 발행하고, 여기서는 그 정적 파일만 읽습니다(첫 화면 0.1초대).
-   cases.json이 없거나 실패할 때만 예전처럼 Apps Script API로 폴백.
+   로딩 순서: 같은 도메인의 cases.json(관리 페이지에서 저장할 때 발행됨) →
+   없으면 Apps Script API 폴백. 표시 순서는 파일에 담긴 순서 그대로(관리 페이지에서 조정).
+   카드 사진은 발행된 cases-img/w800/{id}.jpg(photo.local)를 쓰고, 없으면 드라이브 썸네일.
    ===================================================================== */
-const DATA_URL = 'cases.json';
-const API = 'https://script.google.com/macros/s/AKfycbwo33sv9L1y722IdcfUm_i_nhmgZCCQX-grPEXGYbLemeI3WUx-f3C1Mi8ZxunmZ6D6lw/exec'; // 폴백 전용
-const driveUrl = (fid,w)=>`https://drive.google.com/thumbnail?id=${fid}&sz=w${w||800}`;
-/* 카드/BEST(800px 이하): 레포에 발행된 사진 → 없으면 드라이브. 라이트박스(1600px): 드라이브 */
-const photoSrc = (p,w)=> (p.local && (w||800)<=800) ? `cases-img/w800/${p.id}.jpg` : driveUrl(p.id,w);
-const photoAbs = p => p.local ? `https://www.dolbommat.com/cases-img/w800/${p.id}.jpg` : driveUrl(p.id,1600);
+const API = 'https://script.google.com/macros/s/AKfycbwo33sv9L1y722IdcfUm_i_nhmgZCCQX-grPEXGYbLemeI3WUx-f3C1Mi8ZxunmZ6D6lw/exec';
+const JSON_URL = 'cases.json';
+const photoUrl = (fid,w)=>`https://drive.google.com/thumbnail?id=${fid}&sz=w${w||800}`;
+const localUrl = fid => `cases-img/w800/${fid}.jpg`;
+/* 카드·BEST용(≤800px): 발행된 로컬 사진 우선. 1600px는 드라이브에만 있음 */
+const imgSrc = (p,w) => (p.local && (!w || w<=800)) ? localUrl(p.id) : photoUrl(p.id, w||800);
+/* 로컬 사진이 아직 안 올라간 경우(발행 전 등) 드라이브로 1회 폴백 */
+function fallbackImg(img){
+  if(img.dataset.fb) return;
+  img.dataset.fb='1';
+  img.src = photoUrl(img.dataset.id, img.dataset.w||800);
+}
 const esc = s => String(s==null?'':s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const CACHE_KEY = 'dolbomCases_v3';
+const CACHE_KEY = 'dolbomCases_v4';
 
 let CASES = [];
 let CONFIG = { sizes:[], tags:[] };
-const MATS = ["유아매트","애견매트"];
-const state = { size:"전체", tag:"전체", mat:"전체", shown:12 };
+let LOADED_SIG = null;
+const state = { size:"전체", tag:"전체", shown:12 };
 
 function chip(label, on, fn){
   const b=document.createElement('button');
@@ -306,10 +334,6 @@ function renderChips(){
     const on = state.tag===o;
     rt.appendChild(chip(o, on, ()=>{state.tag = on ? "전체" : o; refresh();}));
   });
-  MATS.forEach(o=>{
-    const on = state.mat===o;
-    rt.appendChild(chip(o, on, ()=>{state.mat = on ? "전체" : o; refresh();}));
-  });
 }
 function matchPhotoIdx(c){
   if(state.tag === "전체") return 0;
@@ -319,18 +343,17 @@ function matchPhotoIdx(c){
 function match(c){
   if(state.size!=="전체" && c.size!==state.size) return false;
   if(state.tag!=="전체" && !c.tags.includes(state.tag)) return false;
-  if(state.mat!=="전체" && c.mat!==state.mat) return false;
   return true;
 }
 
 function renderBest(){
   const g=document.getElementById('bestGrid');
   g.innerHTML='';
-  CASES.filter(c=>c.best && c.photos.length).slice(0,3).forEach((c,i)=>{
+  CASES.filter(c=>c.best && c.photos.length).slice(0,3).forEach(c=>{
     const el=document.createElement('div');
     el.className='best-card';
     el.innerHTML=`
-      <img class="ph" src="${photoSrc(c.photos[0],800)}" alt="${esc(c.title)} 시공 사진" loading="eager" fetchpriority="${i===0?'high':'auto'}" decoding="async">
+      <img class="ph" src="${imgSrc(c.photos[0],800)}" data-id="${esc(c.photos[0].id)}" data-w="800" onerror="fallbackImg(this)" alt="${esc(c.title)} 시공 사진" fetchpriority="high" decoding="async">
       <span class="best-badge">Best</span>
       <div class="best-info">
         <div class="t">${esc(c.title)}</div>
@@ -351,7 +374,7 @@ function renderGrid(){
     el.className='case-card';
     el.innerHTML=`
       <div class="thumb">
-        <img src="${c.photos.length?photoSrc(c.photos[matchPhotoIdx(c)],800):''}" alt="${esc(c.title)} — ${esc(c.mat)} 시공 사진" loading="${idx<3?'eager':'lazy'}" decoding="async">
+        ${c.photos.length?`<img src="${imgSrc(c.photos[matchPhotoIdx(c)],800)}" data-id="${esc(c.photos[matchPhotoIdx(c)].id)}" data-w="800" onerror="fallbackImg(this)" alt="${esc(c.title)} — ${esc(c.mat)} 시공 사진" loading="${idx<3?'eager':'lazy'}" decoding="async">`:''}
         <span class="photo-n">${c.photos.length}장</span>
       </div>
       <div class="title">${esc(c.title)}</div>
@@ -386,21 +409,18 @@ function openLB(c){
 }
 function showImg(){
   const img=document.getElementById('lbImg');
-  const p=lbCase.photos[lbIdx], cur=lbIdx, curCase=lbCase;
-  const big=driveUrl(p.id,1600);
-  if(p.local){
-    /* 카드에서 이미 받은 800px를 즉시 보여주고, 1600px가 준비되면 바꿔치기 */
-    img.src=photoSrc(p,800);
-    const hi=new Image();
-    hi.onload=()=>{ if(lbCase===curCase && lbIdx===cur && lb.classList.contains('open')) img.src=big; };
-    hi.src=big;
-  } else {
-    img.src=big;
-  }
-  img.alt=`${lbCase.title} 사진 ${lbIdx+1}`;
-  document.getElementById('lbCounter').textContent=`${lbIdx+1} / ${lbCase.photos.length}`;
-  const n=lbCase.photos.length;
-  if(n>1){ [(lbIdx+1)%n,(lbIdx-1+n)%n].forEach(k=>{ const pre=new Image(); pre.src=driveUrl(lbCase.photos[k].id,1600); }); }
+  const p=lbCase.photos[lbIdx];
+  const c=lbCase, i=lbIdx;
+  /* 800px(발행본이면 즉시)을 먼저 띄우고, 1600px가 준비되면 같은 자리에서 교체 */
+  img.onerror=()=>{ img.onerror=null; img.src=photoUrl(p.id,800); };
+  img.src=imgSrc(p,800);
+  img.alt=`${c.title} 사진 ${i+1}`;
+  const hi=new Image();
+  hi.onload=()=>{ if(lbCase===c && lbIdx===i) img.src=hi.src; };
+  hi.src=photoUrl(p.id,1600);
+  document.getElementById('lbCounter').textContent=`${i+1} / ${c.photos.length}`;
+  const n=c.photos.length;
+  if(n>1){ [(i+1)%n,(i-1+n)%n].forEach(k=>{ const pre=new Image(); pre.src=imgSrc(c.photos[k],800); }); }
 }
 function moveLB(d){
   if(!lbCase) return;
@@ -412,17 +432,7 @@ function closeLB(){ lb.classList.remove('open'); document.body.style.overflow=''
 document.getElementById('lbClose').onclick=closeLB;
 document.getElementById('lbPrev').onclick=e=>{e.stopPropagation(); moveLB(-1);};
 document.getElementById('lbNext').onclick=e=>{e.stopPropagation(); moveLB(1);};
-lb.addEventListener('click',e=>{
-  if(e.target===lb||e.target.classList.contains('lb-stage')) return closeLB();
-  if(e.target.id==='lbImg'){
-    /* img 박스는 스테이지 전체 — 실제 그려진 그림 바깥(검은 여백)을 눌렀으면 닫기 */
-    const img=e.target, r=img.getBoundingClientRect(), nw=img.naturalWidth, nh=img.naturalHeight;
-    if(!nw||!nh) return;
-    const sc=Math.min(r.width/nw, r.height/nh), dw=nw*sc, dh=nh*sc;
-    const x0=r.left+(r.width-dw)/2, y0=r.top+(r.height-dh)/2;
-    if(e.clientX<x0||e.clientX>x0+dw||e.clientY<y0||e.clientY>y0+dh) closeLB();
-  }
-});
+lb.addEventListener('click',e=>{ if(e.target===lb||e.target.classList.contains('lb-stage')) closeLB(); });
 document.addEventListener('keydown',e=>{
   if(!lb.classList.contains('open')) return;
   if(e.key==='Escape') closeLB();
@@ -444,7 +454,7 @@ function injectLD(){
         "@type":"CreativeWork",
         "name":c.title,
         "description":c.desc||c.title,
-        "image":c.photos.length?photoAbs(c.photos[0]):undefined,
+        "image":c.photos.length?(c.photos[0].local?'https://www.dolbommat.com/'+localUrl(c.photos[0].id):photoUrl(c.photos[0].id,1600)):undefined,
         "provider":{"@type":"LocalBusiness","name":"돌봄매트","telephone":"0507-1345-4146","url":"https://www.dolbommat.com"}
       }
     }))
@@ -466,7 +476,7 @@ function applyData(payload){
     desc: c.desc || '',
     tags: Array.isArray(c.tags) ? c.tags : [],
     photos: (Array.isArray(c.photos) ? c.photos : [])
-      .map(p => typeof p === 'string' ? {id:p, labels:[]} : {id:String(p.id||''), labels:Array.isArray(p.labels)?p.labels:[], local:p.local===true})
+      .map(p => typeof p === 'string' ? {id:p, labels:[], local:false} : {id:String(p.id||''), labels:Array.isArray(p.labels)?p.labels:[], local:!!p.local})
       .filter(p => p.id)
   }));
   if(payload.config && Array.isArray(payload.config.sizes) && Array.isArray(payload.config.tags)) CONFIG = payload.config;
@@ -474,46 +484,62 @@ function applyData(payload){
   document.getElementById('errorMsg').style.display='none';
   renderBest(); refresh(); injectLD();
 }
-function renderSkeleton(){
-  /* 데이터가 오기 전 자리 표시 — 캐시가 있으면 그리지 않음 */
-  if(CASES.length) return;
-  const b=document.getElementById('bestGrid');
-  b.innerHTML='<div class="best-card sk-best sk"></div>';
-  document.getElementById('best').style.display='';
+function showSkeleton(){
   const g=document.getElementById('caseGrid');
-  g.innerHTML=Array.from({length:6},()=>`<article class="case-card sk-card"><div class="thumb sk"></div><div class="sk sk-t"></div><div class="sk sk-m"></div></article>`).join('');
+  if(g.children.length) return;
+  g.innerHTML = Array.from({length:6},()=>`<div class="case-card sk"><div class="thumb"></div><div class="line"></div><div class="line s"></div></div>`).join('');
+  document.getElementById('loadingMsg').style.display='none';
 }
-async function fetchJson(url, opt){
-  const r = await fetch(url, opt);
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  const j = await r.json();
-  if(!j || !j.ok) throw new Error('bad payload');
-  return j;
+function payloadSig(j){ return j.sig || JSON.stringify(j.cases||[]).length+':'+(j.cases||[]).map(c=>c.id).join(','); }
+function useData(j){
+  const sig = payloadSig(j);
+  if(sig === LOADED_SIG) return;         // 캐시와 같은 내용이면 다시 그리지 않음(깜빡임 방지)
+  LOADED_SIG = sig;
+  applyData(j);
 }
 async function loadCases(){
-  /* 1) 캐시가 있으면 즉시 렌더(재방문), 없으면 스켈레톤
-     2) 같은 도메인의 cases.json(발행본) — 30~50ms
-     3) cases.json이 없을 때만 Apps Script API 폴백(첫 발행 전·장애 시) */
+  /* 1) 이전 방문 캐시로 즉시 그리기 → 2) 같은 도메인 cases.json(발행본, 빠름) → 3) 실패 시 Apps Script API 폴백 */
+  let hasCache=false;
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
-    if(cached && cached.payload) applyData(cached.payload);
+    if(cached && cached.payload && cached.payload.cases && cached.payload.cases.length){ useData(cached.payload); hasCache=true; }
   }catch(e){}
-  renderSkeleton();
+  if(!hasCache) showSkeleton();
   let j=null;
-  try{ j = await fetchJson(DATA_URL, {cache:'no-cache'}); }
-  catch(e1){ try{ j = await fetchJson(API+'?type=cases'); }catch(e2){} }
+  try{
+    const r = await fetch(JSON_URL, {cache:'no-cache'});   // 항상 재검증(ETag) → 발행 직후에도 최신
+    if(r.ok){ const x = await r.json(); if(x && x.ok!==false && Array.isArray(x.cases)) j=x; }
+  }catch(e){}
+  if(!j){
+    try{
+      const r = await fetch(API+'?type=cases');
+      const x = await r.json();
+      if(x && x.ok) j=x;
+    }catch(e){}
+  }
   if(j){
-    applyData(j);
+    useData(j);
     try{ localStorage.setItem(CACHE_KEY, JSON.stringify({at:Date.now(), payload:j})); }catch(e){} // 저장 실패는 무시
   } else if(!CASES.length){
-    document.getElementById('bestGrid').innerHTML=''; document.getElementById('best').style.display='none';
     document.getElementById('caseGrid').innerHTML='';
     document.getElementById('loadingMsg').style.display='none';
     document.getElementById('errorMsg').style.display='block';
   }
 }
 
-['hd-kakao','ft-kakao','lb-kakao'].forEach(id=>{
+/* 하단 고정 CTA: 인트로가 화면에서 사라지면 표시, 마무리 CTA 구간이 보이면 숨김(버튼 중복·푸터 가림 방지) */
+(function(){
+  const bar=document.getElementById('floatCta');
+  const intro=document.querySelector('.intro');
+  const foot=document.querySelector('.foot-cta');
+  if(!bar||!intro||!foot||!('IntersectionObserver' in window)) return;
+  let introOut=false, footIn=false;
+  const sync=()=>bar.classList.toggle('show', introOut && !footIn);
+  new IntersectionObserver(([e])=>{ introOut=!e.isIntersecting; sync(); },{threshold:0}).observe(intro);
+  new IntersectionObserver(([e])=>{ footIn=e.isIntersecting; sync(); },{threshold:0}).observe(foot);
+})();
+
+['hd-kakao','ft-kakao','lb-kakao','fc-kakao'].forEach(id=>{
   const el=document.getElementById(id);
   if(el) el.addEventListener('click',()=>{ if(typeof gtag==='function') gtag('event','kakao_click',{from:'cases_'+id}); });
 });
