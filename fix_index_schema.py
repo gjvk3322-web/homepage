@@ -52,7 +52,7 @@ ALL_AREAS = [a['name'] for a in BUSAN_AREAS + GYEONGGI_AREAS]
 
 # SNS / 외부 링크
 SAME_AS = [
-    "https://www.instagram.com/dolbomstore",
+    "https://www.instagram.com/dolbommat",
     "https://blog.naver.com/dolbommatt1004",
     "https://pf.kakao.com/_UMyBK",
     "https://pf.kakao.com/_UMyBK/chat"

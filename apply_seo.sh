@@ -46,7 +46,7 @@ cat > /tmp/schema_index.html << 'SCHEMA_EOF'
       "telephone": "+82-507-1345-4146",
       "email": "dolbommat@naver.com",
       "sameAs": [
-        "https://www.instagram.com/dolbomstore",
+        "https://www.instagram.com/dolbommat",
         "https://blog.naver.com/dolbommatt1004",
         "https://pf.kakao.com/_UMyBK/chat"
       ],

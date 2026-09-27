@@ -54,7 +54,7 @@ ORGANIZATION_REF = {
     "foundingDate": "2020-11-23",
     "founder": {"@type": "Person", "name": "허민석"},
     "sameAs": [
-        "https://www.instagram.com/dolbomstore",
+        "https://www.instagram.com/dolbommat",
         "https://blog.naver.com/dolbommatt1004",
         "https://pf.kakao.com/_UMyBK"
     ]
