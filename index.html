@@ -1048,6 +1048,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 // ===== 시공 사례 갤러리 =====
 // 사진 추가/제거: 아래 caseData 배열에 파일 경로만 넣으면 됨
+// ※ 1000modern · 1000beige는 페이지 로드 후 cases.json(시공사례 페이지 데이터)으로 교체됨 — 아래 목록은 폴백용
 // 권장 폴더 구조: img/cases/{카테고리}/01.jpg, 02.jpg, ...
 // 권장 비율: 16:10 (or 4:3 in mobile)
 const caseData = {
@@ -1280,6 +1281,43 @@ function updateCaseImage() {
     new Image().src = photos[nextIdx];
   }
 }
+
+// ===== 시공사례 페이지(cases.html) 연동 =====
+// 1,000 모던 · 1,000 베이지 탭은 마케팅팀이 cases-admin에서 등록한 사례(cases.json)의 사진으로 교체.
+// 공기순환 통로·500 시리즈는 위 caseData 그대로. cases.json을 못 받거나 해당 제품 사진이 없으면 기존 사진 유지.
+(function(){
+  const MAP = [
+    { cat:'1000modern', test: p => /1000/.test(p) && /모던/.test(p) },
+    { cat:'1000beige',  test: p => /1000/.test(p) && /베이지/.test(p) }
+  ];
+  const localUrl = id => 'cases-img/w800/' + id + '.jpg';
+  const driveUrl = id => 'https://drive.google.com/thumbnail?id=' + id + '&sz=w1200';
+  function apply(j){
+    const cases = Array.isArray(j && j.cases) ? j.cases : [];
+    MAP.forEach(m => {
+      const urls = [];
+      cases.forEach(c => {
+        const product = String(c.product || '');
+        if (!m.test(product)) return;
+        (Array.isArray(c.photos) ? c.photos : []).forEach(p => {
+          const id = typeof p === 'string' ? p : (p && p.id);
+          if (!id) return;
+          urls.push((p && p.local) ? localUrl(id) : driveUrl(id));
+        });
+      });
+      if (urls.length) caseData[m.cat] = urls;
+    });
+    // 지금 보고 있는 탭이 교체 대상이면 즉시 반영
+    if (caseData[currentCaseCategory] && MAP.some(m => m.cat === currentCaseCategory)) {
+      currentCaseIndex = 0;
+      updateCaseImage();
+    }
+  }
+  fetch('cases.json', {cache:'no-cache'})
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j) apply(j); })
+    .catch(function(){});
+})();
 
 // 키보드 좌/우 화살표
 document.addEventListener('keydown', function(e) {
