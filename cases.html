@@ -120,7 +120,7 @@ header{
 .result-count{font-size:13px;color:var(--ink-faint)}
 
 .grid-wrap{max-width:1140px;margin:0 auto;padding:28px 24px 80px}
-.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 16px}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .case-card{cursor:pointer}
 .case-card .thumb{
   position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--paper-dim);
@@ -128,12 +128,15 @@ header{
 .case-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .case-card:hover .thumb img{transform:scale(1.04)}
 .photo-n{
-  position:absolute;right:10px;bottom:10px;
+  position:absolute;right:10px;top:10px;z-index:2;
   background:rgba(0,0,0,.55);color:#fff;font-size:11.5px;
   padding:3px 8px;border-radius:100px;
 }
-.case-card .title{margin-top:10px;font-size:15px;font-weight:700;line-height:1.45}
-.case-card .meta{margin-top:5px;display:flex;flex-wrap:wrap;gap:5px}
+/* 카드 제목·메타 — BEST 카드(.best-info)와 같은 사진 위 오버레이 */
+.case-card .info{position:absolute;left:0;right:0;bottom:0;padding:36px 16px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff}
+.case-card .info .t{font-size:15px;font-weight:700;line-height:1.4}
+.case-card .info .m{margin-top:4px;font-size:12.5px;opacity:.85}
 .tag{
   font-size:12px;color:var(--ink-soft);
   background:var(--paper-dim);border-radius:6px;padding:3px 8px;
@@ -204,7 +207,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:12.5px;color:var(--ink
 
 @media (max-width:860px){
   .best-grid{grid-template-columns:1fr;gap:14px}
-  .case-grid{grid-template-columns:repeat(2,1fr);gap:20px 12px}
+  .case-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .intro{padding:48px 20px 28px}
   .filter-bar{top:56px}
 }
@@ -389,12 +392,10 @@ function renderGrid(){
       <div class="thumb">
         ${c.photos.length?`<img src="${imgSrc(c.photos[matchPhotoIdx(c)],800)}" data-id="${esc(c.photos[matchPhotoIdx(c)].id)}" data-w="800" onerror="fallbackImg(this)" alt="${esc(c.title)} — ${esc(c.mat)} 시공 사진" loading="${idx<3?'eager':'lazy'}" decoding="async">`:''}
         <span class="photo-n">${c.photos.length}장</span>
-      </div>
-      <div class="title">${esc(c.title)}</div>
-      <div class="meta">
-        ${c.size?`<span class="tag">${esc(c.size)}</span>`:''}
-        ${c.tags.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}
-        <span class="tag">${esc(c.mat)}</span>
+        <div class="info">
+          <div class="t">${esc(c.title)}</div>
+          <div class="m">${esc([c.size, c.tags.slice(0,2).join('/'), c.product||c.mat].filter(Boolean).join(' · '))}</div>
+        </div>
       </div>`;
     el.onclick=()=>openLB(c);
     g.appendChild(el);
@@ -500,7 +501,7 @@ function applyData(payload){
 function showSkeleton(){
   const g=document.getElementById('caseGrid');
   if(g.children.length) return;
-  g.innerHTML = Array.from({length:6},()=>`<div class="case-card sk"><div class="thumb"></div><div class="line"></div><div class="line s"></div></div>`).join('');
+  g.innerHTML = Array.from({length:6},()=>`<div class="case-card sk"><div class="thumb"></div></div>`).join('');
   document.getElementById('loadingMsg').style.display='none';
 }
 function payloadSig(j){ return j.sig || JSON.stringify(j.cases||[]).length+':'+(j.cases||[]).map(c=>c.id).join(','); }
