@@ -127,6 +127,11 @@ a{text-decoration:none;color:inherit}
 .top-bar .menu-btn{background:none;border:none;color:#fff;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;transition:background 0.2s}
 .top-bar .menu-btn:hover{background:rgba(255,255,255,0.1)}
 .top-bar .menu-btn svg{width:18px;height:18px;display:block}
+/* 유아/애견 토글 — 히어로에서 헤더(로고 오른쪽)로 이동 (2026-10-14) */
+.top-bar .top-left{display:flex;align-items:center;gap:14px;min-width:0}
+.top-bar .persona-toggle{margin:0;gap:4px}
+.top-bar .persona-btn{padding:5px 12px;font-size:12px;border-width:1px}
+@media (max-width:380px){.top-bar .top-left{gap:10px}.top-bar .persona-btn{padding:5px 10px;font-size:11.5px}}
 
 /* ═══ MENU OVERLAY (뒷배경) ═══ */
 .menu-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;background:rgba(0,0,0,0.25);opacity:0;visibility:hidden;transition:opacity 0.25s ease}
@@ -879,7 +884,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      미니멀 로고 + 햄버거 메뉴
 ═══════════════════════════════════════ -->
 <header class="top-bar" id="topBar">
-  <a href="index.html" class="logo-link">DOLBOMMAT</a>
+  <div class="top-left">
+    <a href="index.html" class="logo-link">DOLBOMMAT</a>
+    <div class="persona-toggle" role="group" aria-label="매트 종류 선택">
+      <button class="persona-btn active" id="heroBaby" onclick="switchMode('baby')">유아매트</button>
+      <button class="persona-btn" id="heroPet" onclick="switchMode('pet')">애견매트</button>
+    </div>
+  </div>
   <button class="menu-btn" onclick="toggleMenu()" aria-label="메뉴 열기" id="menuBtn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
   </button>
@@ -940,10 +951,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </video>
   <div class="overlay"></div>
   <div class="content">
-    <div class="persona-toggle hero-anim hero-d1">
-      <button class="persona-btn active" id="heroBaby" onclick="switchMode('baby')">👶 유아매트</button>
-      <button class="persona-btn" id="heroPet" onclick="switchMode('pet')">🐶 애견매트</button>
-    </div>
     <p class="sub hero-anim hero-d2">
       <span class="for-baby">우리 아이 처음이자 마지막 매트</span>
       <span class="for-pet">반려견의 관절을 지키는 매트</span>
