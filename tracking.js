@@ -26,20 +26,30 @@
 
   // ═══════════════════════════════════════════════════════════════
   // 1. GA4 (Google Analytics 4) 로드
+  //   2026-10-15: GTM(GTM-WBCCZ3CN)이 있는 페이지에서는 gtag.js를 따로 띄우지 않음.
+  //   같은 G-Z98MT8N5WK를 GTM의 Google태그와 gtag.js가 동시에 띄우면 목적지를 공유하면서
+  //   페이지의 gtag('event') 호출이 전송되지 않는 현상이 실측됨(sample.html에서 확인).
+  //   → GTM 페이지: page_view는 GTM Google태그가 보내고, 커스텀 이벤트는 아래 trackEvent가
+  //     dataLayer.push({event, dolbom_event:true, …})로 넘겨 GTM 태그("GA4 - dolbom events")가 전송.
+  //   → GTM 없는 페이지(직원용 툴 등): 기존대로 gtag.js 직접 로드.
   // ═══════════════════════════════════════════════════════════════
-  (function() {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.GA4_ID;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function() { window.dataLayer.push(arguments); };
-    gtag('js', new Date());
-    gtag('config', CONFIG.GA4_ID, {
-      send_page_view: true,
-      cookie_flags: 'SameSite=None;Secure'
-    });
-  })();
+  var HAS_GTM = !!(document.querySelector('script[src*="googletagmanager.com/gtm.js"]') ||
+                   (window.dataLayer && window.dataLayer.some && window.dataLayer.some(function(x){ return x && x['gtm.start']; })));
+  window.dataLayer = window.dataLayer || [];
+  if (!HAS_GTM) {
+    (function() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.GA4_ID;
+      document.head.appendChild(s);
+      window.gtag = function() { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', CONFIG.GA4_ID, {
+        send_page_view: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+    })();
+  }
 
   // ═══════════════════════════════════════════════════════════════
   // 2. Meta Pixel (페이스북·인스타그램)
@@ -92,8 +102,13 @@
   function trackEvent(eventName, params) {
     params = params || {};
     try {
-      // GA4
-      if (typeof gtag === 'function') {
+      // GA4 — GTM 페이지는 dataLayer(GTM 태그가 전송), 그 외는 gtag 직접
+      if (HAS_GTM) {
+        window.dataLayer.push(Object.assign({ event: eventName, dolbom_event: true }, params));
+        // 페이지가 따로 gtag 스니펫을 가진 경우(홈페이지의 G-WNRMST82MC) 그 속성에도 기존처럼 전달.
+        // 이 gtag는 G-Z98MT8N5WK를 config하지 않으므로 GTM 경로와 중복되지 않음.
+        if (typeof window.gtag === 'function') { try { window.gtag('event', eventName, params); } catch(e) {} }
+      } else if (typeof gtag === 'function') {
         gtag('event', eventName, params);
       }
       // Meta Pixel (표준 이벤트 매핑)
@@ -281,6 +296,7 @@
   // 전역에 노출 (특정 페이지에서 커스텀 이벤트 보낼 때 사용)
   window.dolbomTrack = trackEvent;
 
-  console.log('[돌봄매트] 추적 시스템 활성화 ·', new Date().toLocaleTimeString());
+  window.dolbomTrackMode = HAS_GTM ? 'gtm' : 'gtag';
+  console.log('[돌봄매트] 추적 시스템 활성화 ·', (HAS_GTM ? 'GTM 경로' : 'gtag 경로'), '·', new Date().toLocaleTimeString());
 
 })();
