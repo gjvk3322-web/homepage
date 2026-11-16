@@ -2345,10 +2345,10 @@ body.pet-notice-ended .persona-toggle,body.pet-notice-ended .menu-list a[href^="
 <script>
 // ── 애견매트 일시 중단 스위치 ──
 var PET_PAUSED = true;            // ★ 애견매트를 다시 열 때 false 로 변경
-var PET_NOTICE_ON_LOAD = false;   // true 로 바꾸면 메인에 들어오는 모든 방문자에게 팝업 (세션당 1회)
-var PET_NOTICE_UNTIL = '2026-11-23T23:59:59+09:00';   // 이 시각까지만 팝업 표시. 지나면 팝업과 '애견매트' 버튼·메뉴가 자동으로 사라짐 (기간 연장은 날짜만 수정)
+var PET_NOTICE_ON_LOAD = true;    // true 로 바꾸면 메인에 들어오는 모든 방문자에게 팝업 (세션당 1회)
+var PET_NOTICE_UNTIL = '2026-11-23T23:59:59+09:00';   // 이 시각까지만 팝업 표시. 지나면 팝업이 자동으로 사라짐 (기간 연장은 날짜만 수정)
 function petNoticeActive() { return PET_PAUSED && Date.now() <= Date.parse(PET_NOTICE_UNTIL); }
-if (PET_PAUSED && !petNoticeActive()) document.body.classList.add('pet-notice-ended');
+if (PET_PAUSED) document.body.classList.add('pet-notice-ended');   // 중단 중에는 '애견매트' 버튼·메뉴를 숨김
 
 var petNoticeLastFocus = null;
 function showPetNotice(auto) {
