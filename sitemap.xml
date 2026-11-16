@@ -3,7 +3,7 @@
   <url><loc>https://www.dolbommat.com/</loc><priority>1.0</priority></url>
   <url><loc>https://www.dolbommat.com/cases.html</loc><priority>0.9</priority></url>
   <url><loc>https://www.dolbommat.com/baby-mat.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.dolbommat.com/dog-mat.html</loc><priority>0.8</priority></url>
+  <!--PET-PAUSE <url><loc>https://www.dolbommat.com/dog-mat.html</loc><priority>0.8</priority></url> PET-PAUSE-->
   <url><loc>https://www.dolbommat.com/quote.html</loc><priority>0.7</priority></url>
   <url><loc>https://www.dolbommat.com/event.html</loc><priority>0.6</priority></url>
   <url><loc>https://www.dolbommat.com/map.html</loc><priority>0.5</priority></url>
