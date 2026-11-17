@@ -2294,12 +2294,12 @@ window.hoCopyQuoteTextOnly=hoCopyQuoteTextOnly;
 </div>
 
 <!-- ═══════════════════════════════════════
-     애견매트 일시 중단 안내 팝업 (2026-11-16)
-     · 뜨는 경우: ① 상단 '애견매트' 버튼, 메뉴의 '애견매트' 클릭
-                  ② ?mode=pet 같은 애견 링크로 들어옴 (세션당 1회)
-                  ③ dog-mat.html 접속 시 메인으로 이동한 뒤 표시
-     · 문구 수정: 바로 아래 #petNotice 안의 글자만 바꾸면 됨 (2026-11-16 공식 입장문으로 교체)
-     · 스위치: 아래 script 의 PET_PAUSED / PET_NOTICE_ON_LOAD
+     애견매트 일시 중단 (2026-11-16 ~)
+     · 2026-11-17 안내 팝업 내림: 팝업 본문(#petNotice)을 이 파일에서 뺐고, 지금은 어떤 경로로도 팝업이 뜨지 않음
+       (?mode=pet 같은 애견 링크나 dog-mat.html 로 들어오면 팝업 없이 유아 화면)
+     · 팝업을 다시 띄울 때: git show 302ca7e:index.html 에서 #petNotice 블록을 가져와 아래 style 바로 다음에 넣고,
+       script 의 PET_NOTICE_UNTIL 을 미래 시각으로 변경 (메인 방문자 전체에게 띄우려면 PET_NOTICE_ON_LOAD = true)
+     · 스위치: 아래 script 의 PET_PAUSED / PET_NOTICE_ON_LOAD / PET_NOTICE_UNTIL
      · 재오픈 절차: 프로젝트 문서 '애견매트_일시중단_재오픈.md'
 ═══════════════════════════════════════ -->
 <style>
@@ -2325,28 +2325,11 @@ body.pet-notice-ended .persona-toggle,body.pet-notice-ended .menu-list a[href^="
 @keyframes petNoticePop{from{opacity:0;transform:translateY(10px) scale(0.96)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pet-notice.open,.pet-notice-card{animation:none}}
 </style>
-<div class="pet-notice" id="petNotice" role="dialog" aria-modal="true" aria-labelledby="petNoticeTitle" aria-describedby="petNoticeSub" aria-hidden="true">
-  <div class="pet-notice-card pet-notice-letter">
-    <p class="pet-notice-title" id="petNoticeTitle">돌봄매트 공식 입장문</p>
-    <div class="pet-notice-body" id="petNoticeSub">
-      <p>안녕하세요.<br>돌봄매트입니다.</p>
-      <p>스레드에서 당사 애견매트가 미끄럽다는 글과 댓글이 이어지고 있는 상황에 대해 돌봄매트의 입장을 말씀드립니다.</p>
-      <p>먼저 돌봄매트를 믿고 시공하셨음에도 반려견이 미끄러워해 불편과 걱정을 겪으신 고객님께 진심으로 사과드립니다.</p>
-      <p>돌봄매트는 이번 문제 제기를 무겁게 받아들이고 있습니다.<br>이에 따라 다음과 같이 조치하겠습니다.</p>
-      <p>1. 애견매트는 판매 안내를 중단하고, 논슬립을 더 보완한 제품으로 다시 선보이겠습니다.</p>
-      <p>2. 이번 사안을 회피하지 않고, 충분한 보상과 필요한 후속 조치를 끝까지 책임지겠습니다. 제품 성능을 다시 점검하고 고객 응대 절차도 개선하겠습니다.</p>
-      <p>이번 일을 더 나은 제품을 만드는 계기로 삼겠습니다.</p>
-      <p>감사합니다.</p>
-      <p class="pet-notice-sign">돌봄매트 드림</p>
-    </div>
-    <button type="button" class="pet-notice-btn" id="petNoticeOk">확인</button>
-  </div>
-</div>
 <script>
 // ── 애견매트 일시 중단 스위치 ──
 var PET_PAUSED = true;            // ★ 애견매트를 다시 열 때 false 로 변경
-var PET_NOTICE_ON_LOAD = true;    // true 로 바꾸면 메인에 들어오는 모든 방문자에게 팝업 (세션당 1회)
-var PET_NOTICE_UNTIL = '2026-11-23T23:59:59+09:00';   // 이 시각까지만 팝업 표시. 지나면 팝업이 자동으로 사라짐 (기간 연장은 날짜만 수정)
+var PET_NOTICE_ON_LOAD = false;   // true = 메인에 들어오는 모든 방문자에게 팝업 (세션당 1회). 2026-11-17 팝업을 내리면서 false
+var PET_NOTICE_UNTIL = '2026-11-17T00:00:00+09:00';   // 팝업 표시 기한. 지난 시각이면 팝업이 어디서도 뜨지 않음 (2026-11-17 내림, 원래 기한 11/23)
 function petNoticeActive() { return PET_PAUSED && Date.now() <= Date.parse(PET_NOTICE_UNTIL); }
 if (PET_PAUSED) document.body.classList.add('pet-notice-ended');   // 중단 중에는 '애견매트' 버튼·메뉴를 숨김
 
